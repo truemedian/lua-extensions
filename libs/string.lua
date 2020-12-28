@@ -223,7 +223,7 @@ end
 ---For example: `ggl` is a subsequence of `GooGLe`. (uppercase letters signify which letters form the subsequence).
 ---@param subseq string
 ---@param str string
----@return string
+---@return boolean
 function ext_string.subsequencematch(subseq, str)
     local matches = 0
 
