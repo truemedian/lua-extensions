@@ -11,23 +11,23 @@ require('table.new')
 local extensions = {math = ext_math, string = ext_string, table = ext_table}
 
 setmetatable(extensions, {
-    __call = function()
-        for _, ext in pairs(extensions) do
-            ext()
-        end
-    end,
+	__call = function()
+		for _, ext in pairs(extensions) do
+			ext()
+		end
+	end,
 })
 
 for name, ext in pairs(extensions) do
-    setmetatable(ext, {
-        __call = function()
-            _G[name] = _G[name] or {}
+	setmetatable(ext, {
+		__call = function()
+			_G[name] = _G[name] or {}
 
-            for k, v in pairs(extensions) do
-                _G[name][k] = v
-            end
-        end,
-    })
+			for k, v in pairs(extensions) do
+				_G[name][k] = v
+			end
+		end,
+	})
 end
 
 return extensions
