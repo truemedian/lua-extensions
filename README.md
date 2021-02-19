@@ -316,4 +316,230 @@ local out = extensions.string.split("hello world", " ")
 
 ### Table
 
-Todo: Document
+> #### table.copy(tbl)
+>
+> Returns a new table with a single layer of keys-values copied.
+>
+> | Name | Type  |
+> |------|-------|
+> | tbl  | table |
+>
+> **Returns: table**
+
+-----
+
+> #### table.deepcopy(tbl)
+>
+> Returns a new table with a all layers of keys-values copied. Tables are copied recursively.
+>
+> | Name | Type  |
+> |------|-------|
+> | tbl  | table |
+>
+> **Returns: table**
+
+-----
+
+> #### table.count(tbl)
+>
+> Returns the number of keys in the table.
+>
+> | Name | Type  |
+> |------|-------|
+> | tbl  | table |
+>
+> **Returns: number**
+
+-----
+
+> #### table.deepcount(tbl)
+>
+> Returns the number of keys in the table by recursively looking into tables.
+>
+> | Name | Type  |
+> |------|-------|
+> | tbl  | table |
+>
+> **Returns: number**
+
+-----
+
+> #### table.map(tbl, fn)
+>
+> Returns a new table with new key-value pairs sourced from the map function.
+> The map function has a signature of: `fn(value, key) new_value[, new_key]`.
+> If `new_key` is omitted, the key will remain the same.
+>
+> | Name |   Type   |
+> |------|----------|
+> | tbl  |  table   |
+> |  fn  | function |
+>
+> **Returns: table**
+
+-----
+
+> #### table.filter(tbl, fn)
+>
+> Returns a new table with only key-value pairs that cause `fn` to return true.
+> The filter function has a signature of: `fn(value, key) boolean`.
+>
+> | Name |   Type   |
+> |------|----------|
+> | tbl  |  table   |
+> |  fn  | function |
+>
+> **Returns: table**
+
+-----
+
+> #### table.reverse(tbl)
+>
+> Reverses the contents of the array.
+>
+> | Name | Type  |
+> |------|-------|
+> | tbl  | table |
+>
+> **Returns: nil**
+
+-----
+
+> #### table.reversed(tbl)
+>
+> Returns a new array with the reversed contents of the original.
+>
+> | Name | Type  |
+> |------|-------|
+> | tbl  | table |
+>
+> **Returns: table**
+
+-----
+
+> #### table.shift(tbl, index, count)
+>
+> Shifts every index after `index` in the array to the right by `count`.
+>
+> | Name  |  Type  |
+> |-------|--------|
+> |  tbl  | table  |
+> | index | number |
+> | count | number |
+>
+> **Returns: nil**
+
+-----
+
+> #### table.slice(tbl, start, stop, step)
+>
+> Returns a slice of the table, works similarly to `string.sub` except on a table.
+>
+> |  Name  |  Type  |
+> |--------|--------|
+> |  tbl   | table  |
+> | start? | number |
+> | stop?  | number |
+> | step?  | number |
+>
+> **Returns: table**
+
+-----
+
+> #### table.memcpy(dest, src, index)
+>
+> Works identically to `memcpy` in C. copies all of src into dest starting at index.
+>
+> | Name  |  Type  |
+> |-------|--------|
+> | dest  | table  |
+> |  src  | table  |
+> | index | number |
+>
+> **Returns: nil**
+
+-----
+
+> #### table.swapremove(tbl, i)
+>
+> Removes the value at the index from an array and replaces it with the item at the end of the array.
+>
+> | Name |  Type  |
+> |------|--------|
+> | tbl  | table  |
+> |  i   | number |
+>
+> **Returns: any**
+
+-----
+
+> #### table.search(tbl, value)
+>
+> Looks for a specific value in a table and returns the key it was first found at.
+>
+> | Name  | Type  |
+> |-------|-------|
+> | tbl   | table |
+> | value |  any  |
+>
+> **Returns: any?**
+
+-----
+
+> #### table.keys(tbl)
+>
+> Returns an array of keys available in the table.
+>
+> | Name | Type  |
+> |------|-------|
+> | tbl  | table |
+>
+> **Returns: table**
+
+-----
+
+> #### table.values(tbl)
+>
+> Returns an array of values available in the table.
+>
+> | Name | Type  |
+> |------|-------|
+> | tbl  | table |
+>
+> **Returns: table**
+
+-----
+
+> #### table.isempty(tbl)
+>
+> Returns whether or not the table is empty.
+>
+> | Name | Type  |
+> |------|-------|
+> | tbl  | table |
+>
+> **Returns: boolean**
+
+-----
+
+> #### table.randomipair(tbl)
+>
+> Returns a random key, value index from an array.
+>
+> | Name | Type  |
+> |------|-------|
+> | tbl  | table |
+>
+> **Returns: any, any**
+
+-----
+
+> #### table.randompair(tbl)
+>
+> Returns a random key, value index from a table.
+>
+> | Name | Type  |
+> |------|-------|
+> | tbl  | table |
+>
+> **Returns: any, any**

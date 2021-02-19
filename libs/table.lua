@@ -57,6 +57,7 @@ end
 
 ---Returns a new table with new key-value pairs sourced from the map function.
 ---The map function has a signature of: `fn(value, key) new_value, new_key?`
+---If `new_key` is omitted, the key will remain the same.
 ---@param tbl table
 ---@param fn function
 ---@return table
@@ -135,7 +136,7 @@ function ext_table.shift(tbl, index, count)
     end
 end
 
----Returns a slice of the table, works similarly to `string.sub`.
+---Returns a slice of the table, works similarly to `string.sub` except on a table.
 ---@param tbl table
 ---@param start? number
 ---@param stop? number
