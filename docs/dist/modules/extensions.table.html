@@ -1,0 +1,626 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Lua Extensions</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/extensions.html">extensions</a></li>
+  <li><a href="../modules/extensions.coroutine.html">extensions.coroutine</a></li>
+  <li><a href="../modules/extensions.math.html">extensions.math</a></li>
+  <li><a href="../modules/extensions.string.html">extensions.string</a></li>
+  <li><strong>extensions.table</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>extensions.table</code></h1>
+<p>Extensions to the Lua standard table library.</p>
+<p>
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#copy">copy (tbl)</a></td>
+	<td class="summary">Returns a new table with a single layer of keys-values copied.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#deepcopy">deepcopy (tbl)</a></td>
+	<td class="summary">Returns a new table with a all layers of keys-values copied.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#count">count (tbl)</a></td>
+	<td class="summary">Returns the number of keys in the table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#deepcount">deepcount (tbl)</a></td>
+	<td class="summary">Returns the number of keys in the table by recursively looking into tables.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#map">map (tbl, fn)</a></td>
+	<td class="summary">Returns a new table with new key-value pairs sourced from the map function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#filter">filter (tbl, fn)</a></td>
+	<td class="summary">Returns a new table with only key-value pairs that cause <code>fn</code> to return true.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#reverse">reverse (tbl)</a></td>
+	<td class="summary">Reverses the contents of the array.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#reversed">reversed (tbl)</a></td>
+	<td class="summary">Returns a new array with the reversed contents of the original.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#shift">shift (tbl, index, count)</a></td>
+	<td class="summary">Shifts every index after <code>index</code> in the table to the right by <a href="../modules/extensions.table.html#count">count</a>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#slice">slice (tbl[, start[, stop[, step]]])</a></td>
+	<td class="summary">Returns a slice of the table, works similarly to <code>string.sub</code> except on a table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#memcpy">memcpy (dest, src, index)</a></td>
+	<td class="summary">Works identically to <a href="../modules/extensions.table.html#memcpy">memcpy</a> in C.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#swapremove">swapremove (tbl, i)</a></td>
+	<td class="summary">Removes the value at the index from an array and replaces it with the item at the end of the array.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#search">search (tbl, value)</a></td>
+	<td class="summary">Looks for a specific value in a table and returns the key it was first found at.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#keys">keys (tbl)</a></td>
+	<td class="summary">Returns an array of keys available in the table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#values">values (tbl)</a></td>
+	<td class="summary">Returns an array of values available in the table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isempty">isempty (tbl)</a></td>
+	<td class="summary">Returns whether or not the table is empty.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#randomipair">randomipair (tbl)</a></td>
+	<td class="summary">Returns a random key, value index from an array.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#randompair">randompair (tbl)</a></td>
+	<td class="summary">Returns a random key, value index from a table.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "copy"></a>
+    <strong>copy (tbl)</strong>
+    </dt>
+    <dd>
+    Returns a new table with a single layer of keys-values copied.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "deepcopy"></a>
+    <strong>deepcopy (tbl)</strong>
+    </dt>
+    <dd>
+    Returns a new table with a all layers of keys-values copied.  Tables are copied recursively.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "count"></a>
+    <strong>count (tbl)</strong>
+    </dt>
+    <dd>
+    Returns the number of keys in the table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "deepcount"></a>
+    <strong>deepcount (tbl)</strong>
+    </dt>
+    <dd>
+    Returns the number of keys in the table by recursively looking into tables.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "map"></a>
+    <strong>map (tbl, fn)</strong>
+    </dt>
+    <dd>
+    Returns a new table with new key-value pairs sourced from the map function.
+The map function has a signature of: <code>fn(value, key) new_value, new_key?</code>
+If <code>new_key</code> is omitted, the key will remain the same.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+        <li><span class="parameter">fn</span>
+         function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "filter"></a>
+    <strong>filter (tbl, fn)</strong>
+    </dt>
+    <dd>
+    Returns a new table with only key-value pairs that cause <code>fn</code> to return true.
+The filter function has a signature of: <code>fn(value, key) boolean</code>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+        <li><span class="parameter">fn</span>
+         function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "reverse"></a>
+    <strong>reverse (tbl)</strong>
+    </dt>
+    <dd>
+    Reverses the contents of the array.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "reversed"></a>
+    <strong>reversed (tbl)</strong>
+    </dt>
+    <dd>
+    Returns a new array with the reversed contents of the original.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "shift"></a>
+    <strong>shift (tbl, index, count)</strong>
+    </dt>
+    <dd>
+    Shifts every index after <code>index</code> in the table to the right by <a href="../modules/extensions.table.html#count">count</a>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+        <li><span class="parameter">index</span>
+         number
+        </li>
+        <li><span class="parameter">count</span>
+         number
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "slice"></a>
+    <strong>slice (tbl[, start[, stop[, step]]])</strong>
+    </dt>
+    <dd>
+    Returns a slice of the table, works similarly to <code>string.sub</code> except on a table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+        <li><span class="parameter">start</span>
+         number
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">stop</span>
+         number
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">step</span>
+         number
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "memcpy"></a>
+    <strong>memcpy (dest, src, index)</strong>
+    </dt>
+    <dd>
+    Works identically to <a href="../modules/extensions.table.html#memcpy">memcpy</a> in C.  copies all of src into dest starting at index.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dest</span>
+         table
+        </li>
+        <li><span class="parameter">src</span>
+         table
+        </li>
+        <li><span class="parameter">index</span>
+         number
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "swapremove"></a>
+    <strong>swapremove (tbl, i)</strong>
+    </dt>
+    <dd>
+    Removes the value at the index from an array and replaces it with the item at the end of the array.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+        <li><span class="parameter">i</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        any
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "search"></a>
+    <strong>search (tbl, value)</strong>
+    </dt>
+    <dd>
+    Looks for a specific value in a table and returns the key it was first found at.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+        <li><span class="parameter">value</span>
+         any
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        any|nil
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "keys"></a>
+    <strong>keys (tbl)</strong>
+    </dt>
+    <dd>
+    Returns an array of keys available in the table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "values"></a>
+    <strong>values (tbl)</strong>
+    </dt>
+    <dd>
+    Returns an array of values available in the table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "isempty"></a>
+    <strong>isempty (tbl)</strong>
+    </dt>
+    <dd>
+    Returns whether or not the table is empty.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "randomipair"></a>
+    <strong>randomipair (tbl)</strong>
+    </dt>
+    <dd>
+    Returns a random key, value index from an array.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        any, any
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "randompair"></a>
+    <strong>randompair (tbl)</strong>
+    </dt>
+    <dd>
+    Returns a random key, value index from a table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        any, any
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2021-03-08 22:17:38 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

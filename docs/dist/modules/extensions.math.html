@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Lua Extensions</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Fields">Fields</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/extensions.html">extensions</a></li>
+  <li><a href="../modules/extensions.coroutine.html">extensions.coroutine</a></li>
+  <li><strong>extensions.math</strong></li>
+  <li><a href="../modules/extensions.string.html">extensions.string</a></li>
+  <li><a href="../modules/extensions.table.html">extensions.table</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>extensions.math</code></h1>
+<p>Extensions to the Lua standard math library.</p>
+<p>
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#clamp">clamp (num, minValue, maxValue)</a></td>
+	<td class="summary">Returns <code>num</code> clamped to [minValue, maxValue].</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#round">round (num[, precision])</a></td>
+	<td class="summary">Returns <code>num</code> rounded normally to <code>precision</code> decimals of precision.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sign">sign (n)</a></td>
+	<td class="summary">Returns -1 for a negative number, 1 for a positive number and 0 for 0.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#cbrt">cbrt (n)</a></td>
+	<td class="summary">Returns the cube root of <code>n</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#root">root (n, base)</a></td>
+	<td class="summary">Returns the <code>base</code>th root of <code>n</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isnan">isnan (n)</a></td>
+	<td class="summary">Returns true if <code>n</code> is nan.</td>
+	</tr>
+</table>
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#nan">nan</a></td>
+	<td class="summary">A value that is never equal to itself.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "clamp"></a>
+    <strong>clamp (num, minValue, maxValue)</strong>
+    </dt>
+    <dd>
+    Returns <code>num</code> clamped to [minValue, maxValue].
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">num</span>
+         number
+        </li>
+        <li><span class="parameter">minValue</span>
+         number
+        </li>
+        <li><span class="parameter">maxValue</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "round"></a>
+    <strong>round (num[, precision])</strong>
+    </dt>
+    <dd>
+    Returns <code>num</code> rounded normally to <code>precision</code> decimals of precision.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">num</span>
+         number
+        </li>
+        <li><span class="parameter">precision</span>
+         number
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sign"></a>
+    <strong>sign (n)</strong>
+    </dt>
+    <dd>
+    Returns -1 for a negative number, 1 for a positive number and 0 for 0.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">n</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "cbrt"></a>
+    <strong>cbrt (n)</strong>
+    </dt>
+    <dd>
+    Returns the cube root of <code>n</code>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">n</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "root"></a>
+    <strong>root (n, base)</strong>
+    </dt>
+    <dd>
+    Returns the <code>base</code>th root of <code>n</code>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">n</span>
+         number
+        </li>
+        <li><span class="parameter">base</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "isnan"></a>
+    <strong>isnan (n)</strong>
+    </dt>
+    <dd>
+    Returns true if <code>n</code> is nan.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">n</span>
+         number
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "nan"></a>
+    <strong>nan</strong>
+    </dt>
+    <dd>
+    A value that is never equal to itself.
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/extensions.math.html#isnan">isnan</a>
+    </ul>
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2021-03-08 22:17:38 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

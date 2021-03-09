@@ -1,0 +1,560 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Lua Extensions</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/extensions.html">extensions</a></li>
+  <li><a href="../modules/extensions.coroutine.html">extensions.coroutine</a></li>
+  <li><a href="../modules/extensions.math.html">extensions.math</a></li>
+  <li><strong>extensions.string</strong></li>
+  <li><a href="../modules/extensions.table.html">extensions.table</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>extensions.string</code></h1>
+<p>Extensions to the Lua standard string library.</p>
+<p>
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#endswith">endswith (str, pattern[, plain])</a></td>
+	<td class="summary">Returns whether or not the string ends with <code>pattern</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#patternescape">patternescape (str)</a></td>
+	<td class="summary">Returns a new string with all Lua Pattern special characters escaped.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#startswith">startswith (str, pattern[, plain])</a></td>
+	<td class="summary">Returns whether or not the string starts with <code>pattern</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#trim">trim (str)</a></td>
+	<td class="summary">Returns a new string with all leading and trailing whitespace removed.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#padright">padright (str, final_len[, pattern])</a></td>
+	<td class="summary">Returns a new string with the left padded with <code>pattern</code> or spaces until the string is <code>final_len</code> characters long.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#padcenter">padcenter (str, final_len[, pattern])</a></td>
+	<td class="summary">Returns a new string with both sides padded with <code>pattern</code> or spaces until the string is <code>final_len</code> characters long.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#padleft">padleft (str, final_len[, pattern])</a></td>
+	<td class="summary">Returns a new string with the right padded with <code>pattern</code> or spaces until the string is <code>final_len</code> characters long.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#pad">pad (str, final_len, align[, pattern])</a></td>
+	<td class="summary">Returns a new string with the right, left, or both sides padded with <code>pattern</code> or spaces until the string is <code>final_len</code> characters long.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#split">split (str[, delim[, plain]])</a></td>
+	<td class="summary">Returns a table of all elements of the string split on <code>delim</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#random">random (final_len[, mn[, mx]])</a></td>
+	<td class="summary">Returns a string of <code>final_len</code> random characters in the byte-range of <code>[mn, mx]</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#levenshtein">levenshtein (str1, str2)</a></td>
+	<td class="summary">Returns the Levenshtein distance between the two strings.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dameraulevenshtein">dameraulevenshtein (str1, str2)</a></td>
+	<td class="summary">Returns the Damerau-Levenshtein distance between the two strings.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#subsequencematch">subsequencematch (subseq, str)</a></td>
+	<td class="summary">Returns true if the subsequence can be found inside <code>str</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#title">title (str)</a></td>
+	<td class="summary">Returns a copy of this string with the first and every letter after a word boundary uppercased, and everything else lowercase</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "endswith"></a>
+    <strong>endswith (str, pattern[, plain])</strong>
+    </dt>
+    <dd>
+    Returns whether or not the string ends with <code>pattern</code>.  Use <code>plain</code> if you want to match <code>pattern</code> literally.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+        <li><span class="parameter">pattern</span>
+         string
+        </li>
+        <li><span class="parameter">plain</span>
+         boolean
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "patternescape"></a>
+    <strong>patternescape (str)</strong>
+    </dt>
+    <dd>
+    Returns a new string with all Lua Pattern special characters escaped.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "startswith"></a>
+    <strong>startswith (str, pattern[, plain])</strong>
+    </dt>
+    <dd>
+    Returns whether or not the string starts with <code>pattern</code>.  Use <code>plain</code> if you want to match <code>pattern</code> literally.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+        <li><span class="parameter">pattern</span>
+         string
+        </li>
+        <li><span class="parameter">plain</span>
+         boolean
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "trim"></a>
+    <strong>trim (str)</strong>
+    </dt>
+    <dd>
+    Returns a new string with all leading and trailing whitespace removed.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "padright"></a>
+    <strong>padright (str, final_len[, pattern])</strong>
+    </dt>
+    <dd>
+    Returns a new string with the left padded with <code>pattern</code> or spaces until the string is <code>final_len</code> characters long.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+        <li><span class="parameter">final_len</span>
+         number
+        </li>
+        <li><span class="parameter">pattern</span>
+         string
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "padcenter"></a>
+    <strong>padcenter (str, final_len[, pattern])</strong>
+    </dt>
+    <dd>
+    Returns a new string with both sides padded with <code>pattern</code> or spaces until the string is <code>final_len</code> characters long.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+        <li><span class="parameter">final_len</span>
+         number
+        </li>
+        <li><span class="parameter">pattern</span>
+         string
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "padleft"></a>
+    <strong>padleft (str, final_len[, pattern])</strong>
+    </dt>
+    <dd>
+    Returns a new string with the right padded with <code>pattern</code> or spaces until the string is <code>final_len</code> characters long.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+        <li><span class="parameter">final_len</span>
+         number
+        </li>
+        <li><span class="parameter">pattern</span>
+         string
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "pad"></a>
+    <strong>pad (str, final_len, align[, pattern])</strong>
+    </dt>
+    <dd>
+    Returns a new string with the right, left, or both sides padded with <code>pattern</code> or spaces until the string is <code>final_len</code> characters long.
+The alignment parameter denotes where the original string should be after padding. (eg. &ldquo;left&rdquo; will pad the right side)
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+        <li><span class="parameter">final_len</span>
+         number
+        </li>
+        <li><span class="parameter">align</span>
+         &ldquo;right&rdquo;|&ldquo;left&rdquo;|&ldquo;center&rdquo;
+        </li>
+        <li><span class="parameter">pattern</span>
+         string
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "split"></a>
+    <strong>split (str[, delim[, plain]])</strong>
+    </dt>
+    <dd>
+    Returns a table of all elements of the string split on <code>delim</code>.  Use <code>plain</code> if the delimiter provided is not a pattern.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+        <li><span class="parameter">delim</span>
+         string
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">plain</span>
+         boolean
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "random"></a>
+    <strong>random (final_len[, mn[, mx]])</strong>
+    </dt>
+    <dd>
+    Returns a string of <code>final_len</code> random characters in the byte-range of <code>[mn, mx]</code>.  By default <code>mn = 0</code> and <code>mx = 255</code>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">final_len</span>
+         number
+        </li>
+        <li><span class="parameter">mn</span>
+         number
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">mx</span>
+         number
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "levenshtein"></a>
+    <strong>levenshtein (str1, str2)</strong>
+    </dt>
+    <dd>
+    Returns the Levenshtein distance between the two strings.  This is often referred as &ldquo;edit distance&rdquo;.
+<a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Wikipedia &ldquo;Levenshtein Distance&rdquo;</a>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str1</span>
+         string
+        </li>
+        <li><span class="parameter">str2</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dameraulevenshtein"></a>
+    <strong>dameraulevenshtein (str1, str2)</strong>
+    </dt>
+    <dd>
+    Returns the Damerau-Levenshtein distance between the two strings.  This is often referred as &ldquo;edit distance&rdquo;.
+<a href="https://en.wikipedia.org/wiki/Damerau%25E2%2580%2593Levenshtein_distance">Wikipedia &ldquo;Damerau-Levenshtein Distance&rdquo;</a>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str1</span>
+         string
+        </li>
+        <li><span class="parameter">str2</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "subsequencematch"></a>
+    <strong>subsequencematch (subseq, str)</strong>
+    </dt>
+    <dd>
+    Returns true if the subsequence can be found inside <code>str</code>.
+For example: <code>ggl</code> is a subsequence of <code>GooGLe</code>. (uppercase letters signify which letters form the subsequence).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">subseq</span>
+         string
+        </li>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "title"></a>
+    <strong>title (str)</strong>
+    </dt>
+    <dd>
+    Returns a copy of this string with the first and every letter after a word boundary uppercased, and everything else lowercase
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+         string
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2021-03-08 22:17:38 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

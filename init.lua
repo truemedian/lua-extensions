@@ -1,33 +1,42 @@
---- This initialization module is designed for use in the Luvit environment.
---- It *will* not work elsewhere, however you can still copy the individual
---- extensions from the `libs` directory and they should work.
-local ext_math = require('math.lua')
-local ext_string = require('string.lua')
-local ext_table = require('table.lua')
-
+---A combination of extensions to the Lua standard libraries and other useful utilities for libraries I use.
+---@module extensions
+-- This initialization module is designed for use in the Luvit environment.
+-- It *will* not work elsewhere, however you can still copy the individual
+-- extensions from the `libs` directory and they should work.
 -- Luvit uses Luajit 2.1, but `table.new` is not included in the stdlib by default
 require('table.new')
 
-local extensions = {math = ext_math, string = ext_string, table = ext_table}
+local extensions = {}
+extensions.meta = {}
+extensions.math = require('math.lua')
+extensions.string = require('string.lua')
+extensions.table = require('table.lua')
+extensions.coroutine = require('coroutine.lua')
 
-setmetatable(extensions, {
-	__call = function()
-		for _, ext in pairs(extensions) do
-			ext()
-		end
-	end,
-})
+local autoload = {
+    math = extensions.math,
+    string = extensions.string,
+    table = extensions.table,
+    coroutine = extensions.coroutine,
+}
 
-for name, ext in pairs(extensions) do
-	setmetatable(ext, {
-		__call = function()
-			_G[name] = _G[name] or {}
-
-			for k, v in pairs(extensions) do
-				_G[name][k] = v
-			end
-		end,
-	})
+---Loads the standard library extensions into the global environment. This will **not** overwrite any user-defined functions.
+---@usage local extensions = require 'extensions' ()
+function extensions.load()
+    for name, ext in pairs(autoload) do
+        for k, v in pairs(ext) do
+            if _G[name][k] == nil then
+                _G[name][k] = v
+            end
+        end
+    end
 end
+
+function extensions.meta:__call()
+    self.load()
+    return self
+end
+
+setmetatable(extensions, extensions.meta)
 
 return extensions

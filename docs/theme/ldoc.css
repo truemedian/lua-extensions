@@ -1,0 +1,290 @@
+/* Modified from https://github.com/lunarmodules/LDoc/blob/59b728ca200e894adf46d2125b73d76192d77213/ldoc/html/ldoc_new_css.lua */
+
+body {
+    color: #47555c;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: #eff4ff;
+    margin: 0;
+}
+
+a:link { color: #008fee; }
+a:visited { color: #008fee; }
+a:hover { color: #22a7ff; }
+
+h1 { font-size:26px; font-weight: normal; }
+h2 { font-size:22px; font-weight: normal; }
+h3 { font-size:18px; font-weight: normal; }
+h4 { font-size:16px; font-weight: bold; }
+
+hr {
+    height: 1px;
+    background: #c1cce4;
+    border: 0px;
+    margin: 15px 0;
+}
+
+p.name {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+br {
+    display: none;
+}
+
+#main {
+    display: flex;
+}
+
+/* Navigation Box */
+
+#navigation {
+    position: sticky;
+    top: 0;
+
+    background-color: white;
+    border-right: 1px solid #d3dbec;
+    border-bottom: 1px solid #d3dbec;
+
+    overflow-y: auto;
+
+    height: 100%;
+    height: 100vh;
+
+    min-width: min-content;
+}
+
+#navigation h1 {
+    background-color: white;
+    border-bottom: 1px solid #d3dbec;
+    padding: 16px;
+    margin: 0 0 24px 0;
+}
+
+#navigation h2 {
+    background-color: white;
+    border-bottom: 1px solid #d3dbec;
+    padding: 8px 24px;
+    margin: 0;
+}
+
+#navigation > ul {
+    font-size: 1em;
+    list-style: none;
+
+    padding: 0 32px;
+    margin: 16px 0;
+}
+
+/* Content Box */
+
+#content {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#content h1 {
+    background-color: #2c3e67;
+    color: white;
+    padding: 16px;
+    margin: 0px;
+}
+
+#content > h1 code {
+    background-color: inherit;
+    border: none;
+}
+
+#content h2 {
+    background-color: #6c7ea7;
+    color: white;
+    padding: 16px;
+}
+
+#content h2 a {
+    background-color: #6c7ea7;
+    color: white;
+    text-decoration: none;
+}
+
+#content h2 a:hover {
+    text-decoration: underline;
+}
+
+#content h3 {
+    font-style: italic;
+    padding-top: 15px;
+    padding-bottom: 4px;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-bottom: 5px;
+    border-bottom: solid 1px #bcd;
+}
+
+#content h4 {
+    margin-right: 15px;
+    margin-left: 15px;
+    border-bottom: solid 1px #bcd;
+}
+
+#content pre {
+    margin: 15px;
+}
+
+#content ul pre.example {
+    margin-left: 0px;
+}
+
+#content p {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#content table {
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: white;
+}
+
+#about {
+    padding: 15px;
+    padding-left: 16em;
+    background-color: white;
+    border-top: 1px solid #d3dbec;
+    border-bottom: 1px solid #d3dbec;
+}
+
+/* Documentation Boxes */
+
+code, tt {
+    font-family: 'Courier New', Courier, monospace;
+    background: #f5f5f5;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    padding: 2px 4px;
+}
+
+span.parameter {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: #637383;
+}
+
+span.parameter:after {
+    content:": ";
+}
+
+span.types:before {
+    content:"(";
+}
+
+span.types:after {
+    content:")";
+}
+
+.type {
+    font-weight: bold;
+    font-style: italic;
+}
+
+pre {
+    background-color: #323744;
+    color: white;
+    border-radius: 3px;
+    padding: 15px;
+    overflow: auto;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+table.index td { text-align: left; vertical-align: top; }
+
+table.module_list, table.function_list {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #cccccc;
+    border-collapse: collapse;
+    margin: 15px;
+}
+
+table.module_list td, table.function_list td {
+    border-width: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: solid 1px #c1cce4;
+}
+
+table.module_list td.name, table.function_list td.name {
+    background-color: white; min-width: 200px; border-right-width: 0px;
+}
+
+table.module_list td.summary, table.function_list td.summary {
+    background-color: white; width: 100%; border-left-width: 0px;
+}
+
+dl.function {
+    margin: 0 15px;
+    border: solid 1px #c1cce4;
+    background-color: white;
+}
+
+dl.function dt {
+    color: #457cb6;
+    font-family: 'Courier New', Courier, monospace;
+    border-top: solid 1px #c1cce4;
+    padding: 15px;
+}
+
+dl.function dd {
+    margin: 5px 15px 15px 15px;
+}
+
+dl.function dd h3 {
+    margin-top: 0px;
+    margin-left: 0px;
+    padding-left: 0px;
+    font-size: 16px;
+    color: #808080;
+    border-bottom: solid 1px #def;
+}
+
+dl.function dd ul, dl.function dd ol {
+    padding: 0px;
+    padding-left: 15px;
+    list-style-type: none;
+}
+
+.section-description {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* stop sublists from having initial vertical space */
+ul ul { margin-top: 0px; }
+ol ul { margin-top: 0px; }
+ol ol { margin-top: 0px; }
+ul ol { margin-top: 0px; }
+
+/* make the target distinct; helps when we're navigating to a function */
+a:target + * {
+    background-color: rgba(231, 231, 112, 0.5);
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+/* styles for prettification of source */
+pre .comment { color: #bbccaa; }
+pre .constant { color: #a8660d; }
+pre .escape { color: #844631; }
+pre .keyword { color: #ffc090; font-weight: bold; }
+pre .library { color: #0e7c6b; }
+pre .marker { color: #512b1e; background: #fedc56; font-weight: bold; }
+pre .string { color: #8080ff; }
+pre .number { color: #f8660d; }
+pre .operator { color: #2239a8; font-weight: bold; }
+pre .preprocessor, pre .prepro { color: #a33243; }
+pre .global { color: #c040c0; }
+pre .user-keyword { color: #800080; }
+pre .prompt { color: #558817; }
+pre .url { color: #272fc2; text-decoration: underline; }

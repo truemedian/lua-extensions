@@ -1,7 +1,16 @@
+---Extensions to the Lua standard math library.
+---@module extensions.math
+---@alias ext_math
 local floor, min, max = math.floor, math.min, math.max
 
 local ext_math = {}
 
+for k, v in pairs(math) do
+	ext_math[k] = v
+end
+
+---A value that is never equal to itself.
+---@see isnan
 ext_math.nan = 0 / 0
 
 ---Returns `num` clamped to [minValue, maxValue].
@@ -15,7 +24,7 @@ end
 
 ---Returns `num` rounded normally to `precision` decimals of precision.
 ---@param num number
----@param precision? number
+---@param[opt] precision number
 ---@return number
 function ext_math.round(num, precision)
 	local m = 10 ^ (precision or 0)

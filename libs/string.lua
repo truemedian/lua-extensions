@@ -1,14 +1,22 @@
-local byte, char, find, gsub, len, match, rep, sub = string.byte, string.char, string.find, string.gsub, string.len,
-													 string.match, string.rep, string.sub
+---Extensions to the Lua standard string library.
+---@module extensions.string
+---@alias ext_string
+local byte, char, find, gsub, len = string.byte, string.char, string.find, string.gsub, string.len
+local match, rep, sub, upper = string.match, string.rep, string.sub, string.upper
+
 local concat, insert = table.concat, table.insert
 local ceil, floor, min, random = math.ceil, math.floor, math.min, math.random
 
 local ext_string = {}
 
+for k, v in pairs(string) do
+	ext_string[k] = v
+end
+
 ---Returns whether or not the string ends with `pattern`. Use `plain` if you want to match `pattern` literally.
 ---@param str string
 ---@param pattern string
----@param plain? boolean
+---@param[opt] plain boolean
 ---@return boolean
 function ext_string.endswith(str, pattern, plain)
 	return select(2, find(str, pattern, 1, plain)) == #str
@@ -27,7 +35,7 @@ end
 ---Returns whether or not the string starts with `pattern`. Use `plain` if you want to match `pattern` literally.
 ---@param str string
 ---@param pattern string
----@param plain? boolean
+---@param[opt] plain boolean
 ---@return boolean
 function ext_string.startswith(str, pattern, plain)
 	return find(str, pattern, 1, plain) == 1
@@ -43,7 +51,7 @@ end
 ---Returns a new string with the left padded with `pattern` or spaces until the string is `final_len` characters long.
 ---@param str string
 ---@param final_len number
----@param pattern? string
+---@param[opt] pattern string
 ---@return string
 function ext_string.padright(str, final_len, pattern)
 	pattern = pattern or ' '
@@ -53,7 +61,7 @@ end
 ---Returns a new string with both sides padded with `pattern` or spaces until the string is `final_len` characters long.
 ---@param str string
 ---@param final_len number
----@param pattern? string
+---@param[opt] pattern string
 ---@return string
 function ext_string.padcenter(str, final_len, pattern)
 	pattern = pattern or ' '
@@ -64,7 +72,7 @@ end
 ---Returns a new string with the right padded with `pattern` or spaces until the string is `final_len` characters long.
 ---@param str string
 ---@param final_len number
----@param pattern? string
+---@param[opt] pattern string
 ---@return string
 function ext_string.padleft(str, final_len, pattern)
 	pattern = pattern or ' '
@@ -76,7 +84,7 @@ end
 ---@param str string
 ---@param final_len number
 ---@param align "right"|"left"|"center"
----@param pattern? string
+---@param[opt] pattern string
 ---@return string
 function ext_string.pad(str, final_len, align, pattern)
 	if align == 'right' then
@@ -90,8 +98,8 @@ end
 
 ---Returns a table of all elements of the string split on `delim`. Use `plain` if the delimiter provided is not a pattern.
 ---@param str string
----@param delim? string
----@param plain? boolean
+---@param[opt] delim string
+---@param[opt] plain boolean
 ---@return table
 function ext_string.split(str, delim, plain)
 	local ret = {}
@@ -125,8 +133,8 @@ end
 
 ---Returns a string of `final_len` random characters in the byte-range of `[mn, mx]`. By default `mn = 0` and `mx = 255`.
 ---@param final_len number
----@param mn? number
----@param mx? number
+---@param[opt] mn number
+---@param[opt] mx number
 ---@return string
 function ext_string.random(final_len, mn, mx)
 	local ret = {}
@@ -141,7 +149,7 @@ function ext_string.random(final_len, mn, mx)
 end
 
 ---Returns the Levenshtein distance between the two strings. This is often referred as "edit distance".
----https://en.wikipedia.org/wiki/Levenshtein_distance
+---[Wikipedia "Levenshtein Distance"](https://en.wikipedia.org/wiki/Levenshtein_distance)
 ---@param str1 string
 ---@param str2 string
 ---@return number
@@ -179,7 +187,7 @@ function ext_string.levenshtein(str1, str2)
 end
 
 ---Returns the Damerau-Levenshtein distance between the two strings. This is often referred as "edit distance".
----https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance
+---[Wikipedia "Damerau-Levenshtein Distance"](https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance)
 ---@param str1 string
 ---@param str2 string
 ---@return number
@@ -240,7 +248,7 @@ end
 ---@param str string
 ---@return string
 function ext_string.title(str)
-	return str:sub(1, 1):upper() .. str:sub(2):lower():gsub('%W%w', string.upper)
+	return str:sub(1, 1):upper() .. str:sub(2):lower():gsub('%W%w', upper)
 end
 
 return ext_string

@@ -1,7 +1,14 @@
+---Extensions to the Lua standard table library.
+---@module extensions.table
+---@alias ext_table
 local insert = table.insert
 local random = math.random
 
 local ext_table = {}
+
+for k, v in pairs(table) do
+	ext_table[k] = v
+end
 
 ---Returns a new table with a single layer of keys-values copied.
 ---@param tbl table
@@ -138,9 +145,9 @@ end
 
 ---Returns a slice of the table, works similarly to `string.sub` except on a table.
 ---@param tbl table
----@param start? number
----@param stop? number
----@param step? number
+---@param[opt] start number
+---@param[opt] stop number
+---@param[opt] step number
 ---@return table
 function ext_table.slice(tbl, start, stop, step)
 	local new = {}
