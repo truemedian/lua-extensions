@@ -7,54 +7,45 @@
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
 </head>
 <body>
-
 <div id="container">
-
-<div id="product">
-	<div id="product_logo"></div>
-	<div id="product_name"><big><b></b></big></div>
-	<div id="product_description"></div>
-</div> <!-- id="product" -->
-
-
 <div id="main">
-
-
 <!-- Menu -->
-
 <div id="navigation">
 <br/>
 <h1>Lua Extensions</h1>
-
 <ul>
   <li><a href="../index.html">Index</a></li>
 </ul>
-
 <h2>Contents</h2>
 <ul>
 <li><a href="#Functions">Functions</a></li>
 </ul>
-
-
 <h2>Modules</h2>
-<ul class="nowrap">
+<ul>
   <li><a href="../modules/extensions.html">extensions</a></li>
   <li><a href="../modules/extensions.coroutine.html">extensions.coroutine</a></li>
   <li><a href="../modules/extensions.math.html">extensions.math</a></li>
   <li><strong>extensions.string</strong></li>
   <li><a href="../modules/extensions.table.html">extensions.table</a></li>
 </ul>
-
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+<h2>Source</h2>
+<ul>
+  <li><a href="../source/init.lua.html">init.lua</a></li>
+  <li><a href="../source/coroutine.lua.html">coroutine.lua</a></li>
+  <li><a href="../source/math.lua.html">math.lua</a></li>
+  <li><a href="../source/string.lua.html">string.lua</a></li>
+  <li><a href="../source/table.lua.html">table.lua</a></li>
+</ul>
 </div>
-
 <div id="content">
-
 <h1>Module <code>extensions.string</code></h1>
 <p>Extensions to the Lua standard string library.</p>
 <p>
 </p>
-
-
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
@@ -114,22 +105,18 @@
 	<td class="summary">Returns a copy of this string with the first and every letter after a word boundary uppercased, and everything else lowercase</td>
 	</tr>
 </table>
-
 <br/>
 <br/>
-
-
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    <h2 class="section-header "><a name="Functions" href="#Functions">Functions</a></h2>
 
     <dl class="function">
     <dt>
     <a name = "endswith"></a>
     <strong>endswith (str, pattern[, plain])</strong>
+    <a style="float:right;" href="../source/string.lua.html#21">line 21</a>
     </dt>
     <dd>
     Returns whether or not the string ends with <code>pattern</code>.  Use <code>plain</code> if you want to match <code>pattern</code> literally.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str</span>
@@ -143,50 +130,38 @@
          (<em>optional</em>)
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         boolean
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "patternescape"></a>
     <strong>patternescape (str)</strong>
+    <a style="float:right;" href="../source/string.lua.html#31">line 31</a>
     </dt>
     <dd>
     Returns a new string with all Lua Pattern special characters escaped.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str</span>
          string
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         boolean
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "startswith"></a>
     <strong>startswith (str, pattern[, plain])</strong>
+    <a style="float:right;" href="../source/string.lua.html#40">line 40</a>
     </dt>
     <dd>
     Returns whether or not the string starts with <code>pattern</code>.  Use <code>plain</code> if you want to match <code>pattern</code> literally.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str</span>
@@ -200,50 +175,38 @@
          (<em>optional</em>)
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         boolean
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "trim"></a>
     <strong>trim (str)</strong>
+    <a style="float:right;" href="../source/string.lua.html#47">line 47</a>
     </dt>
     <dd>
     Returns a new string with all leading and trailing whitespace removed.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str</span>
          string
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         string
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "padright"></a>
     <strong>padright (str, final_len[, pattern])</strong>
+    <a style="float:right;" href="../source/string.lua.html#56">line 56</a>
     </dt>
     <dd>
     Returns a new string with the left padded with <code>pattern</code> or spaces until the string is <code>final_len</code> characters long.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str</span>
@@ -257,25 +220,19 @@
          (<em>optional</em>)
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         string
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "padcenter"></a>
     <strong>padcenter (str, final_len[, pattern])</strong>
+    <a style="float:right;" href="../source/string.lua.html#66">line 66</a>
     </dt>
     <dd>
     Returns a new string with both sides padded with <code>pattern</code> or spaces until the string is <code>final_len</code> characters long.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str</span>
@@ -289,25 +246,19 @@
          (<em>optional</em>)
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         string
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "padleft"></a>
     <strong>padleft (str, final_len[, pattern])</strong>
+    <a style="float:right;" href="../source/string.lua.html#77">line 77</a>
     </dt>
     <dd>
     Returns a new string with the right padded with <code>pattern</code> or spaces until the string is <code>final_len</code> characters long.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str</span>
@@ -321,26 +272,20 @@
          (<em>optional</em>)
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         string
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "pad"></a>
     <strong>pad (str, final_len, align[, pattern])</strong>
+    <a style="float:right;" href="../source/string.lua.html#89">line 89</a>
     </dt>
     <dd>
     Returns a new string with the right, left, or both sides padded with <code>pattern</code> or spaces until the string is <code>final_len</code> characters long.
 The alignment parameter denotes where the original string should be after padding. (eg. &ldquo;left&rdquo; will pad the right side)
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str</span>
@@ -357,25 +302,19 @@ The alignment parameter denotes where the original string should be after paddin
          (<em>optional</em>)
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         string
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "split"></a>
     <strong>split (str[, delim[, plain]])</strong>
+    <a style="float:right;" href="../source/string.lua.html#104">line 104</a>
     </dt>
     <dd>
     Returns a table of all elements of the string split on <code>delim</code>.  Use <code>plain</code> if the delimiter provided is not a pattern.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str</span>
@@ -390,25 +329,19 @@ The alignment parameter denotes where the original string should be after paddin
          (<em>optional</em>)
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         table
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "random"></a>
     <strong>random (final_len[, mn[, mx]])</strong>
+    <a style="float:right;" href="../source/string.lua.html#139">line 139</a>
     </dt>
     <dd>
     Returns a string of <code>final_len</code> random characters in the byte-range of <code>[mn, mx]</code>.  By default <code>mn = 0</code> and <code>mx = 255</code>.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">final_len</span>
@@ -423,26 +356,20 @@ The alignment parameter denotes where the original string should be after paddin
          (<em>optional</em>)
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         string
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "levenshtein"></a>
     <strong>levenshtein (str1, str2)</strong>
+    <a style="float:right;" href="../source/string.lua.html#156">line 156</a>
     </dt>
     <dd>
     Returns the Levenshtein distance between the two strings.  This is often referred as &ldquo;edit distance&rdquo;.
 <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Wikipedia &ldquo;Levenshtein Distance&rdquo;</a>
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str1</span>
@@ -452,26 +379,20 @@ The alignment parameter denotes where the original string should be after paddin
          string
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         number
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "dameraulevenshtein"></a>
     <strong>dameraulevenshtein (str1, str2)</strong>
+    <a style="float:right;" href="../source/string.lua.html#194">line 194</a>
     </dt>
     <dd>
     Returns the Damerau-Levenshtein distance between the two strings.  This is often referred as &ldquo;edit distance&rdquo;.
 <a href="https://en.wikipedia.org/wiki/Damerau%25E2%2580%2593Levenshtein_distance">Wikipedia &ldquo;Damerau-Levenshtein Distance&rdquo;</a>
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str1</span>
@@ -481,26 +402,20 @@ The alignment parameter denotes where the original string should be after paddin
          string
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         number
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "subsequencematch"></a>
     <strong>subsequencematch (subseq, str)</strong>
+    <a style="float:right;" href="../source/string.lua.html#235">line 235</a>
     </dt>
     <dd>
     Returns true if the subsequence can be found inside <code>str</code>.
 For example: <code>ggl</code> is a subsequence of <code>GooGLe</code>. (uppercase letters signify which letters form the subsequence).
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">subseq</span>
@@ -510,51 +425,34 @@ For example: <code>ggl</code> is a subsequence of <code>GooGLe</code>. (uppercas
          string
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         boolean
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "title"></a>
     <strong>title (str)</strong>
+    <a style="float:right;" href="../source/string.lua.html#250">line 250</a>
     </dt>
     <dd>
     Returns a copy of this string with the first and every letter after a word boundary uppercased, and everything else lowercase
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str</span>
          string
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         string
     </ol>
-
-
-
-
 </dd>
 </dl>
-
-
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
-<div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-03-08 22:47:06 </i>
-</div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
 </html>

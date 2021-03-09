@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+<div id="container">
+<div id="main">
+<!-- Menu -->
+<div id="navigation">
+<br/>
+<h1>Lua Extensions</h1>
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+<h2>Contents</h2>
+<ul>
+<li><a href="#Usage">Usage </a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><strong>README</strong></li>
+</ul>
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/extensions.html">extensions</a></li>
+  <li><a href="../modules/extensions.coroutine.html">extensions.coroutine</a></li>
+  <li><a href="../modules/extensions.math.html">extensions.math</a></li>
+  <li><a href="../modules/extensions.string.html">extensions.string</a></li>
+  <li><a href="../modules/extensions.table.html">extensions.table</a></li>
+</ul>
+<h2>Source</h2>
+<ul>
+  <li><a href="../source/init.lua.html">init.lua</a></li>
+  <li><a href="../source/coroutine.lua.html">coroutine.lua</a></li>
+  <li><a href="../source/math.lua.html">math.lua</a></li>
+  <li><a href="../source/string.lua.html">string.lua</a></li>
+  <li><a href="../source/table.lua.html">table.lua</a></li>
+</ul>
+</div>
+<div id="content">
+    <h1>Lua Extensions</h1>
+
+<blockquote><p>This library is intended for use in the <a href="https://luvit.io/">Luvit</a> environment. However it may eventually be adapted
+for use elsewhere.</p></blockquote>
+
+<p><a name="Usage"></a></p>
+
+<h2>Usage</h2>
+
+<p>Each extension may be loaded separately, or all at the same time. Alternatively, the extensions may be accessed
+individually without injecting them into your global environment.</p>
+
+<h3>Injecting All Extensions</h3>
+
+<p>This loads all extensions into the global environment.</p>
+
+<pre>
+<span class="keyword">local</span> extensions = <span class="global">require</span> <span class="string">'extensions'</span> ()
+</pre>
+
+
+<h3>Using Individual Extensions</h3>
+
+<p>This accesses the <code>split</code> extension without ever modifying your global environment.</p>
+
+<pre>
+<span class="keyword">local</span> extensions = <span class="global">require</span> <span class="string">'extensions'</span>
+
+<span class="keyword">local</span> out = extensions.<span class="global">string</span>.split(<span class="string">"hello world"</span>, <span class="string">" "</span>)
+</pre>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+</div> <!-- id="container" -->
+</body>
+</html>

@@ -7,54 +7,45 @@
     <link rel="stylesheet" href="../ldoc.css" type="text/css" />
 </head>
 <body>
-
 <div id="container">
-
-<div id="product">
-	<div id="product_logo"></div>
-	<div id="product_name"><big><b></b></big></div>
-	<div id="product_description"></div>
-</div> <!-- id="product" -->
-
-
 <div id="main">
-
-
 <!-- Menu -->
-
 <div id="navigation">
 <br/>
 <h1>Lua Extensions</h1>
-
 <ul>
   <li><a href="../index.html">Index</a></li>
 </ul>
-
 <h2>Contents</h2>
 <ul>
 <li><a href="#Functions">Functions</a></li>
 </ul>
-
-
 <h2>Modules</h2>
-<ul class="nowrap">
+<ul>
   <li><a href="../modules/extensions.html">extensions</a></li>
   <li><a href="../modules/extensions.coroutine.html">extensions.coroutine</a></li>
   <li><a href="../modules/extensions.math.html">extensions.math</a></li>
   <li><a href="../modules/extensions.string.html">extensions.string</a></li>
   <li><strong>extensions.table</strong></li>
 </ul>
-
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+<h2>Source</h2>
+<ul>
+  <li><a href="../source/init.lua.html">init.lua</a></li>
+  <li><a href="../source/coroutine.lua.html">coroutine.lua</a></li>
+  <li><a href="../source/math.lua.html">math.lua</a></li>
+  <li><a href="../source/string.lua.html">string.lua</a></li>
+  <li><a href="../source/table.lua.html">table.lua</a></li>
+</ul>
 </div>
-
 <div id="content">
-
 <h1>Module <code>extensions.table</code></h1>
 <p>Extensions to the Lua standard table library.</p>
 <p>
 </p>
-
-
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
@@ -130,124 +121,96 @@
 	<td class="summary">Returns a random key, value index from a table.</td>
 	</tr>
 </table>
-
 <br/>
 <br/>
-
-
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    <h2 class="section-header "><a name="Functions" href="#Functions">Functions</a></h2>
 
     <dl class="function">
     <dt>
     <a name = "copy"></a>
     <strong>copy (tbl)</strong>
+    <a style="float:right;" href="../source/table.lua.html#16">line 16</a>
     </dt>
     <dd>
     Returns a new table with a single layer of keys-values copied.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
          table
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         table
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "deepcopy"></a>
     <strong>deepcopy (tbl)</strong>
+    <a style="float:right;" href="../source/table.lua.html#29">line 29</a>
     </dt>
     <dd>
     Returns a new table with a all layers of keys-values copied.  Tables are copied recursively.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
          table
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         table
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "count"></a>
     <strong>count (tbl)</strong>
+    <a style="float:right;" href="../source/table.lua.html#42">line 42</a>
     </dt>
     <dd>
     Returns the number of keys in the table.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
          table
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         number
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "deepcount"></a>
     <strong>deepcount (tbl)</strong>
+    <a style="float:right;" href="../source/table.lua.html#55">line 55</a>
     </dt>
     <dd>
     Returns the number of keys in the table by recursively looking into tables.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
          table
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         number
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "map"></a>
     <strong>map (tbl, fn)</strong>
+    <a style="float:right;" href="../source/table.lua.html#71">line 71</a>
     </dt>
     <dd>
     Returns a new table with new key-value pairs sourced from the map function.
 The map function has a signature of: <code>fn(value, key) new_value, new_key?</code>
 If <code>new_key</code> is omitted, the key will remain the same.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
@@ -257,26 +220,20 @@ If <code>new_key</code> is omitted, the key will remain the same.
          function
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         table
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "filter"></a>
     <strong>filter (tbl, fn)</strong>
+    <a style="float:right;" href="../source/table.lua.html#92">line 92</a>
     </dt>
     <dd>
     Returns a new table with only key-value pairs that cause <code>fn</code> to return true.
 The filter function has a signature of: <code>fn(value, key) boolean</code>
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
@@ -286,70 +243,52 @@ The filter function has a signature of: <code>fn(value, key) boolean</code>
          function
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         table
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "reverse"></a>
     <strong>reverse (tbl)</strong>
+    <a style="float:right;" href="../source/table.lua.html#106">line 106</a>
     </dt>
     <dd>
     Reverses the contents of the array.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
          table
         </li>
     </ul>
-
-
-
-
-
 </dd>
     <dt>
     <a name = "reversed"></a>
     <strong>reversed (tbl)</strong>
+    <a style="float:right;" href="../source/table.lua.html#118">line 118</a>
     </dt>
     <dd>
     Returns a new array with the reversed contents of the original.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
          table
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         table
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "shift"></a>
     <strong>shift (tbl, index, count)</strong>
+    <a style="float:right;" href="../source/table.lua.html#132">line 132</a>
     </dt>
     <dd>
     Shifts every index after <code>index</code> in the table to the right by <a href="../modules/extensions.table.html#count">count</a>.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
@@ -362,20 +301,14 @@ The filter function has a signature of: <code>fn(value, key) boolean</code>
          number
         </li>
     </ul>
-
-
-
-
-
 </dd>
     <dt>
     <a name = "slice"></a>
     <strong>slice (tbl[, start[, stop[, step]]])</strong>
+    <a style="float:right;" href="../source/table.lua.html#152">line 152</a>
     </dt>
     <dd>
     Returns a slice of the table, works similarly to <code>string.sub</code> except on a table.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
@@ -394,25 +327,19 @@ The filter function has a signature of: <code>fn(value, key) boolean</code>
          (<em>optional</em>)
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         table
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "memcpy"></a>
     <strong>memcpy (dest, src, index)</strong>
+    <a style="float:right;" href="../source/table.lua.html#166">line 166</a>
     </dt>
     <dd>
     Works identically to <a href="../modules/extensions.table.html#memcpy">memcpy</a> in C.  copies all of src into dest starting at index.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">dest</span>
@@ -425,20 +352,14 @@ The filter function has a signature of: <code>fn(value, key) boolean</code>
          number
         </li>
     </ul>
-
-
-
-
-
 </dd>
     <dt>
     <a name = "swapremove"></a>
     <strong>swapremove (tbl, i)</strong>
+    <a style="float:right;" href="../source/table.lua.html#178">line 178</a>
     </dt>
     <dd>
     Removes the value at the index from an array and replaces it with the item at the end of the array.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
@@ -448,25 +369,19 @@ The filter function has a signature of: <code>fn(value, key) boolean</code>
          number
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         any
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "search"></a>
     <strong>search (tbl, value)</strong>
+    <a style="float:right;" href="../source/table.lua.html#190">line 190</a>
     </dt>
     <dd>
     Looks for a specific value in a table and returns the key it was first found at.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
@@ -476,151 +391,110 @@ The filter function has a signature of: <code>fn(value, key) boolean</code>
          any
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         any|nil
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "keys"></a>
     <strong>keys (tbl)</strong>
+    <a style="float:right;" href="../source/table.lua.html#203">line 203</a>
     </dt>
     <dd>
     Returns an array of keys available in the table.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
          table
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         table
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "values"></a>
     <strong>values (tbl)</strong>
+    <a style="float:right;" href="../source/table.lua.html#216">line 216</a>
     </dt>
     <dd>
     Returns an array of values available in the table.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
          table
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         table
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "isempty"></a>
     <strong>isempty (tbl)</strong>
+    <a style="float:right;" href="../source/table.lua.html#229">line 229</a>
     </dt>
     <dd>
     Returns whether or not the table is empty.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
          table
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         boolean
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "randomipair"></a>
     <strong>randomipair (tbl)</strong>
+    <a style="float:right;" href="../source/table.lua.html#236">line 236</a>
     </dt>
     <dd>
     Returns a random key, value index from an array.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
          table
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         any, any
     </ol>
-
-
-
-
 </dd>
     <dt>
     <a name = "randompair"></a>
     <strong>randompair (tbl)</strong>
+    <a style="float:right;" href="../source/table.lua.html#244">line 244</a>
     </dt>
     <dd>
     Returns a random key, value index from a table.
-
-
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">tbl</span>
          table
         </li>
     </ul>
-
     <h3>Returns:</h3>
     <ol>
 
         any, any
     </ol>
-
-
-
-
 </dd>
 </dl>
-
-
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
-<div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-03-08 22:47:06 </i>
-</div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
 </html>

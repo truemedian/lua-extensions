@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+<div id="container">
+<div id="main">
+<!-- Menu -->
+<div id="navigation">
+<br/>
+<h1>Lua Extensions</h1>
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+<h2>Source</h2>
+<ul>
+  <li><strong>init.lua</strong></li>
+  <li><a href="../source/coroutine.lua.html">coroutine.lua</a></li>
+  <li><a href="../source/math.lua.html">math.lua</a></li>
+  <li><a href="../source/string.lua.html">string.lua</a></li>
+  <li><a href="../source/table.lua.html">table.lua</a></li>
+</ul>
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/extensions.html">extensions</a></li>
+  <li><a href="../modules/extensions.coroutine.html">extensions.coroutine</a></li>
+  <li><a href="../modules/extensions.math.html">extensions.math</a></li>
+  <li><a href="../modules/extensions.string.html">extensions.string</a></li>
+  <li><a href="../modules/extensions.table.html">extensions.table</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+</div>
+<div id="content">
+    <h2>init.lua</h2>
+<pre>
+<span class="comment">---A combination of extensions to the Lua standard libraries and other useful utilities for libraries I use.
+</span><span class="comment">---@module extensions
+</span>
+<span class="comment">-- This initialization module is designed for use in the Luvit environment.
+</span><span class="comment">-- It *will* not work elsewhere, however you can still copy the individual
+</span><span class="comment">-- extensions from the <code>libs</code> directory and they should work.
+</span><span class="comment">-- Luvit uses Luajit 2.1, but <code>table.new</code> is not included in the stdlib by default
+</span><span class="global">require</span>(<span class="string">'table.new'</span>)
+
+<span class="keyword">local</span> extensions = {}
+extensions.meta = {}
+extensions.<span class="global">math</span> = <span class="global">require</span>(<span class="string">'math.lua'</span>)
+extensions.<span class="global">string</span> = <span class="global">require</span>(<span class="string">'string.lua'</span>)
+extensions.<span class="global">table</span> = <span class="global">require</span>(<span class="string">'table.lua'</span>)
+extensions.<span class="global">coroutine</span> = <span class="global">require</span>(<span class="string">'coroutine.lua'</span>)
+
+<span class="keyword">local</span> autoload = {
+	<span class="global">math</span> = extensions.<span class="global">math</span>,
+	<span class="global">string</span> = extensions.<span class="global">string</span>,
+	<span class="global">table</span> = extensions.<span class="global">table</span>,
+	<span class="global">coroutine</span> = extensions.<span class="global">coroutine</span>,
+}
+
+<span class="comment">---Loads the standard library extensions into the global environment. This will **not** overwrite any user-defined functions.
+</span><a id="26"></a><span class="comment">---@usage local extensions = require 'extensions' ()
+</span><span class="keyword">function</span> extensions.<span class="global">load</span>()
+	<span class="keyword">for</span> name, ext <span class="keyword">in</span> <span class="global">pairs</span>(autoload) <span class="keyword">do</span>
+		<span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">pairs</span>(ext) <span class="keyword">do</span>
+			<span class="keyword">if</span> _G[name][k] == <span class="keyword">nil</span> <span class="keyword">then</span>
+				_G[name][k] = v
+			<span class="keyword">end</span>
+		<span class="keyword">end</span>
+	<span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> extensions.meta:__call()
+	self.<span class="global">load</span>()
+	<span class="keyword">return</span> self
+<span class="keyword">end</span>
+
+<span class="global">setmetatable</span>(extensions, extensions.meta)
+
+<span class="keyword">return</span> extensions</pre>
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+</div> <!-- id="container" -->
+</body>
+</html>
