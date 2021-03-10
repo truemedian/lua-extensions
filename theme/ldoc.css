@@ -170,14 +170,6 @@ pre code {
     padding: 0;
 }
 
-pre code::before {
-    content: "`";
-}
-
-pre code::after {
-    content: "`";
-}
-
 span.parameter {
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
