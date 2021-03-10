@@ -4,6 +4,16 @@
 > This library is intended for use in the [Luvit](https://luvit.io/) environment. However it may eventually be adapted
 > for use elsewhere.
 
+## Installation
+
+```
+lit install truemedian/extensions
+```
+
+## Documentation
+
+https://www.truemedian.me/lua-extensions/
+
 ## Usage
 
 Each extension may be loaded separately, or all at the same time. Alternatively, the extensions may be accessed
