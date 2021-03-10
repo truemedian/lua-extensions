@@ -1,5 +1,5 @@
 ---Extensions to the SinisterRectus's [Discordia](https://github.com/SinisterRectus/Discordia).
----@module extensions.math
+---@module extensions.discordia
 ---@alias ext_discordia
 local utf8 = require 'utf8'
 local floor = math.floor
@@ -30,6 +30,10 @@ end
 
 local ext_discordia = {}
 
+---Validates a Discord message for consumption by Discordia's send function.
+---@param message table
+---@return boolean
+---@error Position and description of what is invalid
 function ext_discordia.validate(message)
     local has_content = false
 
@@ -77,6 +81,10 @@ function ext_discordia.validate(message)
     return true
 end
 
+---Validates a Discord message embed for consumption by Discordia's send function.
+---@param embed table
+---@return boolean
+---@error Position and description of what is invalid
 function ext_discordia.validateembed(embed, prefix)
     prefix = prefix or 'embed'
     local total_size = 0
