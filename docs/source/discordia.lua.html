@@ -118,8 +118,7 @@
 
     <span class="keyword">if</span> message.nonce ~= <span class="keyword">nil</span> <span class="keyword">then</span>
         <span class="keyword">if</span> <span class="global">type</span>(message.nonce) ~= <span class="string">'number'</span> <span class="keyword">and</span> <span class="global">type</span>(message.nonce) ~= <span class="string">'string'</span> <span class="keyword">then</span>
-            <span class="keyword">return</span> <span class="keyword">false</span>,
-                   <span class="string">'message.nonce: wrong type (expected string or number or nil, got '</span> .. <span class="global">type</span>(message.nonce) .. <span class="string">')'</span>
+            <span class="keyword">return</span> <span class="keyword">false</span>, <span class="string">'message.nonce: wrong type (expected string or number or nil, got '</span> .. <span class="global">type</span>(message.nonce) .. <span class="string">')'</span>
         <span class="keyword">end</span>
     <span class="keyword">end</span>
 
@@ -129,7 +128,7 @@
 <span class="comment">---Validates a Discord message embed for consumption by Discordia's send function.
 </span><span class="comment">---@param embed table
 </span><span class="comment">---@return boolean
-</span><a id="89"></a><span class="comment">---@error Position and description of what is invalid
+</span><a id="88"></a><span class="comment">---@error Position and description of what is invalid
 </span><span class="keyword">function</span> ext_discordia.validateembed(embed, prefix)
     prefix = prefix <span class="keyword">or</span> <span class="string">'embed'</span>
     <span class="keyword">local</span> total_size = <span class="number">0</span>
@@ -152,8 +151,7 @@
 
     <span class="keyword">if</span> embed.description ~= <span class="keyword">nil</span> <span class="keyword">then</span>
         <span class="keyword">if</span> <span class="global">type</span>(embed.description) ~= <span class="string">'string'</span> <span class="keyword">then</span>
-            <span class="keyword">return</span> <span class="keyword">false</span>,
-                   prefix .. <span class="string">'.description: wrong type (expected string or nil, got '</span> .. <span class="global">type</span>(embed.description) .. <span class="string">')'</span>
+            <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.description: wrong type (expected string or nil, got '</span> .. <span class="global">type</span>(embed.description) .. <span class="string">')'</span>
         <span class="keyword">elseif</span> utf8.len(embed.description) &lt; <span class="number">1</span> <span class="keyword">then</span>
             <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.description: too small ('</span> .. utf8.len(embed.description) .. <span class="string">' &lt; 1)'</span>
         <span class="keyword">elseif</span> utf8.len(embed.description) &gt; <span class="number">2048</span> <span class="keyword">then</span>
@@ -172,8 +170,7 @@
     <span class="keyword">if</span> embed.timestamp ~= <span class="keyword">nil</span> <span class="keyword">then</span>
         <span class="comment">-- TODO: validate ISO-8601 (using Discordia?)
 </span>        <span class="keyword">if</span> <span class="global">type</span>(embed.timestamp) ~= <span class="string">'string'</span> <span class="keyword">then</span>
-            <span class="keyword">return</span> <span class="keyword">false</span>,
-                   prefix .. <span class="string">'.timestamp: wrong type (expected string or nil, got '</span> .. <span class="global">type</span>(embed.timestamp) .. <span class="string">')'</span>
+            <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.timestamp: wrong type (expected string or nil, got '</span> .. <span class="global">type</span>(embed.timestamp) .. <span class="string">')'</span>
         <span class="keyword">end</span>
     <span class="keyword">end</span>
 
@@ -204,14 +201,12 @@
 
         <span class="keyword">if</span> embed.footer.icon_url ~= <span class="keyword">nil</span> <span class="keyword">then</span>
             <span class="keyword">if</span> <span class="global">type</span>(embed.footer.icon_url) ~= <span class="string">'string'</span> <span class="keyword">then</span>
-                <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.footer.icon_url: wrong type (expected string or nil, got '</span> ..
-                           <span class="global">type</span>(embed.footer.icon_url) .. <span class="string">')'</span>
+                <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.footer.icon_url: wrong type (expected string or nil, got '</span> .. <span class="global">type</span>(embed.footer.icon_url) .. <span class="string">')'</span>
             <span class="keyword">end</span>
         <span class="keyword">end</span>
 
         <span class="keyword">if</span> <span class="global">type</span>(embed.footer.proxy_icon_url) ~= <span class="string">'nil'</span> <span class="keyword">then</span>
-            <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.footer.proxy_icon_url: wrong type (expected nil, got '</span> ..
-                       <span class="global">type</span>(embed.footer.proxy_icon_url) .. <span class="string">')'</span>
+            <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.footer.proxy_icon_url: wrong type (expected nil, got '</span> .. <span class="global">type</span>(embed.footer.proxy_icon_url) .. <span class="string">')'</span>
         <span class="keyword">end</span>
     <span class="keyword">end</span>
 
@@ -222,14 +217,12 @@
 
         <span class="keyword">if</span> embed.image.url ~= <span class="keyword">nil</span> <span class="keyword">then</span>
             <span class="keyword">if</span> <span class="global">type</span>(embed.image.url) ~= <span class="string">'string'</span> <span class="keyword">then</span>
-                <span class="keyword">return</span> <span class="keyword">false</span>,
-                       prefix .. <span class="string">'.image.url: wrong type (expected string or nil, got '</span> .. <span class="global">type</span>(embed.image.url) .. <span class="string">')'</span>
+                <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.image.url: wrong type (expected string or nil, got '</span> .. <span class="global">type</span>(embed.image.url) .. <span class="string">')'</span>
             <span class="keyword">end</span>
         <span class="keyword">end</span>
 
         <span class="keyword">if</span> embed.image.proxy_url ~= <span class="keyword">nil</span> <span class="keyword">then</span>
-            <span class="keyword">return</span> <span class="keyword">false</span>,
-                   prefix .. <span class="string">'.image.proxy_url: wrong type (expected nil, got '</span> .. <span class="global">type</span>(embed.image.proxy_url) .. <span class="string">')'</span>
+            <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.image.proxy_url: wrong type (expected nil, got '</span> .. <span class="global">type</span>(embed.image.proxy_url) .. <span class="string">')'</span>
         <span class="keyword">end</span>
 
         <span class="keyword">if</span> embed.image.height ~= <span class="keyword">nil</span> <span class="keyword">then</span>
@@ -243,30 +236,25 @@
 
     <span class="keyword">if</span> embed.thumbnail ~= <span class="keyword">nil</span> <span class="keyword">then</span>
         <span class="keyword">if</span> <span class="global">type</span>(embed.thumbnail) ~= <span class="string">'table'</span> <span class="keyword">then</span>
-            <span class="keyword">return</span> <span class="keyword">false</span>,
-                   prefix .. <span class="string">'.thumbnail: wrong type (expected table or nil, got '</span> .. <span class="global">type</span>(embed.thumbnail) .. <span class="string">')'</span>
+            <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.thumbnail: wrong type (expected table or nil, got '</span> .. <span class="global">type</span>(embed.thumbnail) .. <span class="string">')'</span>
         <span class="keyword">end</span>
 
         <span class="keyword">if</span> embed.thumbnail.url ~= <span class="keyword">nil</span> <span class="keyword">then</span>
             <span class="keyword">if</span> <span class="global">type</span>(embed.thumbnail.url) ~= <span class="string">'string'</span> <span class="keyword">then</span>
-                <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.thumbnail.url: wrong type (expected string or nil, got '</span> ..
-                           <span class="global">type</span>(embed.thumbnail.url) .. <span class="string">')'</span>
+                <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.thumbnail.url: wrong type (expected string or nil, got '</span> .. <span class="global">type</span>(embed.thumbnail.url) .. <span class="string">')'</span>
             <span class="keyword">end</span>
         <span class="keyword">end</span>
 
         <span class="keyword">if</span> embed.thumbnail.proxy_url ~= <span class="keyword">nil</span> <span class="keyword">then</span>
-            <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.thumbnail.proxy_url: wrong type (expected nil, got '</span> ..
-                       <span class="global">type</span>(embed.thumbnail.proxy_url) .. <span class="string">')'</span>
+            <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.thumbnail.proxy_url: wrong type (expected nil, got '</span> .. <span class="global">type</span>(embed.thumbnail.proxy_url) .. <span class="string">')'</span>
         <span class="keyword">end</span>
 
         <span class="keyword">if</span> embed.thumbnail.height ~= <span class="keyword">nil</span> <span class="keyword">then</span>
-            <span class="keyword">return</span> <span class="keyword">false</span>,
-                   prefix .. <span class="string">'.thumbnail.height: wrong type (expected nil, got '</span> .. <span class="global">type</span>(embed.thumbnail.height) .. <span class="string">')'</span>
+            <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.thumbnail.height: wrong type (expected nil, got '</span> .. <span class="global">type</span>(embed.thumbnail.height) .. <span class="string">')'</span>
         <span class="keyword">end</span>
 
         <span class="keyword">if</span> embed.thumbnail.width ~= <span class="keyword">nil</span> <span class="keyword">then</span>
-            <span class="keyword">return</span> <span class="keyword">false</span>,
-                   prefix .. <span class="string">'.thumbnail.width: wrong type (expected nil, got '</span> .. <span class="global">type</span>(embed.thumbnail.width) .. <span class="string">')'</span>
+            <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.thumbnail.width: wrong type (expected nil, got '</span> .. <span class="global">type</span>(embed.thumbnail.width) .. <span class="string">')'</span>
         <span class="keyword">end</span>
     <span class="keyword">end</span>
 
@@ -285,8 +273,7 @@
 
         <span class="keyword">if</span> embed.author.name ~= <span class="keyword">nil</span> <span class="keyword">then</span>
             <span class="keyword">if</span> <span class="global">type</span>(embed.author.name) ~= <span class="string">'string'</span> <span class="keyword">then</span>
-                <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.author.name: wrong type (expected string or nil, got '</span> ..
-                           <span class="global">type</span>(embed.author.name) .. <span class="string">')'</span>
+                <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.author.name: wrong type (expected string or nil, got '</span> .. <span class="global">type</span>(embed.author.name) .. <span class="string">')'</span>
             <span class="keyword">elseif</span> utf8.len(embed.author.name) &lt; <span class="number">1</span> <span class="keyword">then</span>
                 <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.author.name: too small ('</span> .. utf8.len(embed.author.name) .. <span class="string">' &lt; 1)'</span>
             <span class="keyword">elseif</span> utf8.len(embed.author.name) &gt; <span class="number">256</span> <span class="keyword">then</span>
@@ -298,21 +285,18 @@
 
         <span class="keyword">if</span> embed.author.url ~= <span class="keyword">nil</span> <span class="keyword">then</span>
             <span class="keyword">if</span> <span class="global">type</span>(embed.author.url) ~= <span class="string">'string'</span> <span class="keyword">then</span>
-                <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.author.url: wrong type (expected string or nil, got '</span> ..
-                           <span class="global">type</span>(embed.author.url) .. <span class="string">')'</span>
+                <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.author.url: wrong type (expected string or nil, got '</span> .. <span class="global">type</span>(embed.author.url) .. <span class="string">')'</span>
             <span class="keyword">end</span>
         <span class="keyword">end</span>
 
         <span class="keyword">if</span> embed.author.icon_url ~= <span class="keyword">nil</span> <span class="keyword">then</span>
             <span class="keyword">if</span> <span class="global">type</span>(embed.author.icon_url) ~= <span class="string">'string'</span> <span class="keyword">then</span>
-                <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.author.icon_url: wrong type (expected string or nil, got '</span> ..
-                           <span class="global">type</span>(embed.author.icon_url) .. <span class="string">')'</span>
+                <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.author.icon_url: wrong type (expected string or nil, got '</span> .. <span class="global">type</span>(embed.author.icon_url) .. <span class="string">')'</span>
             <span class="keyword">end</span>
         <span class="keyword">end</span>
 
         <span class="keyword">if</span> <span class="global">type</span>(embed.author.proxy_icon_url) ~= <span class="string">'nil'</span> <span class="keyword">then</span>
-            <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.author.proxy_icon_url: wrong type (expected nil, got '</span> ..
-                       <span class="global">type</span>(embed.author.proxy_icon_url) .. <span class="string">')'</span>
+            <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.author.proxy_icon_url: wrong type (expected nil, got '</span> .. <span class="global">type</span>(embed.author.proxy_icon_url) .. <span class="string">')'</span>
         <span class="keyword">end</span>
     <span class="keyword">end</span>
 
@@ -338,8 +322,7 @@
             <span class="keyword">end</span>
 
             <span class="keyword">if</span> <span class="global">type</span>(field.name) ~= <span class="string">'string'</span> <span class="keyword">then</span>
-                <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.fields['</span> .. i .. <span class="string">'].name: wrong type (expected string, got '</span> ..
-                           <span class="global">type</span>(field.name) .. <span class="string">')'</span>
+                <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.fields['</span> .. i .. <span class="string">'].name: wrong type (expected string, got '</span> .. <span class="global">type</span>(field.name) .. <span class="string">')'</span>
             <span class="keyword">elseif</span> utf8.len(field.name) &lt; <span class="number">1</span> <span class="keyword">then</span>
                 <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.fields['</span> .. i .. <span class="string">'].name: too small ('</span> .. utf8.len(field.name) .. <span class="string">' &lt; 1)'</span>
             <span class="keyword">elseif</span> utf8.len(field.name) &gt; <span class="number">256</span> <span class="keyword">then</span>
@@ -349,8 +332,7 @@
             total_size = total_size + utf8.len(embed.field.name)
 
             <span class="keyword">if</span> <span class="global">type</span>(field.value) ~= <span class="string">'string'</span> <span class="keyword">then</span>
-                <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.fields['</span> .. i .. <span class="string">'].value: wrong type (expected string, got '</span> ..
-                           <span class="global">type</span>(field.value) .. <span class="string">')'</span>
+                <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.fields['</span> .. i .. <span class="string">'].value: wrong type (expected string, got '</span> .. <span class="global">type</span>(field.value) .. <span class="string">')'</span>
             <span class="keyword">elseif</span> utf8.len(field.value) &lt; <span class="number">1</span> <span class="keyword">then</span>
                 <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.fields['</span> .. i .. <span class="string">'].value: too small ('</span> .. utf8.len(field.value) .. <span class="string">' &lt; 1)'</span>
             <span class="keyword">elseif</span> utf8.len(field.value) &gt; <span class="number">1024</span> <span class="keyword">then</span>
@@ -361,8 +343,7 @@
 
             <span class="keyword">if</span> field.inline ~= <span class="keyword">nil</span> <span class="keyword">then</span>
                 <span class="keyword">if</span> <span class="global">type</span>(field.inline) ~= <span class="string">'string'</span> <span class="keyword">then</span>
-                    <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.fields['</span> .. i .. <span class="string">'].inline: wrong type (expected boolean or nil, got '</span> ..
-                               <span class="global">type</span>(field.inline) .. <span class="string">')'</span>
+                    <span class="keyword">return</span> <span class="keyword">false</span>, prefix .. <span class="string">'.fields['</span> .. i .. <span class="string">'].inline: wrong type (expected boolean or nil, got '</span> .. <span class="global">type</span>(field.inline) .. <span class="string">')'</span>
                 <span class="keyword">end</span>
             <span class="keyword">end</span>
         <span class="keyword">end</span>
