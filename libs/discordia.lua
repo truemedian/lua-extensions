@@ -312,4 +312,34 @@ function ext_discordia.validateembed(embed, prefix)
     return true
 end
 
+---Strips the code and language out of a fenced codeblock.
+---Expects only the fenced codeblock with no surrounding content.
+---@param code string
+---@return string, string
+function ext_discordia.stripcode(code)
+    local unfenced = code:match('^```(.-)```$')
+
+    if unfenced:find('^[a-zA-Z0-9-_+.]+\n') then
+        local language, content = unfenced:match('^([a-zA-Z0-9-_+.]+)\n(.*)$')
+        return content, language
+    else
+        return unfenced
+    end
+end
+
+---Formats a discord fenced codeblock.
+---Asserts that the provided language is valid (any of a-z, A-Z, 0-9, '-', '_', '+', '.')
+---@param code string
+---@param[opt] language string
+---@return string
+function ext_discordia.formatcode(code, language)
+    if language then
+        assert(not string.find(language, '[^a-zA-Z0-9-_+.]'), 'invalid language')
+
+        return '```' .. language .. '\n' .. code .. '```'
+    else
+        return '```' .. code .. '```'
+    end
+end
+
 return ext_discordia
