@@ -58,6 +58,19 @@
 	<td class="name" nowrap><a href="#validateembed">validateembed (embed)</a></td>
 	<td class="summary">Validates a Discord message embed for consumption by Discordia&rsquo;s send function.</td>
 	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#stripcode">stripcode (code)</a></td>
+	<td class="summary">Strips the code and language out of a fenced codeblock.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#formatcode">formatcode (code[, language])</a></td>
+	<td class="summary">Formats a discord fenced codeblock.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#stripmention">stripmention (mention)</a></td>
+	<td class="summary">Strips the snowflake id out of a discord mention.The second return signifies what kind of mention was parsed,
+either <code>raw</code> (only an id was passed), <code>user</code>, <code>role</code>, <code>channel</code>, or <code>none</code>.</td>
+	</tr>
 </table>
 <br/>
 <br/>
@@ -120,6 +133,70 @@
         <li>
            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
         Position and description of what is invalid</li>
+    </ol>
+</dd>
+    <dt>
+    <a name = "stripcode"></a>
+    <strong>stripcode (code)</strong>
+    <a style="float:right;" href="../source/discordia.lua.html#319">line 319</a>
+    </dt>
+    <dd>
+    Strips the code and language out of a fenced codeblock.
+Expects only the fenced codeblock with no surrounding content.
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">code</span>
+         string
+        </li>
+    </ul>
+    <h3>Returns:</h3>
+    <ol>
+
+        string, string
+    </ol>
+</dd>
+    <dt>
+    <a name = "formatcode"></a>
+    <strong>formatcode (code[, language])</strong>
+    <a style="float:right;" href="../source/discordia.lua.html#335">line 335</a>
+    </dt>
+    <dd>
+    Formats a discord fenced codeblock.
+Asserts that the provided language is valid (any of a-z, A-Z, 0-9, &lsquo;&ndash;&rsquo;, &lsquo;_&rsquo;, &lsquo;+&rsquo;, &lsquo;.&rsquo;)
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">code</span>
+         string
+        </li>
+        <li><span class="parameter">language</span>
+         string
+         (<em>optional</em>)
+        </li>
+    </ul>
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+</dd>
+    <dt>
+    <a name = "stripmention"></a>
+    <strong>stripmention (mention)</strong>
+    <a style="float:right;" href="../source/discordia.lua.html#349">line 349</a>
+    </dt>
+    <dd>
+    Strips the snowflake id out of a discord mention.The second return signifies what kind of mention was parsed,
+either <code>raw</code> (only an id was passed), <code>user</code>, <code>role</code>, <code>channel</code>, or <code>none</code>.
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">mention</span>
+         string
+        </li>
+    </ul>
+    <h3>Returns:</h3>
+    <ol>
+
+        string?, string
     </ol>
 </dd>
 </dl>

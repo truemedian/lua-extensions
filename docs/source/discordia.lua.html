@@ -356,6 +356,58 @@
     <span class="keyword">return</span> <span class="keyword">true</span>
 <span class="keyword">end</span>
 
+<span class="comment">---Strips the code and language out of a fenced codeblock.
+</span><span class="comment">---Expects only the fenced codeblock with no surrounding content.
+</span><span class="comment">---@param code string
+</span><a id="319"></a><span class="comment">---@return string, string
+</span><span class="keyword">function</span> ext_discordia.stripcode(code)
+    <span class="keyword">local</span> unfenced = code:match(<span class="string">'^```(.-)```$'</span>)
+
+    <span class="keyword">if</span> unfenced:find(<span class="string">'^[a-zA-Z0-9-_+.]+\n'</span>) <span class="keyword">then</span>
+        <span class="keyword">local</span> language, content = unfenced:match(<span class="string">'^([a-zA-Z0-9-_+.]+)\n(.*)$'</span>)
+        <span class="keyword">return</span> content, language
+    <span class="keyword">else</span>
+        <span class="keyword">return</span> unfenced
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---Formats a discord fenced codeblock.
+</span><span class="comment">---Asserts that the provided language is valid (any of a-z, A-Z, 0-9, '-', '_', '+', '.')
+</span><span class="comment">---@param code string
+</span><span class="comment">---@param[opt] language string
+</span><a id="335"></a><span class="comment">---@return string
+</span><span class="keyword">function</span> ext_discordia.formatcode(code, language)
+    <span class="keyword">if</span> language <span class="keyword">then</span>
+        <span class="global">assert</span>(<span class="keyword">not</span> <span class="global">string</span>.find(language, <span class="string">'[^a-zA-Z0-9-_+.]'</span>), <span class="string">'invalid language'</span>)
+
+        <span class="keyword">return</span> <span class="string">'```'</span> .. language .. <span class="string">'\n'</span> .. code .. <span class="string">'```'</span>
+    <span class="keyword">else</span>
+        <span class="keyword">return</span> <span class="string">'```'</span> .. code .. <span class="string">'```'</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---Strips the snowflake id out of a discord mention.The second return signifies what kind of mention was parsed,
+</span><span class="comment">---either <code>raw</code> (only an id was passed), <code>user</code>, <code>role</code>, <code>channel</code>, or <code>none</code>.
+</span><span class="comment">---@param mention string
+</span><a id="349"></a><span class="comment">---@return string?, string
+</span><span class="keyword">function</span> ext_discordia.stripmention(mention)
+    <span class="keyword">if</span> <span class="global">tonumber</span>(mention) <span class="keyword">then</span>
+        <span class="keyword">return</span> mention, <span class="string">'raw'</span>
+    <span class="keyword">end</span>
+
+    <span class="keyword">local</span> symbol, id = mention:match(<span class="string">'&lt;([@#][&amp;!]?)(%d+)&gt;'</span>)
+
+    <span class="keyword">if</span> symbol == <span class="string">'@'</span> <span class="keyword">or</span> symbol == <span class="string">'@!'</span> <span class="keyword">then</span>
+        <span class="keyword">return</span> id, <span class="string">'user'</span>
+    <span class="keyword">elseif</span> symbol == <span class="string">'@&amp;'</span> <span class="keyword">then</span>
+        <span class="keyword">return</span> id, <span class="string">'role'</span>
+    <span class="keyword">elseif</span> symbol == <span class="string">'#'</span> <span class="keyword">then</span>
+        <span class="keyword">return</span> id, <span class="string">'channel'</span>
+    <span class="keyword">end</span>
+
+    <span class="keyword">return</span> <span class="keyword">nil</span>, <span class="string">'none'</span>
+<span class="keyword">end</span>
+
 <span class="keyword">return</span> ext_discordia</pre>
 
 </div> <!-- id="content" -->
