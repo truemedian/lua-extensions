@@ -1,8 +1,8 @@
 column_limit: 180
 
-use_tab: false
+use_tab: true
 tab_width: 4
-indent_width: 4
+indent_width: 1
 continuation_indent_width: 4
 
 keep_simple_function_one_line: false
