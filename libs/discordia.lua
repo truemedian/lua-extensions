@@ -342,4 +342,26 @@ function ext_discordia.formatcode(code, language)
     end
 end
 
+---Strips the snowflake id out of a discord mention.The second return signifies what kind of mention was parsed,
+---either `raw` (only an id was passed), `user`, `role`, `channel`, or `none`.
+---@param mention string
+---@return string?, string
+function ext_discordia.stripmention(mention)
+    if tonumber(mention) then
+        return mention, 'raw'
+    end
+
+    local symbol, id = mention:match('<([@#][&!]?)(%d+)>')
+
+    if symbol == '@' or symbol == '@!' then
+        return id, 'user'
+    elseif symbol == '@&' then
+        return id, 'role'
+    elseif symbol == '#' then
+        return id, 'channel'
+    end
+
+    return nil, 'none'
+end
+
 return ext_discordia
