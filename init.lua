@@ -13,7 +13,6 @@ extensions.math = require('math.lua')
 extensions.string = require('string.lua')
 extensions.table = require('table.lua')
 extensions.coroutine = require('coroutine.lua')
-extensions.discordia = require('discordia.lua')
 
 local autoload = {
 	math = extensions.math,

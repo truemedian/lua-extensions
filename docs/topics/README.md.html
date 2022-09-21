@@ -30,7 +30,6 @@
 <ul>
   <li><a href="../modules/extensions.html">extensions</a></li>
   <li><a href="../modules/extensions.coroutine.html">extensions.coroutine</a></li>
-  <li><a href="../modules/extensions.discordia.html">extensions.discordia</a></li>
   <li><a href="../modules/extensions.math.html">extensions.math</a></li>
   <li><a href="../modules/extensions.string.html">extensions.string</a></li>
   <li><a href="../modules/extensions.table.html">extensions.table</a></li>
@@ -39,33 +38,34 @@
 <ul>
   <li><a href="../source/init.lua.html">init.lua</a></li>
   <li><a href="../source/coroutine.lua.html">coroutine.lua</a></li>
-  <li><a href="../source/discordia.lua.html">discordia.lua</a></li>
   <li><a href="../source/math.lua.html">math.lua</a></li>
   <li><a href="../source/string.lua.html">string.lua</a></li>
   <li><a href="../source/table.lua.html">table.lua</a></li>
 </ul>
 </div>
 <div id="content">
-    <h1>Lua Extensions</h1>
 
-<blockquote><p>This library is intended for use in the <a href="https://luvit.io/">Luvit</a> environment. However it may eventually be adapted
-for use elsewhere.</p></blockquote>
+
+<h1>Lua Extensions</h1>
+
+<blockquote>
+    <p>This library is intended for use in the <a href="https://luvit.io/">Luvit</a> environment. However it may eventually be adapted
+    for use elsewhere.</p>
+</blockquote>
 
 <p><a name="Installation"></a></p>
-
 <h2>Installation</h2>
 
 <pre><code> lit install truemedian/extensions
 </code></pre>
 
-<p><a name="Documentation"></a></p>
 
+<p><a name="Documentation"></a></p>
 <h2>Documentation</h2>
 
 <p>https://www.truemedian.me/lua-extensions/</p>
 
 <p><a name="Usage"></a></p>
-
 <h2>Usage</h2>
 
 <p>Each extension may be loaded separately, or all at the same time. Alternatively, the extensions may be accessed
@@ -75,6 +75,7 @@ individually without injecting them into your global environment.</p>
 
 <p>This loads all extensions into the global environment.</p>
 
+
 <pre>
 <span class="keyword">local</span> extensions = <span class="global">require</span> <span class="string">'extensions'</span> ()
 </pre>
@@ -83,6 +84,7 @@ individually without injecting them into your global environment.</p>
 <h3>Using Individual Extensions</h3>
 
 <p>This accesses the <code>split</code> extension without ever modifying your global environment.</p>
+
 
 <pre>
 <span class="keyword">local</span> extensions = <span class="global">require</span> <span class="string">'extensions'</span>

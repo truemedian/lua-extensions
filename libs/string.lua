@@ -19,7 +19,15 @@ end
 ---@param[opt] plain boolean
 ---@return boolean
 function ext_string.endswith(str, pattern, plain)
-	return select(2, find(str, pattern, 1, plain)) == #str
+	if plain then
+		return string.sub(str, - #pattern) == pattern
+	else
+		if pattern:sub(-1) == '$' then
+			pattern = pattern .. '$'
+		end
+
+		return not not string.find(str, pattern, 1)
+	end
 end
 
 local pattern_special = [[^$()%.[]*+-?]]
@@ -27,7 +35,7 @@ local pattern_match = '[' .. pattern_special:gsub('.', '%%%1') .. ']'
 
 ---Returns a new string with all Lua Pattern special characters escaped.
 ---@param str string
----@return boolean
+---@return string
 function ext_string.patternescape(str)
 	return (gsub(str, pattern_match, '%%%1'))
 end
@@ -42,10 +50,15 @@ function ext_string.startswith(str, pattern, plain)
 end
 
 ---Returns a new string with all leading and trailing whitespace removed.
+---A pattern may be provided to instead strip using that pattern.
 ---@param str string
+---@param pattern? string
 ---@return string
-function ext_string.trim(str)
-	return match(str, '^%s*(.-)%s*$')
+function ext_string.trim(str, pattern)
+	pattern = pattern or '%s'
+	assert(#pattern > 0)
+
+	return match(str, '^' .. pattern .. '*(.-)' .. pattern .. '*$')
 end
 
 ---Returns a new string with the left padded with `pattern` or spaces until the string is `final_len` characters long.
@@ -77,23 +90,6 @@ end
 function ext_string.padleft(str, final_len, pattern)
 	pattern = pattern or ' '
 	return str .. rep(pattern, (final_len - #str) / #pattern)
-end
-
----Returns a new string with the right, left, or both sides padded with `pattern` or spaces until the string is `final_len` characters long.
----The alignment parameter denotes where the original string should be after padding. (eg. "left" will pad the right side)
----@param str string
----@param final_len number
----@param align "right"|"left"|"center"
----@param[opt] pattern string
----@return string
-function ext_string.pad(str, final_len, align, pattern)
-	if align == 'right' then
-		return ext_string.padright(str, final_len, pattern)
-	elseif align == 'center' then
-		return ext_string.padcenter(str, final_len, pattern)
-	else -- left
-		return ext_string.padleft(str, final_len, pattern)
-	end
 end
 
 ---Returns a table of all elements of the string split on `delim`. Use `plain` if the delimiter provided is not a pattern.
@@ -169,7 +165,7 @@ function ext_string.levenshtein(str1, str2)
 
 	local matrix = {}
 	for i = 0, len1 do
-		matrix[i] = {[0] = i}
+		matrix[i] = { [0] = i }
 	end
 
 	for j = 0, len2 do
@@ -207,7 +203,7 @@ function ext_string.dameraulevenshtein(str1, str2)
 
 	local matrix = {}
 	for i = 0, len1 do
-		matrix[i] = {[0] = i}
+		matrix[i] = { [0] = i }
 	end
 
 	for j = 0, len2 do
@@ -242,13 +238,6 @@ function ext_string.subsequencematch(subseq, str)
 	end
 
 	return matches == len(subseq)
-end
-
----Returns a copy of this string with the first and every letter after a word boundary uppercased, and everything else lowercase
----@param str string
----@return string
-function ext_string.title(str)
-	return str:sub(1, 1):upper() .. str:sub(2):lower():gsub('%W%w', upper)
 end
 
 return ext_string

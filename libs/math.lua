@@ -1,7 +1,6 @@
 ---Extensions to the Lua standard math library.
 ---@module extensions.math
 ---@alias ext_math
-local floor, min, max = math.floor, math.min, math.max
 
 local ext_math = {}
 
@@ -13,13 +12,17 @@ end
 ---@see isnan
 ext_math.nan = 0 / 0
 
+---Euler's number. This is the base of the natural logarithm.
+---@see math.log
+ext_math.e = math.exp(1)
+
 ---Returns `num` clamped to [minValue, maxValue].
 ---@param num number
 ---@param minValue number
 ---@param maxValue number
 ---@return number
 function ext_math.clamp(num, minValue, maxValue)
-	return min(max(num, minValue), maxValue)
+	return math.min(math.max(num, minValue), maxValue)
 end
 
 ---Returns `num` rounded normally to `precision` decimals of precision.
@@ -28,7 +31,7 @@ end
 ---@return number
 function ext_math.round(num, precision)
 	local m = 10 ^ (precision or 0)
-	return floor(num * m + 0.5) / m
+	return math.floor(num * m + 0.5) / m
 end
 
 ---Returns -1 for a negative number, 1 for a positive number and 0 for 0.

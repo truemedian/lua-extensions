@@ -49,19 +49,6 @@ function ext_table.count(tbl)
 	return n
 end
 
----Returns the number of keys in the table by recursively looking into tables.
----@param tbl table
----@return number
-function ext_table.deepcount(tbl)
-	local n = 0
-
-	for _, v in pairs(tbl) do
-		n = type(v) == 'table' and n + ext_table.deepcount(v) or n + 1
-	end
-
-	return n
-end
-
 ---Returns a new table with new key-value pairs sourced from the map function.
 ---The map function has a signature of: `fn(value, key) new_value, new_key?`
 ---If `new_key` is omitted, the key will remain the same.
@@ -101,28 +88,49 @@ function ext_table.filter(tbl, fn)
 	return new
 end
 
----Reverses the contents of the array.
+---Iterates over the array portion of a table in order, calling `fn` on each value, passing in the return value from the previous element.
+---If `initial` is not provided, the first element of the array is used, and the iteration starts at the second element.
+---The reduce function has a signature of: `fn(previous, value, index?) boolean`
 ---@param tbl table
-function ext_table.reverse(tbl)
-	local i, n = 1, #tbl
+---@param fn fun(previous: any, value: any, index?: integer): boolean
+---@param initial any
+---@return any
+function ext_table.reduce(tbl, fn, initial)
+	local reduced = initial
 
-	while i < n do
-		tbl[i], tbl[n] = tbl[n], tbl[i]
-		i, n = i + 1, n - 1
+	for i, v in ipairs(tbl) do
+		if i == 1 and reduced == nil then
+			reduced = v
+		else
+			reduced = fn(reduced, v, i)
+		end
 	end
+
+	return reduced
 end
 
----Returns a new array with the reversed contents of the original.
+---Reverses the contents of the array.
+---If `dest` is provided, the source array will not be modified
 ---@param tbl table
+---@param dest? table
 ---@return table
-function ext_table.reversed(tbl)
-	local new = {}
+function ext_table.reverse(tbl, dest)
+	if dest then
+		for i = 1, #tbl do
+			dest[i] = tbl[#tbl - i + 1]
+		end
 
-	for i = 1, #tbl do
-		new[i] = tbl[#tbl - i + 1]
+		return dest
+	else
+		local i, n = 1, #tbl
+
+		while i < n do
+			tbl[i], tbl[n] = tbl[n], tbl[i]
+			i, n = i + 1, n - 1
+		end
+
+		return tbl
 	end
-
-	return new
 end
 
 ---Shifts every index after `index` in the table to the right by `count`.
@@ -157,6 +165,30 @@ function ext_table.slice(tbl, start, stop, step)
 	end
 
 	return new
+end
+
+---Appends all elements of `b` into `a`. Does not consider non-array elements.
+---@param a table
+---@param b table
+---@return table
+function ext_table.join(a, b)
+	for _, v in ipairs(b) do
+		table.insert(a, v)
+	end
+
+	return a
+end
+
+---Merges all key-value pairs of `b` into `a`. Will overwrite any existing keys.
+---@param a table
+---@param b table
+---@return table
+function ext_table.merge(a, b)
+	for k, v in pairs(b) do
+		a[k] = v
+	end
+
+	return a
 end
 
 ---Works identically to `memcpy` in C. copies all of src into dest starting at index.
@@ -230,12 +262,32 @@ function ext_table.isempty(tbl)
 	return not next(tbl)
 end
 
+---Shuffles a table in place.
+---@param tbl table
+---@return table
+function ext_table.shuffle(tbl)
+	for i = #tbl, 1, -1 do
+		local j = math.random(i)
+		tbl[i], tbl[j] = tbl[j], tbl[i]
+	end
+
+	return tbl
+end
+
 ---Returns a random key, value index from an array.
 ---@param tbl table
 ---@return any, any
 function ext_table.randomipair(tbl)
 	local i = random(#tbl)
 	return i, tbl[i]
+end
+
+---Returns a random key, value index from an array.
+---@param tbl table
+---@return any, any
+function ext_table.randomvalue(tbl)
+	local values = ext_table.values(tbl)
+	return values[math.random(#values)]
 end
 
 ---Returns a random key, value index from a table.
@@ -250,6 +302,23 @@ function ext_table.randompair(tbl)
 			return k, v
 		end
 	end
+end
+
+---Fills a table from 1 to `len` with `value`.
+---@param tbl table
+---@param value any
+---@param len? integer
+---@param start? integer
+---@return table
+function ext_table.fill(tbl, value, len, start)
+	len = len or #tbl
+	start = start or 1
+
+	for i = 1, len do
+		tbl[i] = value
+	end
+
+	return tbl
 end
 
 return ext_table
