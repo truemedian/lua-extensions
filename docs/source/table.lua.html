@@ -215,7 +215,7 @@
 </span><a id="174"></a><span class="comment">---@return table
 </span><span class="keyword">function</span> ext_table.join(a, b)
 	<span class="keyword">for</span> _, v <span class="keyword">in</span> <span class="global">ipairs</span>(b) <span class="keyword">do</span>
-		<span class="global">table</span>.insert(a, v)
+		insert(a, v)
 	<span class="keyword">end</span>
 
 	<span class="keyword">return</span> a
@@ -233,22 +233,26 @@
 	<span class="keyword">return</span> a
 <span class="keyword">end</span>
 
-<span class="comment">---Works identically to <code>memcpy</code> in C. copies all of src into dest starting at index.
-</span><span class="comment">---@param dest table
+<span class="comment">---This works exactly like [<a href="https://www.lua.org/manual/5.1/manual.html#pdf-table.move">table.move</a>](https://www.lua.org/manual/5.3/manual.html#pdf-table.move) introduced in Lua 5.3.
 </span><span class="comment">---@param src table
-</span><a id="198"></a><span class="comment">---@param index number
-</span><span class="keyword">function</span> ext_table.memcpy(dest, src, index)
-	index = index - <span class="number">1</span>
+</span><span class="comment">---@param first integer
+</span><span class="comment">---@param stop integer
+</span><span class="comment">---@param src_offset integer
+</span><a id="200"></a><span class="comment">---@param dest table
+</span><span class="keyword">function</span> ext_table.move(src, first, stop, src_offset, dest)
+	dest = dest <span class="keyword">or</span> src
 
-	<span class="keyword">for</span> i = <span class="number">1</span>, #src <span class="keyword">do</span>
-		dest[index + i] = src[i]
+	<span class="keyword">for</span> i = <span class="number">0</span>, stop - first <span class="keyword">do</span>
+		dest[src_offset + i] = src[first + i]
 	<span class="keyword">end</span>
+
+	<span class="keyword">return</span> dest
 <span class="keyword">end</span>
 
 <span class="comment">---Removes the value at the index from an array and replaces it with the item at the end of the array.
 </span><span class="comment">---@param tbl table
 </span><span class="comment">---@param i number
-</span><a id="210"></a><span class="comment">---@return any
+</span><a id="214"></a><span class="comment">---@return any
 </span><span class="keyword">function</span> ext_table.swapremove(tbl, i)
 	<span class="keyword">local</span> value = tbl[i]
 
@@ -260,7 +264,7 @@
 <span class="comment">---Looks for a specific value in a table and returns the key it was first found at.
 </span><span class="comment">---@param tbl table
 </span><span class="comment">---@param value any
-</span><a id="222"></a><span class="comment">---@return any|nil
+</span><a id="226"></a><span class="comment">---@return any|nil
 </span><span class="keyword">function</span> ext_table.search(tbl, value)
 	<span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">pairs</span>(tbl) <span class="keyword">do</span>
 		<span class="keyword">if</span> v == value <span class="keyword">then</span>
@@ -273,7 +277,7 @@
 
 <span class="comment">---Returns an array of keys available in the table.
 </span><span class="comment">---@param tbl table
-</span><a id="235"></a><span class="comment">---@return table
+</span><a id="239"></a><span class="comment">---@return table
 </span><span class="keyword">function</span> ext_table.keys(tbl)
 	<span class="keyword">local</span> new = {}
 
@@ -286,7 +290,7 @@
 
 <span class="comment">---Returns an array of values available in the table.
 </span><span class="comment">---@param tbl table
-</span><a id="248"></a><span class="comment">---@return table
+</span><a id="252"></a><span class="comment">---@return table
 </span><span class="keyword">function</span> ext_table.values(tbl)
 	<span class="keyword">local</span> new = {}
 
@@ -299,17 +303,17 @@
 
 <span class="comment">---Returns whether or not the table is empty.
 </span><span class="comment">---@param tbl table
-</span><a id="261"></a><span class="comment">---@return boolean
+</span><a id="265"></a><span class="comment">---@return boolean
 </span><span class="keyword">function</span> ext_table.isempty(tbl)
-	<span class="keyword">return</span> <span class="keyword">not</span> <span class="global">next</span>(tbl)
+	<span class="keyword">return</span> (<span class="global">next</span>(tbl)) == <span class="keyword">nil</span>
 <span class="keyword">end</span>
 
 <span class="comment">---Shuffles a table in place.
 </span><span class="comment">---@param tbl table
-</span><a id="268"></a><span class="comment">---@return table
+</span><a id="272"></a><span class="comment">---@return table
 </span><span class="keyword">function</span> ext_table.shuffle(tbl)
 	<span class="keyword">for</span> i = #tbl, <span class="number">1</span>, -<span class="number">1</span> <span class="keyword">do</span>
-		<span class="keyword">local</span> j = <span class="global">math</span>.random(i)
+		<span class="keyword">local</span> j = random(i)
 		tbl[i], tbl[j] = tbl[j], tbl[i]
 	<span class="keyword">end</span>
 
@@ -318,7 +322,7 @@
 
 <span class="comment">---Returns a random key, value index from an array.
 </span><span class="comment">---@param tbl table
-</span><a id="280"></a><span class="comment">---@return any, any
+</span><a id="284"></a><span class="comment">---@return any, any
 </span><span class="keyword">function</span> ext_table.randomipair(tbl)
 	<span class="keyword">local</span> i = random(#tbl)
 	<span class="keyword">return</span> i, tbl[i]
@@ -326,15 +330,15 @@
 
 <span class="comment">---Returns a random key, value index from an array.
 </span><span class="comment">---@param tbl table
-</span><a id="288"></a><span class="comment">---@return any, any
+</span><a id="292"></a><span class="comment">---@return any, any
 </span><span class="keyword">function</span> ext_table.randomvalue(tbl)
 	<span class="keyword">local</span> values = ext_table.values(tbl)
-	<span class="keyword">return</span> values[<span class="global">math</span>.random(#values)]
+	<span class="keyword">return</span> values[random(#values)]
 <span class="keyword">end</span>
 
 <span class="comment">---Returns a random key, value index from a table.
 </span><span class="comment">---@param tbl table
-</span><a id="296"></a><span class="comment">---@return any, any
+</span><a id="300"></a><span class="comment">---@return any, any
 </span><span class="keyword">function</span> ext_table.randompair(tbl)
 	<span class="keyword">local</span> rand = random(ext_table.count(tbl))
 	<span class="keyword">local</span> n = <span class="number">0</span>
@@ -351,7 +355,7 @@
 </span><span class="comment">---@param value any
 </span><span class="comment">---@param len? integer
 </span><span class="comment">---@param start? integer
-</span><a id="313"></a><span class="comment">---@return table
+</span><a id="317"></a><span class="comment">---@return table
 </span><span class="keyword">function</span> ext_table.fill(tbl, value, len, start)
 	len = len <span class="keyword">or</span> #tbl
 	start = start <span class="keyword">or</span> <span class="number">1</span>

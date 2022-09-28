@@ -54,15 +54,14 @@
 </span><a id="13"></a><span class="comment">---@see isnan
 </span>ext_math.nan = <span class="number">0</span> / <span class="number">0</span>
 
-<span class="comment">---Euler's number. This is the base of the natural logarithm.
-</span><a id="17"></a><span class="comment">---@see math.log
+<a id="16"></a><span class="comment">---Euler's number. This is the base of the natural logarithm.
 </span>ext_math.e = <span class="global">math</span>.exp(<span class="number">1</span>)
 
 <span class="comment">---Returns <code>num</code> clamped to [minValue, maxValue].
 </span><span class="comment">---@param num number
 </span><span class="comment">---@param minValue number
 </span><span class="comment">---@param maxValue number
-</span><a id="24"></a><span class="comment">---@return number
+</span><a id="23"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.clamp(num, minValue, maxValue)
 	<span class="keyword">return</span> <span class="global">math</span>.min(<span class="global">math</span>.max(num, minValue), maxValue)
 <span class="keyword">end</span>
@@ -70,7 +69,7 @@
 <span class="comment">---Returns <code>num</code> rounded normally to <code>precision</code> decimals of precision.
 </span><span class="comment">---@param num number
 </span><span class="comment">---@param[opt] precision number
-</span><a id="32"></a><span class="comment">---@return number
+</span><a id="31"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.round(num, precision)
 	<span class="keyword">local</span> m = <span class="number">10</span> ^ (precision <span class="keyword">or</span> <span class="number">0</span>)
 	<span class="keyword">return</span> <span class="global">math</span>.floor(num * m + <span class="number">0.5</span>) / m
@@ -78,14 +77,14 @@
 
 <span class="comment">---Returns -1 for a negative number, 1 for a positive number and 0 for 0.
 </span><span class="comment">---@param n number
-</span><a id="40"></a><span class="comment">---@return number
+</span><a id="39"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.sign(n)
 	<span class="keyword">return</span> n &gt; <span class="number">0</span> <span class="keyword">and</span> <span class="number">1</span> <span class="keyword">or</span> n == <span class="number">0</span> <span class="keyword">and</span> <span class="number">0</span> <span class="keyword">or</span> -<span class="number">1</span>
 <span class="keyword">end</span>
 
 <span class="comment">---Returns the cube root of <code>n</code>.
 </span><span class="comment">---@param n number
-</span><a id="47"></a><span class="comment">---@return number
+</span><a id="46"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.cbrt(n)
 	<span class="keyword">return</span> n ^ (<span class="number">1</span> / <span class="number">3</span>)
 <span class="keyword">end</span>
@@ -93,7 +92,7 @@
 <span class="comment">---Returns the <code>base</code>th root of <code>n</code>.
 </span><span class="comment">---@param n number
 </span><span class="comment">---@param base number
-</span><a id="55"></a><span class="comment">---@return number
+</span><a id="54"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.root(n, base)
 	<span class="keyword">if</span> base &lt; <span class="number">1</span> <span class="keyword">or</span> n % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">and</span> n &lt; <span class="number">0</span> <span class="keyword">then</span>
 		<span class="keyword">return</span> ext_math.nan
@@ -104,7 +103,7 @@
 
 <span class="comment">---Returns true if <code>n</code> is nan.
 </span><span class="comment">---@param n number
-</span><a id="66"></a><span class="comment">---@return boolean
+</span><a id="65"></a><span class="comment">---@return boolean
 </span><span class="keyword">function</span> ext_math.isnan(n)
 	<span class="keyword">return</span> n ~= n
 <span class="keyword">end</span>

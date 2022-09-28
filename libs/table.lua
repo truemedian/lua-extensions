@@ -173,7 +173,7 @@ end
 ---@return table
 function ext_table.join(a, b)
 	for _, v in ipairs(b) do
-		table.insert(a, v)
+		insert(a, v)
 	end
 
 	return a
@@ -191,16 +191,20 @@ function ext_table.merge(a, b)
 	return a
 end
 
----Works identically to `memcpy` in C. copies all of src into dest starting at index.
----@param dest table
+---This works exactly like [`table.move`](https://www.lua.org/manual/5.3/manual.html#pdf-table.move) introduced in Lua 5.3.
 ---@param src table
----@param index number
-function ext_table.memcpy(dest, src, index)
-	index = index - 1
+---@param first integer
+---@param stop integer
+---@param src_offset integer
+---@param dest table
+function ext_table.move(src, first, stop, src_offset, dest)
+	dest = dest or src
 
-	for i = 1, #src do
-		dest[index + i] = src[i]
+	for i = 0, stop - first do
+		dest[src_offset + i] = src[first + i]
 	end
+
+	return dest
 end
 
 ---Removes the value at the index from an array and replaces it with the item at the end of the array.

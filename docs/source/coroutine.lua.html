@@ -43,11 +43,12 @@
 <span class="comment">---Extensions to the Lua standard coroutine library.
 </span><span class="comment">---@module extensions.coroutine
 </span><span class="comment">---@alias ext_coro
-</span><span class="keyword">local</span> resume, running = <span class="global">coroutine</span>.resume, <span class="global">coroutine</span>.running
+</span><span class="keyword">local</span> pack = <span class="global">table</span>.pack
+<span class="keyword">local</span> resume, running = <span class="global">coroutine</span>.resume, <span class="global">coroutine</span>.running
 <span class="keyword">local</span> traceback = <span class="global">debug</span>.traceback
 
 <span class="keyword">local</span> <span class="keyword">function</span> pack_vararg(success, err, ...)
-	<span class="keyword">return</span> success, err, {...}
+	<span class="keyword">return</span> success, err, pack(...)
 <span class="keyword">end</span>
 
 <span class="keyword">local</span> ext_coro = {}
@@ -56,22 +57,22 @@
 	ext_coro[k] = v
 <span class="keyword">end</span>
 
-<span class="comment">---Properly asserts a coroutine resume in order to get the correct traceback on error. Consumes the first two returns from resume (success and err)
+<span class="comment">---Properly asserts a coroutine resume in order to get the correct traceback on error. Consumes the first return from resume (the success boolean)
 </span><span class="comment">---and returns the rest.
 </span><span class="comment">---@param thread thread
 </span><span class="comment">---@param[opt] ... any
-</span><a id="22"></a><span class="comment">---@return ...
+</span><a id="23"></a><span class="comment">---@return ...
 </span><span class="keyword">function</span> ext_coro.assertresume(thread, ...)
 	<span class="keyword">local</span> success, err, args = pack_vararg(resume(thread, ...))
 	<span class="keyword">if</span> <span class="keyword">not</span> success <span class="keyword">then</span>
 		<span class="global">error</span>(traceback(thread, err), <span class="number">0</span>)
 	<span class="keyword">end</span>
 
-	<span class="keyword">return</span> <span class="global">unpack</span>(args)
+	<span class="keyword">return</span> err, <span class="global">unpack</span>(args, <span class="number">1</span>, args.n)
 <span class="keyword">end</span>
 
 <span class="comment">---Returns whether or not the function was run inside of a coroutine. Returns false if it is on the main thread.
-</span><a id="33"></a><span class="comment">---@return boolean
+</span><a id="34"></a><span class="comment">---@return boolean
 </span><span class="keyword">function</span> ext_coro.isthread()
 	<span class="keyword">return</span> <span class="keyword">not</span> <span class="global">select</span>(<span class="number">2</span>, running())
 <span class="keyword">end</span>

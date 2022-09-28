@@ -94,8 +94,8 @@
 	<td class="summary">Merges all key-value pairs of <code>b</code> into <code>a</code>.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#memcpy">memcpy (dest, src, index)</a></td>
-	<td class="summary">Works identically to <a href="../modules/extensions.table.html#memcpy">memcpy</a> in C.</td>
+	<td class="name" nowrap><a href="#move">move (src, first, stop, src_offset, dest)</a></td>
+	<td class="summary">This works exactly like <a href="https://www.lua.org/manual/5.3/manual.html#pdf-table.move"><a href="../modules/extensions.table.html#move">table.move</a></a> introduced in Lua 5.3.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#swapremove">swapremove (tbl, i)</a></td>
@@ -393,29 +393,35 @@ If <code>dest</code> is provided, the source array will not be modified
     </ol>
 </dd>
     <dt>
-    <a name = "memcpy"></a>
-    <strong>memcpy (dest, src, index)</strong>
-    <a style="float:right;" href="../source/table.lua.html#198">line 198</a>
+    <a name = "move"></a>
+    <strong>move (src, first, stop, src_offset, dest)</strong>
+    <a style="float:right;" href="../source/table.lua.html#200">line 200</a>
     </dt>
     <dd>
-    Works identically to <a href="../modules/extensions.table.html#memcpy">memcpy</a> in C.  copies all of src into dest starting at index.
+    This works exactly like <a href="https://www.lua.org/manual/5.3/manual.html#pdf-table.move"><a href="../modules/extensions.table.html#move">table.move</a></a> introduced in Lua 5.3.
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">dest</span>
-         table
-        </li>
         <li><span class="parameter">src</span>
          table
         </li>
-        <li><span class="parameter">index</span>
-         number
+        <li><span class="parameter">first</span>
+         integer
+        </li>
+        <li><span class="parameter">stop</span>
+         integer
+        </li>
+        <li><span class="parameter">src_offset</span>
+         integer
+        </li>
+        <li><span class="parameter">dest</span>
+         table
         </li>
     </ul>
 </dd>
     <dt>
     <a name = "swapremove"></a>
     <strong>swapremove (tbl, i)</strong>
-    <a style="float:right;" href="../source/table.lua.html#210">line 210</a>
+    <a style="float:right;" href="../source/table.lua.html#214">line 214</a>
     </dt>
     <dd>
     Removes the value at the index from an array and replaces it with the item at the end of the array.
@@ -437,7 +443,7 @@ If <code>dest</code> is provided, the source array will not be modified
     <dt>
     <a name = "search"></a>
     <strong>search (tbl, value)</strong>
-    <a style="float:right;" href="../source/table.lua.html#222">line 222</a>
+    <a style="float:right;" href="../source/table.lua.html#226">line 226</a>
     </dt>
     <dd>
     Looks for a specific value in a table and returns the key it was first found at.
@@ -459,7 +465,7 @@ If <code>dest</code> is provided, the source array will not be modified
     <dt>
     <a name = "keys"></a>
     <strong>keys (tbl)</strong>
-    <a style="float:right;" href="../source/table.lua.html#235">line 235</a>
+    <a style="float:right;" href="../source/table.lua.html#239">line 239</a>
     </dt>
     <dd>
     Returns an array of keys available in the table.
@@ -478,7 +484,7 @@ If <code>dest</code> is provided, the source array will not be modified
     <dt>
     <a name = "values"></a>
     <strong>values (tbl)</strong>
-    <a style="float:right;" href="../source/table.lua.html#248">line 248</a>
+    <a style="float:right;" href="../source/table.lua.html#252">line 252</a>
     </dt>
     <dd>
     Returns an array of values available in the table.
@@ -497,7 +503,7 @@ If <code>dest</code> is provided, the source array will not be modified
     <dt>
     <a name = "isempty"></a>
     <strong>isempty (tbl)</strong>
-    <a style="float:right;" href="../source/table.lua.html#261">line 261</a>
+    <a style="float:right;" href="../source/table.lua.html#265">line 265</a>
     </dt>
     <dd>
     Returns whether or not the table is empty.
@@ -516,7 +522,7 @@ If <code>dest</code> is provided, the source array will not be modified
     <dt>
     <a name = "shuffle"></a>
     <strong>shuffle (tbl)</strong>
-    <a style="float:right;" href="../source/table.lua.html#268">line 268</a>
+    <a style="float:right;" href="../source/table.lua.html#272">line 272</a>
     </dt>
     <dd>
     Shuffles a table in place.
@@ -535,7 +541,7 @@ If <code>dest</code> is provided, the source array will not be modified
     <dt>
     <a name = "randomipair"></a>
     <strong>randomipair (tbl)</strong>
-    <a style="float:right;" href="../source/table.lua.html#280">line 280</a>
+    <a style="float:right;" href="../source/table.lua.html#284">line 284</a>
     </dt>
     <dd>
     Returns a random key, value index from an array.
@@ -554,7 +560,7 @@ If <code>dest</code> is provided, the source array will not be modified
     <dt>
     <a name = "randomvalue"></a>
     <strong>randomvalue (tbl)</strong>
-    <a style="float:right;" href="../source/table.lua.html#288">line 288</a>
+    <a style="float:right;" href="../source/table.lua.html#292">line 292</a>
     </dt>
     <dd>
     Returns a random key, value index from an array.
@@ -573,7 +579,7 @@ If <code>dest</code> is provided, the source array will not be modified
     <dt>
     <a name = "randompair"></a>
     <strong>randompair (tbl)</strong>
-    <a style="float:right;" href="../source/table.lua.html#296">line 296</a>
+    <a style="float:right;" href="../source/table.lua.html#300">line 300</a>
     </dt>
     <dd>
     Returns a random key, value index from a table.
@@ -592,7 +598,7 @@ If <code>dest</code> is provided, the source array will not be modified
     <dt>
     <a name = "fill"></a>
     <strong>fill (tbl, value, len, start)</strong>
-    <a style="float:right;" href="../source/table.lua.html#313">line 313</a>
+    <a style="float:right;" href="../source/table.lua.html#317">line 317</a>
     </dt>
     <dd>
     Fills a table from 1 to <code>len</code> with <code>value</code>.
