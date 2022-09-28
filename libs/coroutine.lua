@@ -25,7 +25,7 @@ function ext_coro.assertresume(thread, ...)
 		error(traceback(thread, err), 0)
 	end
 
-	return unpack(args)
+	return err, unpack(args)
 end
 
 ---Returns whether or not the function was run inside of a coroutine. Returns false if it is on the main thread.
