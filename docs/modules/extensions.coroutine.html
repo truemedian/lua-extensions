@@ -66,10 +66,10 @@
     <dt>
     <a name = "assertresume"></a>
     <strong>assertresume (thread[, ...])</strong>
-    <a style="float:right;" href="../source/coroutine.lua.html#22">line 22</a>
+    <a style="float:right;" href="../source/coroutine.lua.html#23">line 23</a>
     </dt>
     <dd>
-    Properly asserts a coroutine resume in order to get the correct traceback on error.  Consumes the first two returns from resume (success and err)
+    Properly asserts a coroutine resume in order to get the correct traceback on error.  Consumes the first return from resume (the success boolean)
 and returns the rest.
     <h3>Parameters:</h3>
     <ul>
@@ -90,7 +90,7 @@ and returns the rest.
     <dt>
     <a name = "isthread"></a>
     <strong>isthread ()</strong>
-    <a style="float:right;" href="../source/coroutine.lua.html#33">line 33</a>
+    <a style="float:right;" href="../source/coroutine.lua.html#34">line 34</a>
     </dt>
     <dd>
     Returns whether or not the function was run inside of a coroutine.  Returns false if it is on the main thread.

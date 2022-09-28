@@ -13,7 +13,6 @@ end
 ext_math.nan = 0 / 0
 
 ---Euler's number. This is the base of the natural logarithm.
----@see math.log
 ext_math.e = math.exp(1)
 
 ---Returns `num` clamped to [minValue, maxValue].
