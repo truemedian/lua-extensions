@@ -259,7 +259,7 @@ end
 ---@param tbl table
 ---@return boolean
 function ext_table.isempty(tbl)
-	return not next(tbl)
+	return (next(tbl)) == nil
 end
 
 ---Shuffles a table in place.
@@ -267,7 +267,7 @@ end
 ---@return table
 function ext_table.shuffle(tbl)
 	for i = #tbl, 1, -1 do
-		local j = math.random(i)
+		local j = random(i)
 		tbl[i], tbl[j] = tbl[j], tbl[i]
 	end
 
@@ -287,7 +287,7 @@ end
 ---@return any, any
 function ext_table.randomvalue(tbl)
 	local values = ext_table.values(tbl)
-	return values[math.random(#values)]
+	return values[random(#values)]
 end
 
 ---Returns a random key, value index from a table.
