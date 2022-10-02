@@ -1,7 +1,7 @@
 ---Extensions to the Lua standard table library.
 ---@module extensions.table
 ---@alias ext_table
-local insert = table.insert
+local insert, sort = table.insert, table.sort
 local random = math.random
 
 local ext_table = {}
@@ -275,6 +275,15 @@ function ext_table.shuffle(tbl)
 		tbl[i], tbl[j] = tbl[j], tbl[i]
 	end
 
+	return tbl
+end
+
+---This works exactly like the standard `table.sort`, but it also returns the sorted table.
+---@param tbl table
+---@param comp fun(a: any, b: any): boolean
+---@return table
+function ext_table.sort(tbl, comp)
+	sort(tbl, comp)
 	return tbl
 end
 
