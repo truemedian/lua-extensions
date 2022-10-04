@@ -48,8 +48,8 @@ function ext_math.cbrt(n)
 end
 
 ---Returns the `n`th root of `x`.
+---@param x number
 ---@param n number
----@param base number
 ---@return number
 function ext_math.root(x, n)
     if n == 0 then
