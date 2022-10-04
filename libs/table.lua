@@ -308,7 +308,7 @@ function ext_table.randompair(tbl)
 	end
 end
 
----Fills a table from 1 to `len` with `value`.
+---Fills a table from `start` to `start + len` with `value`.
 ---@param tbl table
 ---@param value any
 ---@param len? integer
@@ -316,10 +316,10 @@ end
 ---@return table
 function ext_table.fill(tbl, value, len, start)
 	len = len or #tbl
-	start = start or 1
+	start = (start or 1) - 1
 
 	for i = 1, len do
-		tbl[i] = value
+		tbl[i + start] = value
 	end
 
 	return tbl
