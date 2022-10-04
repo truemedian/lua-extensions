@@ -1,4 +1,4 @@
-column_limit: 180
+column_limit: 120
 
 use_tab: true
 tab_width: 4
@@ -25,7 +25,7 @@ chop_down_table: true
 chop_down_kv_table: true
 extra_sep_at_table_end: true
 table_sep: ','
-column_table_limit: 180
+column_table_limit: 120
 
 break_after_operator: true
 

@@ -1,8 +1,6 @@
 ---Extensions to the Lua standard table library.
 ---@module extensions.table
 ---@alias ext_table
-local insert = table.insert
-local random = math.random
 
 local ext_table = {}
 
@@ -23,7 +21,8 @@ function ext_table.copy(tbl)
 	return new
 end
 
----Returns a new table with a all layers of keys-values copied. Tables are copied recursively.
+---Returns a new table with a all layers of keys-values copied. Tables are
+---copied recursively.
 ---@param tbl table
 ---@return table
 function ext_table.deepcopy(tbl)
@@ -88,8 +87,10 @@ function ext_table.filter(tbl, fn)
 	return new
 end
 
----Iterates over the array portion of a table in order, calling `fn` on each value, passing in the return value from the previous element.
----If `initial` is not provided, the first element of the array is used, and the iteration starts at the second element.
+---Iterates over the array portion of a table in order, calling `fn` on each
+---value, passing in the return value from the previous element.
+---If `initial` is not provided, the first element of the array is used, and
+---the iteration starts at the second element.
 ---The reduce function has a signature of: `fn(previous, value, index?) boolean`
 ---@param tbl table
 ---@param fn fun(previous: any, value: any, index?: integer): boolean
@@ -149,9 +150,12 @@ function ext_table.shift(tbl, index, count)
 
 		i = i - 1
 	end
+
+	return tbl
 end
 
----Returns a slice of the table, works similarly to `string.sub` except on a table.
+---Returns a slice of the table, works similarly to `string.sub` except on a
+---table.
 ---@param tbl table
 ---@param[opt] start number
 ---@param[opt] stop number
@@ -161,7 +165,7 @@ function ext_table.slice(tbl, start, stop, step)
 	local new = {}
 
 	for i = start or 1, stop or #tbl, step or 1 do
-		insert(new, tbl[i])
+		table.insert(new, tbl[i])
 	end
 
 	return new
@@ -173,7 +177,7 @@ end
 ---@return table
 function ext_table.join(a, b)
 	for _, v in ipairs(b) do
-		insert(a, v)
+		table.insert(a, v)
 	end
 
 	return a
@@ -191,7 +195,8 @@ function ext_table.merge(a, b)
 	return a
 end
 
----This works exactly like [`table.move`](https://www.lua.org/manual/5.3/manual.html#pdf-table.move) introduced in Lua 5.3.
+---This works exactly like [`table.move`](https://www.lua.org/manual/5.3/manual.html#pdf-table.move)
+---introduced in Lua 5.3.
 ---@param src table
 ---@param first integer
 ---@param stop integer
@@ -207,7 +212,8 @@ function ext_table.move(src, first, stop, src_offset, dest)
 	return dest
 end
 
----Removes the value at the index from an array and replaces it with the item at the end of the array.
+---Removes the value at the index from an array and replaces it with the item
+---at the end of the array.
 ---@param tbl table
 ---@param i number
 ---@return any
@@ -219,7 +225,8 @@ function ext_table.swapremove(tbl, i)
 	return value
 end
 
----Looks for a specific value in a table and returns the key it was first found at.
+---Looks for a specific value in a table and returns the key it was first found
+---at.
 ---@param tbl table
 ---@param value any
 ---@return any|nil
@@ -240,7 +247,7 @@ function ext_table.keys(tbl)
 	local new = {}
 
 	for k in pairs(tbl) do
-		insert(new, k)
+		table.insert(new, k)
 	end
 
 	return new
@@ -253,7 +260,7 @@ function ext_table.values(tbl)
 	local new = {}
 
 	for _, v in pairs(tbl) do
-		insert(new, v)
+		table.insert(new, v)
 	end
 
 	return new
@@ -271,7 +278,7 @@ end
 ---@return table
 function ext_table.shuffle(tbl)
 	for i = #tbl, 1, -1 do
-		local j = random(i)
+		local j = math.random(i)
 		tbl[i], tbl[j] = tbl[j], tbl[i]
 	end
 
@@ -282,7 +289,7 @@ end
 ---@param tbl table
 ---@return any, any
 function ext_table.randomipair(tbl)
-	local i = random(#tbl)
+	local i = math.random(#tbl)
 	return i, tbl[i]
 end
 
@@ -291,14 +298,14 @@ end
 ---@return any, any
 function ext_table.randomvalue(tbl)
 	local values = ext_table.values(tbl)
-	return values[random(#values)]
+	return values[math.random(#values)]
 end
 
 ---Returns a random key, value index from a table.
 ---@param tbl table
 ---@return any, any
 function ext_table.randompair(tbl)
-	local rand = random(ext_table.count(tbl))
+	local rand = math.random(ext_table.count(tbl))
 	local n = 0
 	for k, v in pairs(tbl) do
 		n = n + 1

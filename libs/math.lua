@@ -12,6 +12,16 @@ end
 ---@see isnan
 ext_math.nan = 0 / 0
 
+if 2 ^ 53 + 1 == 2 ^ 53 then
+	-- 64 bit float
+	ext_math.epsilon = 2 ^ -52
+elseif 2 ^ 24 + 1 == 2 ^ 24 then
+	-- 32 bit float
+	ext_math.epsilon = 2 ^ -23
+else
+	error("we don't support the float size of this system, please report this")
+end
+
 ---Euler's number. This is the base of the natural logarithm.
 ext_math.e = math.exp(1)
 
@@ -37,7 +47,13 @@ end
 ---@param n number
 ---@return number
 function ext_math.sign(n)
-	return n > 0 and 1 or n == 0 and 0 or -1
+	if n > 0 then
+		return 1
+	elseif n < 0 then
+		return -1
+	else
+		return 0
+	end
 end
 
 ---Returns the cube root of `n`.
@@ -47,12 +63,37 @@ function ext_math.cbrt(n)
 	return n ^ (1 / 3)
 end
 
----Returns the `base`th root of `n`.
+---Returns the real `base`th root of `n`. This extends the root function to
+---`n < 0` for odd bases.
+---@usage math.root(-8, 3) -- -2
+---@usage math.root(-4, 2) -- nan
 ---@param n number
 ---@param base number
 ---@return number
 function ext_math.root(n, base)
-	if base < 1 or n % 2 == 0 and n < 0 then
+	if base == 0 then
+		return ext_math.nan
+	end
+
+	if n < 0 then
+		if base % 2 == 0 then
+			return ext_math.nan
+		else
+			return -(-n) ^ (1 / base)
+		end
+	else
+		return n ^ (1 / base)
+	end
+end
+
+---Returns the principal `base`th root of `n`.
+---@usage math.root(-8, 3) -- nan
+---@usage math.root(8, 3) -- 2
+---@param n number
+---@param base number
+---@return number
+function ext_math.proot(n, base)
+	if base == 0 or n < 0 then
 		return ext_math.nan
 	end
 
@@ -64,6 +105,48 @@ end
 ---@return boolean
 function ext_math.isnan(n)
 	return n ~= n
+end
+
+---Performs an approximate comparison of two numbers.
+---
+---Tolerance may be left nil to use the default value of `math.epsilon`, a very
+---small value.
+---
+---This function is recommended for comparing small values near zero; using
+---`approxeqrel` is suggested otherwise.
+---@param a number
+---@param b number
+---@param[opt] tolerance number
+function ext_math.approxeqabs(a, b, tolerance)
+	tolerance = tolerance or ext_math.epsilon
+
+	-- quick path to handle infinities, signed zeroes and nans
+	if a == b then
+		return true
+	end
+
+	return math.abs(a - b) < tolerance
+end
+
+---Performs an approximate comparison of two numbers.
+---
+---Tolerance may be left nil to use the default value of `sqrt(math.epsilon)`,
+---which means half of the digits are equal.
+---
+---Note that for comparisons of small numbers around zero this function won't
+---give meaningful results, use `approxeqabs` instead.
+---@param a number
+---@param b number
+---@param[opt] tolerance number
+function ext_math.approxeqrel(a, b, tolerance)
+	tolerance = tolerance or ext_math.epsilon
+
+	-- quick path to handle infinities, signed zeroes and nans
+	if a == b then
+		return true
+	end
+
+	return math.abs(a - b) < math.max(a, b) * tolerance
 end
 
 return ext_math

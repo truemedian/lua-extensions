@@ -23,8 +23,8 @@
 <h2>Modules</h2>
 <ul>
   <li><a href="../modules/extensions.html">extensions</a></li>
-  <li><a href="../modules/extensions.base.html">extensions.base</a></li>
-  <li><strong>extensions.coroutine</strong></li>
+  <li><strong>extensions.base</strong></li>
+  <li><a href="../modules/extensions.coroutine.html">extensions.coroutine</a></li>
   <li><a href="../modules/extensions.math.html">extensions.math</a></li>
   <li><a href="../modules/extensions.string.html">extensions.string</a></li>
   <li><a href="../modules/extensions.table.html">extensions.table</a></li>
@@ -44,21 +44,24 @@
 </ul>
 </div>
 <div id="content">
-<h1>Module <code>extensions.coroutine</code></h1>
-<p>Extensions to the Lua standard coroutine library.</p>
+<h1>Module <code>extensions.base</code></h1>
+<p>Extensions to the Lua standard base library.</p>
 <p>
 
 </p>
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#assertresume">assertresume (thread[, ...])</a></td>
-	<td class="summary">Properly asserts a coroutine resume in order to get the correct traceback on
-error.</td>
+	<td class="name" nowrap><a href="#printf">printf (message, ...)</a></td>
+	<td class="summary">Format a message and then print it.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#isthread">isthread ()</a></td>
-	<td class="summary">Returns whether or not the function was run inside of a coroutine.</td>
+	<td class="name" nowrap><a href="#errorf">errorf (message, ...)</a></td>
+	<td class="summary">Format a message and then throw an error.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#assertf">assertf (cond, message, ...)</a></td>
+	<td class="summary">Assert a condition, throws an error with a formatted message if it is false.</td>
 	</tr>
 </table>
 <br/>
@@ -67,43 +70,58 @@ error.</td>
 
     <dl class="function">
     <dt>
-    <a name = "assertresume"></a>
-    <strong>assertresume (thread[, ...])</strong>
-    <a style="float:right;" href="../source/coroutine.lua.html#21">line 21</a>
+    <a name = "printf"></a>
+    <strong>printf (message, ...)</strong>
+    <a style="float:right;" href="../source/base.lua.html#10">line 10</a>
     </dt>
     <dd>
-    Properly asserts a coroutine resume in order to get the correct traceback on
-error.  Consumes the first return from resume (the success boolean)
-and returns the rest.
+    Format a message and then print it.
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">thread</span>
-         thread
+        <li><span class="parameter">message</span>
+         any
         </li>
         <li><span class="parameter">...</span>
          any
-         (<em>optional</em>)
         </li>
     </ul>
-    <h3>Returns:</h3>
-    <ol>
-
-        ...
-    </ol>
 </dd>
     <dt>
-    <a name = "isthread"></a>
-    <strong>isthread ()</strong>
-    <a style="float:right;" href="../source/coroutine.lua.html#33">line 33</a>
+    <a name = "errorf"></a>
+    <strong>errorf (message, ...)</strong>
+    <a style="float:right;" href="../source/base.lua.html#17">line 17</a>
     </dt>
     <dd>
-    Returns whether or not the function was run inside of a coroutine.  Returns
-false if it is on the main thread.
-    <h3>Returns:</h3>
-    <ol>
-
-        boolean
-    </ol>
+    Format a message and then throw an error.
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">message</span>
+         any
+        </li>
+        <li><span class="parameter">...</span>
+         any
+        </li>
+    </ul>
+</dd>
+    <dt>
+    <a name = "assertf"></a>
+    <strong>assertf (cond, message, ...)</strong>
+    <a style="float:right;" href="../source/base.lua.html#25">line 25</a>
+    </dt>
+    <dd>
+    Assert a condition, throws an error with a formatted message if it is false.
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cond</span>
+         any
+        </li>
+        <li><span class="parameter">message</span>
+         any
+        </li>
+        <li><span class="parameter">...</span>
+         any
+        </li>
+    </ul>
 </dd>
 </dl>
 </div> <!-- id="content" -->

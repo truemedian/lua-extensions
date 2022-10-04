@@ -19,6 +19,7 @@
 <h2>Source</h2>
 <ul>
   <li><a href="../source/init.lua.html">init.lua</a></li>
+  <li><a href="../source/base.lua.html">base.lua</a></li>
   <li><a href="../source/coroutine.lua.html">coroutine.lua</a></li>
   <li><a href="../source/math.lua.html">math.lua</a></li>
   <li><strong>string.lua</strong></li>
@@ -27,6 +28,7 @@
 <h2>Modules</h2>
 <ul>
   <li><a href="../modules/extensions.html">extensions</a></li>
+  <li><a href="../modules/extensions.base.html">extensions.base</a></li>
   <li><a href="../modules/extensions.coroutine.html">extensions.coroutine</a></li>
   <li><a href="../modules/extensions.math.html">extensions.math</a></li>
   <li><a href="../modules/extensions.string.html">extensions.string</a></li>
@@ -43,28 +45,34 @@
 <span class="comment">---Extensions to the Lua standard string library.
 </span><span class="comment">---@module extensions.string
 </span><span class="comment">---@alias ext_string
-</span><span class="keyword">local</span> byte, char, find, gsub, len = <span class="global">string</span>.byte, <span class="global">string</span>.char, <span class="global">string</span>.find, <span class="global">string</span>.gsub, <span class="global">string</span>.len
-<span class="keyword">local</span> match, rep, sub, upper = <span class="global">string</span>.match, <span class="global">string</span>.rep, <span class="global">string</span>.sub, <span class="global">string</span>.upper
-
-<span class="keyword">local</span> concat, insert = <span class="global">table</span>.concat, <span class="global">table</span>.insert
-<span class="keyword">local</span> ceil, floor, min, random = <span class="global">math</span>.ceil, <span class="global">math</span>.floor, <span class="global">math</span>.min, <span class="global">math</span>.random
-
+</span>
 <span class="keyword">local</span> ext_string = {}
 
 <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">pairs</span>(<span class="global">string</span>) <span class="keyword">do</span>
 	ext_string[k] = v
 <span class="keyword">end</span>
 
-<span class="comment">---Returns whether or not the string ends with <code>pattern</code>. Use <code>plain</code> if you want to match <code>pattern</code> literally.
+<span class="comment">---Returns whether or not the string starts with <code>pattern</code>. Use <code>plain</code> if you
+</span><span class="comment">---want to match <code>pattern</code> literally.
 </span><span class="comment">---@param str string
 </span><span class="comment">---@param pattern string
 </span><span class="comment">---@param[opt] plain boolean
-</span><a id="21"></a><span class="comment">---@return boolean
+</span><a id="17"></a><span class="comment">---@return boolean
+</span><span class="keyword">function</span> ext_string.startswith(str, pattern, plain)
+	<span class="keyword">return</span> <span class="global">string</span>.find(str, pattern, <span class="number">1</span>, plain) == <span class="number">1</span>
+<span class="keyword">end</span>
+
+<span class="comment">---Returns whether or not the string ends with <code>pattern</code>. Use <code>plain</code> if you
+</span><span class="comment">---want to match <code>pattern</code> literally.
+</span><span class="comment">---@param str string
+</span><span class="comment">---@param pattern string
+</span><span class="comment">---@param[opt] plain boolean
+</span><a id="27"></a><span class="comment">---@return boolean
 </span><span class="keyword">function</span> ext_string.endswith(str, pattern, plain)
 	<span class="keyword">if</span> plain <span class="keyword">then</span>
 		<span class="keyword">return</span> <span class="global">string</span>.sub(str, - #pattern) == pattern
 	<span class="keyword">else</span>
-		<span class="keyword">if</span> pattern:sub(-<span class="number">1</span>) == <span class="string">'$'</span> <span class="keyword">then</span>
+		<span class="keyword">if</span> <span class="global">string</span>.sub(pattern, -<span class="number">1</span>) == <span class="string">'$'</span> <span class="keyword">then</span>
 			pattern = pattern .. <span class="string">'$'</span>
 		<span class="keyword">end</span>
 
@@ -77,68 +85,63 @@
 
 <span class="comment">---Returns a new string with all Lua Pattern special characters escaped.
 </span><span class="comment">---@param str string
-</span><a id="39"></a><span class="comment">---@return string
+</span><a id="45"></a><span class="comment">---@return string
 </span><span class="keyword">function</span> ext_string.patternescape(str)
-	<span class="keyword">return</span> (gsub(str, pattern_match, <span class="string">'%%%1'</span>))
-<span class="keyword">end</span>
-
-<span class="comment">---Returns whether or not the string starts with <code>pattern</code>. Use <code>plain</code> if you want to match <code>pattern</code> literally.
-</span><span class="comment">---@param str string
-</span><span class="comment">---@param pattern string
-</span><span class="comment">---@param[opt] plain boolean
-</span><a id="48"></a><span class="comment">---@return boolean
-</span><span class="keyword">function</span> ext_string.startswith(str, pattern, plain)
-	<span class="keyword">return</span> find(str, pattern, <span class="number">1</span>, plain) == <span class="number">1</span>
+	<span class="keyword">return</span> (<span class="global">string</span>.gsub(str, pattern_match, <span class="string">'%%%1'</span>))
 <span class="keyword">end</span>
 
 <span class="comment">---Returns a new string with all leading and trailing whitespace removed.
 </span><span class="comment">---A pattern may be provided to instead strip using that pattern.
 </span><span class="comment">---@param str string
 </span><span class="comment">---@param pattern? string
-</span><a id="57"></a><span class="comment">---@return string
+</span><a id="54"></a><span class="comment">---@return string
 </span><span class="keyword">function</span> ext_string.trim(str, pattern)
 	pattern = pattern <span class="keyword">or</span> <span class="string">'%s'</span>
 	<span class="global">assert</span>(#pattern &gt; <span class="number">0</span>)
 
-	<span class="keyword">return</span> match(str, <span class="string">'^'</span> .. pattern .. <span class="string">'*(.-)'</span> .. pattern .. <span class="string">'*$'</span>)
+	<span class="keyword">return</span> <span class="global">string</span>.match(str, <span class="string">'^'</span> .. pattern .. <span class="string">'*(.-)'</span> .. pattern .. <span class="string">'*$'</span>)
 <span class="keyword">end</span>
 
-<span class="comment">---Returns a new string with the left padded with <code>pattern</code> or spaces until the string is <code>final_len</code> characters long.
+<span class="comment">---Returns a new string with the left padded with <code>pattern</code> or spaces until the
+</span><span class="comment">---string is <code>final_len</code> characters long.
 </span><span class="comment">---@param str string
 </span><span class="comment">---@param final_len number
 </span><span class="comment">---@param[opt] pattern string
-</span><a id="69"></a><span class="comment">---@return string
+</span><a id="67"></a><span class="comment">---@return string
 </span><span class="keyword">function</span> ext_string.padright(str, final_len, pattern)
 	pattern = pattern <span class="keyword">or</span> <span class="string">' '</span>
-	<span class="keyword">return</span> rep(pattern, (final_len - #str) / #pattern) .. str
+	<span class="keyword">return</span> <span class="global">string</span>.rep(pattern, (final_len - #str) / #pattern) .. str
 <span class="keyword">end</span>
 
-<span class="comment">---Returns a new string with both sides padded with <code>pattern</code> or spaces until the string is <code>final_len</code> characters long.
+<span class="comment">---Returns a new string with both sides padded with <code>pattern</code> or spaces until
+</span><span class="comment">---the string is <code>final_len</code> characters long.
 </span><span class="comment">---@param str string
 </span><span class="comment">---@param final_len number
 </span><span class="comment">---@param[opt] pattern string
-</span><a id="79"></a><span class="comment">---@return string
+</span><a id="78"></a><span class="comment">---@return string
 </span><span class="keyword">function</span> ext_string.padcenter(str, final_len, pattern)
 	pattern = pattern <span class="keyword">or</span> <span class="string">' '</span>
 	<span class="keyword">local</span> pad = <span class="number">0.5</span> * (final_len - #str) / #pattern
-	<span class="keyword">return</span> rep(pattern, floor(pad)) .. str .. rep(pattern, ceil(pad))
+	<span class="keyword">return</span> <span class="global">string</span>.rep(pattern, <span class="global">math</span>.floor(pad)) .. str .. <span class="global">string</span>.rep(pattern, <span class="global">math</span>.ceil(pad))
 <span class="keyword">end</span>
 
-<span class="comment">---Returns a new string with the right padded with <code>pattern</code> or spaces until the string is <code>final_len</code> characters long.
+<span class="comment">---Returns a new string with the right padded with <code>pattern</code> or spaces until
+</span><span class="comment">---the string is <code>final_len</code> characters long.
 </span><span class="comment">---@param str string
 </span><span class="comment">---@param final_len number
 </span><span class="comment">---@param[opt] pattern string
 </span><a id="90"></a><span class="comment">---@return string
 </span><span class="keyword">function</span> ext_string.padleft(str, final_len, pattern)
 	pattern = pattern <span class="keyword">or</span> <span class="string">' '</span>
-	<span class="keyword">return</span> str .. rep(pattern, (final_len - #str) / #pattern)
+	<span class="keyword">return</span> str .. <span class="global">string</span>.rep(pattern, (final_len - #str) / #pattern)
 <span class="keyword">end</span>
 
-<span class="comment">---Returns a table of all elements of the string split on <code>delim</code>. Use <code>plain</code> if the delimiter provided is not a pattern.
+<span class="comment">---Returns a table of all elements of the string split on <code>delim</code>. Use <code>plain</code>
+</span><span class="comment">---if the delimiter provided is not a pattern.
 </span><span class="comment">---@param str string
 </span><span class="comment">---@param[opt] delim string
 </span><span class="comment">---@param[opt] plain boolean
-</span><a id="100"></a><span class="comment">---@return table
+</span><a id="101"></a><span class="comment">---@return table
 </span><span class="keyword">function</span> ext_string.split(str, delim, plain)
 	<span class="keyword">local</span> ret = {}
 
@@ -148,7 +151,7 @@
 
 	<span class="keyword">if</span> <span class="keyword">not</span> delim <span class="keyword">or</span> delim == <span class="string">''</span> <span class="keyword">then</span>
 		<span class="keyword">for</span> i = <span class="number">1</span>, #str <span class="keyword">do</span>
-			ret[i] = byte(str, i)
+			ret[i] = <span class="global">string</span>.byte(str, i)
 		<span class="keyword">end</span>
 
 		<span class="keyword">return</span> ret
@@ -156,48 +159,50 @@
 
 	<span class="keyword">local</span> p = <span class="number">1</span>
 	<span class="keyword">while</span> <span class="keyword">true</span> <span class="keyword">do</span>
-		<span class="keyword">local</span> i, j = find(str, delim, p, plain)
+		<span class="keyword">local</span> i, j = <span class="global">string</span>.find(str, delim, p, plain)
 		<span class="keyword">if</span> <span class="keyword">not</span> i <span class="keyword">then</span>
 			<span class="keyword">break</span>
 		<span class="keyword">end</span>
 
-		insert(ret, sub(str, p, i - <span class="number">1</span>))
+		<span class="global">table</span>.insert(ret, <span class="global">string</span>.sub(str, p, i - <span class="number">1</span>))
 		p = j + <span class="number">1</span>
 	<span class="keyword">end</span>
 
-	insert(ret, sub(str, p))
+	<span class="global">table</span>.insert(ret, <span class="global">string</span>.sub(str, p))
 	<span class="keyword">return</span> ret
 <span class="keyword">end</span>
 
-<span class="comment">---Returns a string of <code>final_len</code> random characters in the byte-range of <code>[mn, mx]</code>. By default <code>mn = 0</code> and <code>mx = 255</code>.
+<span class="comment">---Returns a string of <code>final_len</code> random characters in the byte-range of
+</span><span class="comment">---<code>[mn, mx]</code>. By default <code>mn = 0</code> and <code>mx = 255</code>.
 </span><span class="comment">---@param final_len number
 </span><span class="comment">---@param[opt] mn number
 </span><span class="comment">---@param[opt] mx number
-</span><a id="135"></a><span class="comment">---@return string
+</span><a id="137"></a><span class="comment">---@return string
 </span><span class="keyword">function</span> ext_string.random(final_len, mn, mx)
 	<span class="keyword">local</span> ret = {}
 	mn = mn <span class="keyword">or</span> <span class="number">0</span>
 	mx = mx <span class="keyword">or</span> <span class="number">255</span>
 
 	<span class="keyword">for</span> _ = <span class="number">1</span>, final_len <span class="keyword">do</span>
-		insert(ret, char(random(mn, mx)))
+		<span class="global">table</span>.insert(ret, <span class="global">string</span>.char(<span class="global">math</span>.random(mn, mx)))
 	<span class="keyword">end</span>
 
-	<span class="keyword">return</span> concat(ret)
+	<span class="keyword">return</span> <span class="global">table</span>.concat(ret)
 <span class="keyword">end</span>
 
-<span class="comment">---Returns the Levenshtein distance between the two strings. This is often referred as "edit distance".
+<span class="comment">---Returns the Levenshtein distance between the two strings. This is often
+</span><span class="comment">---referred as "edit distance".
 </span><span class="comment">---[Wikipedia "Levenshtein Distance"](https://en.wikipedia.org/wiki/Levenshtein_distance)
 </span><span class="comment">---@param str1 string
 </span><span class="comment">---@param str2 string
-</span><a id="152"></a><span class="comment">---@return number
+</span><a id="155"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_string.levenshtein(str1, str2)
 	<span class="keyword">if</span> str1 == str2 <span class="keyword">then</span>
 		<span class="keyword">return</span> <span class="number">0</span>
 	<span class="keyword">end</span>
 
-	<span class="keyword">local</span> len1 = len(str1)
-	<span class="keyword">local</span> len2 = len(str2)
+	<span class="keyword">local</span> len1 = #str1
+	<span class="keyword">local</span> len2 = #str2
 
 	<span class="keyword">if</span> len1 == <span class="number">0</span> <span class="keyword">then</span>
 		<span class="keyword">return</span> len2
@@ -216,26 +221,27 @@
 
 	<span class="keyword">for</span> i = <span class="number">1</span>, len1 <span class="keyword">do</span>
 		<span class="keyword">for</span> j = <span class="number">1</span>, len2 <span class="keyword">do</span>
-			<span class="keyword">local</span> cost = byte(str1, i) == byte(str2, j) <span class="keyword">and</span> <span class="number">0</span> <span class="keyword">or</span> <span class="number">1</span>
-			matrix[i][j] = min(matrix[i - <span class="number">1</span>][j] + <span class="number">1</span>, matrix[i][j - <span class="number">1</span>] + <span class="number">1</span>, matrix[i - <span class="number">1</span>][j - <span class="number">1</span>] + cost)
+			<span class="keyword">local</span> cost = <span class="global">string</span>.byte(str1, i) == <span class="global">string</span>.byte(str2, j) <span class="keyword">and</span> <span class="number">0</span> <span class="keyword">or</span> <span class="number">1</span>
+			matrix[i][j] = <span class="global">math</span>.min(matrix[i - <span class="number">1</span>][j] + <span class="number">1</span>, matrix[i][j - <span class="number">1</span>] + <span class="number">1</span>, matrix[i - <span class="number">1</span>][j - <span class="number">1</span>] + cost)
 		<span class="keyword">end</span>
 	<span class="keyword">end</span>
 
 	<span class="keyword">return</span> matrix[len1][len2]
 <span class="keyword">end</span>
 
-<span class="comment">---Returns the Damerau-Levenshtein distance between the two strings. This is often referred as "edit distance".
+<span class="comment">---Returns the Damerau-Levenshtein distance between the two strings. This is
+</span><span class="comment">---often referred as "edit distance".
 </span><span class="comment">---[Wikipedia "Damerau-Levenshtein Distance"](https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance)
 </span><span class="comment">---@param str1 string
 </span><span class="comment">---@param str2 string
-</span><a id="190"></a><span class="comment">---@return number
+</span><a id="194"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_string.dameraulevenshtein(str1, str2)
 	<span class="keyword">if</span> str1 == str2 <span class="keyword">then</span>
 		<span class="keyword">return</span> <span class="number">0</span>
 	<span class="keyword">end</span>
 
-	<span class="keyword">local</span> len1 = len(str1)
-	<span class="keyword">local</span> len2 = len(str2)
+	<span class="keyword">local</span> len1 = #str1
+	<span class="keyword">local</span> len2 = #str2
 
 	<span class="keyword">if</span> len1 == <span class="number">0</span> <span class="keyword">then</span>
 		<span class="keyword">return</span> len2
@@ -254,10 +260,11 @@
 
 	<span class="keyword">for</span> i = <span class="number">1</span>, len1 <span class="keyword">do</span>
 		<span class="keyword">for</span> j = <span class="number">1</span>, len2 <span class="keyword">do</span>
-			<span class="keyword">local</span> cost = byte(str1, i) == byte(str2, j) <span class="keyword">and</span> <span class="number">0</span> <span class="keyword">or</span> <span class="number">1</span>
-			matrix[i][j] = min(matrix[i - <span class="number">1</span>][j] + <span class="number">1</span>, matrix[i][j - <span class="number">1</span>] + <span class="number">1</span>, matrix[i - <span class="number">1</span>][j - <span class="number">1</span>] + cost)
-			<span class="keyword">if</span> i &gt; <span class="number">1</span> <span class="keyword">and</span> j &gt; <span class="number">1</span> <span class="keyword">and</span> byte(str1, i) == byte(str2, j - <span class="number">1</span>) <span class="keyword">and</span> byte(str1, i - <span class="number">1</span>) == byte(str2, j) <span class="keyword">then</span>
-				matrix[i][j] = min(matrix[i][j], matrix[i - <span class="number">2</span>][j - <span class="number">2</span>] + <span class="number">1</span>)
+			<span class="keyword">local</span> cost = <span class="global">string</span>.byte(str1, i) == <span class="global">string</span>.byte(str2, j) <span class="keyword">and</span> <span class="number">0</span> <span class="keyword">or</span> <span class="number">1</span>
+			matrix[i][j] = <span class="global">math</span>.min(matrix[i - <span class="number">1</span>][j] + <span class="number">1</span>, matrix[i][j - <span class="number">1</span>] + <span class="number">1</span>, matrix[i - <span class="number">1</span>][j - <span class="number">1</span>] + cost)
+			<span class="keyword">if</span> i &gt; <span class="number">1</span> <span class="keyword">and</span> j &gt; <span class="number">1</span> <span class="keyword">and</span> <span class="global">string</span>.byte(str1, i) == <span class="global">string</span>.byte(str2, j - <span class="number">1</span>) <span class="keyword">and</span>
+				<span class="global">string</span>.byte(str1, i - <span class="number">1</span>) == <span class="global">string</span>.byte(str2, j) <span class="keyword">then</span>
+				matrix[i][j] = <span class="global">math</span>.min(matrix[i][j], matrix[i - <span class="number">2</span>][j - <span class="number">2</span>] + <span class="number">1</span>)
 			<span class="keyword">end</span>
 		<span class="keyword">end</span>
 	<span class="keyword">end</span>
@@ -266,20 +273,21 @@
 <span class="keyword">end</span>
 
 <span class="comment">---Returns true if the subsequence can be found inside <code>str</code>.
-</span><span class="comment">---For example: <code>ggl</code> is a subsequence of <code>GooGLe</code>. (uppercase letters signify which letters form the subsequence).
+</span><span class="comment">---For example: <code>ggl</code> is a subsequence of <code>GooGLe</code>. (uppercase letters signify
+</span><span class="comment">---which letters form the subsequence).
 </span><span class="comment">---@param subseq string
 </span><span class="comment">---@param str string
-</span><a id="231"></a><span class="comment">---@return boolean
+</span><a id="237"></a><span class="comment">---@return boolean
 </span><span class="keyword">function</span> ext_string.subsequencematch(subseq, str)
 	<span class="keyword">local</span> matches = <span class="number">0</span>
 
-	<span class="keyword">for</span> i = <span class="number">1</span>, len(str) <span class="keyword">do</span>
-		<span class="keyword">if</span> byte(subseq, matches + <span class="number">1</span>) == byte(str, i) <span class="keyword">then</span>
+	<span class="keyword">for</span> i = <span class="number">1</span>, #str <span class="keyword">do</span>
+		<span class="keyword">if</span> <span class="global">string</span>.byte(subseq, matches + <span class="number">1</span>) == <span class="global">string</span>.byte(str, i) <span class="keyword">then</span>
 			matches = matches + <span class="number">1</span>
 		<span class="keyword">end</span>
 	<span class="keyword">end</span>
 
-	<span class="keyword">return</span> matches == len(subseq)
+	<span class="keyword">return</span> matches == #subseq
 <span class="keyword">end</span>
 
 <span class="keyword">return</span> ext_string</pre>
