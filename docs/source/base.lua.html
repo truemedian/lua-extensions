@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+<div id="container">
+<div id="main">
+<!-- Menu -->
+<div id="navigation">
+<br/>
+<h1>Lua Extensions</h1>
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+<h2>Source</h2>
+<ul>
+  <li><a href="../source/init.lua.html">init.lua</a></li>
+  <li><strong>base.lua</strong></li>
+  <li><a href="../source/coroutine.lua.html">coroutine.lua</a></li>
+  <li><a href="../source/math.lua.html">math.lua</a></li>
+  <li><a href="../source/string.lua.html">string.lua</a></li>
+  <li><a href="../source/table.lua.html">table.lua</a></li>
+</ul>
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/extensions.html">extensions</a></li>
+  <li><a href="../modules/extensions.base.html">extensions.base</a></li>
+  <li><a href="../modules/extensions.coroutine.html">extensions.coroutine</a></li>
+  <li><a href="../modules/extensions.math.html">extensions.math</a></li>
+  <li><a href="../modules/extensions.string.html">extensions.string</a></li>
+  <li><a href="../modules/extensions.table.html">extensions.table</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+</div>
+<div id="content">
+    <h2>base.lua</h2>
+<pre>
+<span class="comment">---Extensions to the Lua standard base library.
+</span><span class="comment">---@module extensions.base
+</span><span class="comment">---@alias ext_base
+</span>
+<span class="keyword">local</span> ext_base = {}
+
+<span class="comment">---Format a message and then print it.
+</span><span class="comment">---@param message any
+</span><a id="10"></a><span class="comment">---@param ... any
+</span><span class="keyword">function</span> ext_base.printf(message, ...)
+    <span class="global">print</span>(<span class="global">string</span>.format(message, ...))
+<span class="keyword">end</span>
+
+<span class="comment">---Format a message and then throw an error.
+</span><span class="comment">---@param message any
+</span><a id="17"></a><span class="comment">---@param ... any
+</span><span class="keyword">function</span> ext_base.errorf(message, ...)
+    <span class="keyword">return</span> <span class="global">error</span>(<span class="global">string</span>.format(message, ...))
+<span class="keyword">end</span>
+
+<span class="comment">---Assert a condition, throws an error with a formatted message if it is false.
+</span><span class="comment">---@param cond any
+</span><span class="comment">---@param message any
+</span><a id="25"></a><span class="comment">---@param ... any
+</span><span class="keyword">function</span> ext_base.assertf(cond, message, ...)
+    <span class="keyword">if</span> <span class="keyword">not</span> cond <span class="keyword">then</span>
+        <span class="keyword">return</span> <span class="global">error</span>(<span class="global">string</span>.format(message, ...))
+    <span class="keyword">else</span>
+        <span class="keyword">return</span> cond, message, ...
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">return</span> ext_base</pre>
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+</div> <!-- id="container" -->
+</body>
+</html>

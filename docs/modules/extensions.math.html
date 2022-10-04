@@ -24,6 +24,7 @@
 <h2>Modules</h2>
 <ul>
   <li><a href="../modules/extensions.html">extensions</a></li>
+  <li><a href="../modules/extensions.base.html">extensions.base</a></li>
   <li><a href="../modules/extensions.coroutine.html">extensions.coroutine</a></li>
   <li><strong>extensions.math</strong></li>
   <li><a href="../modules/extensions.string.html">extensions.string</a></li>
@@ -36,6 +37,7 @@
 <h2>Source</h2>
 <ul>
   <li><a href="../source/init.lua.html">init.lua</a></li>
+  <li><a href="../source/base.lua.html">base.lua</a></li>
   <li><a href="../source/coroutine.lua.html">coroutine.lua</a></li>
   <li><a href="../source/math.lua.html">math.lua</a></li>
   <li><a href="../source/string.lua.html">string.lua</a></li>
@@ -68,11 +70,23 @@
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#root">root (n, base)</a></td>
-	<td class="summary">Returns the <code>base</code>th root of <code>n</code>.</td>
+	<td class="summary">Returns the real <a href="../modules/extensions.base.html">base</a>th root of <code>n</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#proot">proot (n, base)</a></td>
+	<td class="summary">Returns the principal <a href="../modules/extensions.base.html">base</a>th root of <code>n</code>.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#isnan">isnan (n)</a></td>
 	<td class="summary">Returns true if <code>n</code> is nan.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#approxeqabs">approxeqabs (a, b[, tolerance])</a></td>
+	<td class="summary">Performs an approximate comparison of two numbers.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#approxeqrel">approxeqrel (a, b[, tolerance])</a></td>
+	<td class="summary">Performs an approximate comparison of two numbers.</td>
 	</tr>
 </table>
 <h2><a href="#Fields">Fields</a></h2>
@@ -94,7 +108,7 @@
     <dt>
     <a name = "clamp"></a>
     <strong>clamp (num, minValue, maxValue)</strong>
-    <a style="float:right;" href="../source/math.lua.html#23">line 23</a>
+    <a style="float:right;" href="../source/math.lua.html#33">line 33</a>
     </dt>
     <dd>
     Returns <code>num</code> clamped to [minValue, maxValue].
@@ -119,7 +133,7 @@
     <dt>
     <a name = "round"></a>
     <strong>round (num[, precision])</strong>
-    <a style="float:right;" href="../source/math.lua.html#31">line 31</a>
+    <a style="float:right;" href="../source/math.lua.html#41">line 41</a>
     </dt>
     <dd>
     Returns <code>num</code> rounded normally to <code>precision</code> decimals of precision.
@@ -142,7 +156,7 @@
     <dt>
     <a name = "sign"></a>
     <strong>sign (n)</strong>
-    <a style="float:right;" href="../source/math.lua.html#39">line 39</a>
+    <a style="float:right;" href="../source/math.lua.html#49">line 49</a>
     </dt>
     <dd>
     Returns -1 for a negative number, 1 for a positive number and 0 for 0.
@@ -161,7 +175,7 @@
     <dt>
     <a name = "cbrt"></a>
     <strong>cbrt (n)</strong>
-    <a style="float:right;" href="../source/math.lua.html#46">line 46</a>
+    <a style="float:right;" href="../source/math.lua.html#62">line 62</a>
     </dt>
     <dd>
     Returns the cube root of <code>n</code>.
@@ -180,10 +194,11 @@
     <dt>
     <a name = "root"></a>
     <strong>root (n, base)</strong>
-    <a style="float:right;" href="../source/math.lua.html#54">line 54</a>
+    <a style="float:right;" href="../source/math.lua.html#73">line 73</a>
     </dt>
     <dd>
-    Returns the <code>base</code>th root of <code>n</code>.
+    Returns the real <a href="../modules/extensions.base.html">base</a>th root of <code>n</code>.  This extends the root function to
+<code>n &lt; 0</code> for odd bases.
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">n</span>
@@ -198,11 +213,43 @@
 
         number
     </ol>
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example"><span class="global">math</span>.root(-<span class="number">8</span>, <span class="number">3</span>) <span class="comment">-- -2</span></pre></li>
+        <li><pre class="example"><span class="global">math</span>.root(-<span class="number">4</span>, <span class="number">2</span>) <span class="comment">-- nan</span></pre></li>
+    </ul>
+</dd>
+    <dt>
+    <a name = "proot"></a>
+    <strong>proot (n, base)</strong>
+    <a style="float:right;" href="../source/math.lua.html#95">line 95</a>
+    </dt>
+    <dd>
+    Returns the principal <a href="../modules/extensions.base.html">base</a>th root of <code>n</code>.
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">n</span>
+         number
+        </li>
+        <li><span class="parameter">base</span>
+         number
+        </li>
+    </ul>
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example"><span class="global">math</span>.root(-<span class="number">8</span>, <span class="number">3</span>) <span class="comment">-- nan</span></pre></li>
+        <li><pre class="example"><span class="global">math</span>.root(<span class="number">8</span>, <span class="number">3</span>) <span class="comment">-- 2</span></pre></li>
+    </ul>
 </dd>
     <dt>
     <a name = "isnan"></a>
     <strong>isnan (n)</strong>
-    <a style="float:right;" href="../source/math.lua.html#65">line 65</a>
+    <a style="float:right;" href="../source/math.lua.html#106">line 106</a>
     </dt>
     <dd>
     Returns true if <code>n</code> is nan.
@@ -217,6 +264,60 @@
 
         boolean
     </ol>
+</dd>
+    <dt>
+    <a name = "approxeqabs"></a>
+    <strong>approxeqabs (a, b[, tolerance])</strong>
+    <a style="float:right;" href="../source/math.lua.html#120">line 120</a>
+    </dt>
+    <dd>
+    Performs an approximate comparison of two numbers. </p>
+
+<p>Tolerance may be left nil to use the default value of <code>math.epsilon</code>, a very
+small value.</p>
+
+<p>This function is recommended for comparing small values near zero; using
+<a href="../modules/extensions.math.html#approxeqrel">approxeqrel</a> is suggested otherwise.
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         number
+        </li>
+        <li><span class="parameter">b</span>
+         number
+        </li>
+        <li><span class="parameter">tolerance</span>
+         number
+         (<em>optional</em>)
+        </li>
+    </ul>
+</dd>
+    <dt>
+    <a name = "approxeqrel"></a>
+    <strong>approxeqrel (a, b[, tolerance])</strong>
+    <a style="float:right;" href="../source/math.lua.html#141">line 141</a>
+    </dt>
+    <dd>
+    Performs an approximate comparison of two numbers. </p>
+
+<p>Tolerance may be left nil to use the default value of <code>sqrt(math.epsilon)</code>,
+which means half of the digits are equal.</p>
+
+<p>Note that for comparisons of small numbers around zero this function won't
+give meaningful results, use <a href="../modules/extensions.math.html#approxeqabs">approxeqabs</a> instead.
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+         number
+        </li>
+        <li><span class="parameter">b</span>
+         number
+        </li>
+        <li><span class="parameter">tolerance</span>
+         number
+         (<em>optional</em>)
+        </li>
+    </ul>
 </dd>
 </dl>
     <h2 class="section-header "><a name="Fields" href="#Fields">Fields</a></h2>
@@ -237,7 +338,7 @@
     <dt>
     <a name = "e"></a>
     <strong>e</strong>
-    <a style="float:right;" href="../source/math.lua.html#16">line 16</a>
+    <a style="float:right;" href="../source/math.lua.html#26">line 26</a>
     </dt>
     <dd>
     Euler's number.  This is the base of the natural logarithm.

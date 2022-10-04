@@ -19,6 +19,7 @@
 <h2>Source</h2>
 <ul>
   <li><a href="../source/init.lua.html">init.lua</a></li>
+  <li><a href="../source/base.lua.html">base.lua</a></li>
   <li><a href="../source/coroutine.lua.html">coroutine.lua</a></li>
   <li><strong>math.lua</strong></li>
   <li><a href="../source/string.lua.html">string.lua</a></li>
@@ -27,6 +28,7 @@
 <h2>Modules</h2>
 <ul>
   <li><a href="../modules/extensions.html">extensions</a></li>
+  <li><a href="../modules/extensions.base.html">extensions.base</a></li>
   <li><a href="../modules/extensions.coroutine.html">extensions.coroutine</a></li>
   <li><a href="../modules/extensions.math.html">extensions.math</a></li>
   <li><a href="../modules/extensions.string.html">extensions.string</a></li>
@@ -54,14 +56,24 @@
 </span><a id="13"></a><span class="comment">---@see isnan
 </span>ext_math.nan = <span class="number">0</span> / <span class="number">0</span>
 
-<a id="16"></a><span class="comment">---Euler's number. This is the base of the natural logarithm.
+<span class="keyword">if</span> <span class="number">2</span> ^ <span class="number">53</span> + <span class="number">1</span> == <span class="number">2</span> ^ <span class="number">53</span> <span class="keyword">then</span>
+	<span class="comment">-- 64 bit float
+</span>	ext_math.epsilon = <span class="number">2</span> ^ -<span class="number">52</span>
+<span class="keyword">elseif</span> <span class="number">2</span> ^ <span class="number">24</span> + <span class="number">1</span> == <span class="number">2</span> ^ <span class="number">24</span> <span class="keyword">then</span>
+	<span class="comment">-- 32 bit float
+</span>	ext_math.epsilon = <span class="number">2</span> ^ -<span class="number">23</span>
+<span class="keyword">else</span>
+	<span class="global">error</span>(<span class="string">"we don't support the float size of this system, please report this"</span>)
+<span class="keyword">end</span>
+
+<a id="26"></a><span class="comment">---Euler's number. This is the base of the natural logarithm.
 </span>ext_math.e = <span class="global">math</span>.exp(<span class="number">1</span>)
 
 <span class="comment">---Returns <code>num</code> clamped to [minValue, maxValue].
 </span><span class="comment">---@param num number
 </span><span class="comment">---@param minValue number
 </span><span class="comment">---@param maxValue number
-</span><a id="23"></a><span class="comment">---@return number
+</span><a id="33"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.clamp(num, minValue, maxValue)
 	<span class="keyword">return</span> <span class="global">math</span>.min(<span class="global">math</span>.max(num, minValue), maxValue)
 <span class="keyword">end</span>
@@ -69,7 +81,7 @@
 <span class="comment">---Returns <code>num</code> rounded normally to <code>precision</code> decimals of precision.
 </span><span class="comment">---@param num number
 </span><span class="comment">---@param[opt] precision number
-</span><a id="31"></a><span class="comment">---@return number
+</span><a id="41"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.round(num, precision)
 	<span class="keyword">local</span> m = <span class="number">10</span> ^ (precision <span class="keyword">or</span> <span class="number">0</span>)
 	<span class="keyword">return</span> <span class="global">math</span>.floor(num * m + <span class="number">0.5</span>) / m
@@ -77,24 +89,55 @@
 
 <span class="comment">---Returns -1 for a negative number, 1 for a positive number and 0 for 0.
 </span><span class="comment">---@param n number
-</span><a id="39"></a><span class="comment">---@return number
+</span><a id="49"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.sign(n)
-	<span class="keyword">return</span> n &gt; <span class="number">0</span> <span class="keyword">and</span> <span class="number">1</span> <span class="keyword">or</span> n == <span class="number">0</span> <span class="keyword">and</span> <span class="number">0</span> <span class="keyword">or</span> -<span class="number">1</span>
+	<span class="keyword">if</span> n &gt; <span class="number">0</span> <span class="keyword">then</span>
+		<span class="keyword">return</span> <span class="number">1</span>
+	<span class="keyword">elseif</span> n &lt; <span class="number">0</span> <span class="keyword">then</span>
+		<span class="keyword">return</span> -<span class="number">1</span>
+	<span class="keyword">else</span>
+		<span class="keyword">return</span> <span class="number">0</span>
+	<span class="keyword">end</span>
 <span class="keyword">end</span>
 
 <span class="comment">---Returns the cube root of <code>n</code>.
 </span><span class="comment">---@param n number
-</span><a id="46"></a><span class="comment">---@return number
+</span><a id="62"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.cbrt(n)
 	<span class="keyword">return</span> n ^ (<span class="number">1</span> / <span class="number">3</span>)
 <span class="keyword">end</span>
 
-<span class="comment">---Returns the <code>base</code>th root of <code>n</code>.
+<span class="comment">---Returns the real <code>base</code>th root of <code>n</code>. This extends the root function to
+</span><span class="comment">---<code>n &amp;lt; 0</code> for odd bases.
+</span><span class="comment">---@usage math.root(-8, 3) -- -2
+</span><span class="comment">---@usage math.root(-4, 2) -- nan
 </span><span class="comment">---@param n number
 </span><span class="comment">---@param base number
-</span><a id="54"></a><span class="comment">---@return number
+</span><a id="73"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.root(n, base)
-	<span class="keyword">if</span> base &lt; <span class="number">1</span> <span class="keyword">or</span> n % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">and</span> n &lt; <span class="number">0</span> <span class="keyword">then</span>
+	<span class="keyword">if</span> base == <span class="number">0</span> <span class="keyword">then</span>
+		<span class="keyword">return</span> ext_math.nan
+	<span class="keyword">end</span>
+
+	<span class="keyword">if</span> n &lt; <span class="number">0</span> <span class="keyword">then</span>
+		<span class="keyword">if</span> base % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">then</span>
+			<span class="keyword">return</span> ext_math.nan
+		<span class="keyword">else</span>
+			<span class="keyword">return</span> -(-n) ^ (<span class="number">1</span> / base)
+		<span class="keyword">end</span>
+	<span class="keyword">else</span>
+		<span class="keyword">return</span> n ^ (<span class="number">1</span> / base)
+	<span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---Returns the principal <code>base</code>th root of <code>n</code>.
+</span><span class="comment">---@usage math.root(-8, 3) -- nan
+</span><span class="comment">---@usage math.root(8, 3) -- 2
+</span><span class="comment">---@param n number
+</span><span class="comment">---@param base number
+</span><a id="95"></a><span class="comment">---@return number
+</span><span class="keyword">function</span> ext_math.proot(n, base)
+	<span class="keyword">if</span> base == <span class="number">0</span> <span class="keyword">or</span> n &lt; <span class="number">0</span> <span class="keyword">then</span>
 		<span class="keyword">return</span> ext_math.nan
 	<span class="keyword">end</span>
 
@@ -103,9 +146,51 @@
 
 <span class="comment">---Returns true if <code>n</code> is nan.
 </span><span class="comment">---@param n number
-</span><a id="65"></a><span class="comment">---@return boolean
+</span><a id="106"></a><span class="comment">---@return boolean
 </span><span class="keyword">function</span> ext_math.isnan(n)
 	<span class="keyword">return</span> n ~= n
+<span class="keyword">end</span>
+
+<span class="comment">---Performs an approximate comparison of two numbers.
+</span><span class="comment">---
+</span><span class="comment">---Tolerance may be left nil to use the default value of <code>math.epsilon</code>, a very
+</span><span class="comment">---small value.
+</span><span class="comment">---
+</span><span class="comment">---This function is recommended for comparing small values near zero; using
+</span><span class="comment">---<code>approxeqrel</code> is suggested otherwise.
+</span><span class="comment">---@param a number
+</span><span class="comment">---@param b number
+</span><a id="120"></a><span class="comment">---@param[opt] tolerance number
+</span><span class="keyword">function</span> ext_math.approxeqabs(a, b, tolerance)
+	tolerance = tolerance <span class="keyword">or</span> ext_math.epsilon
+
+	<span class="comment">-- quick path to handle infinities, signed zeroes and nans
+</span>	<span class="keyword">if</span> a == b <span class="keyword">then</span>
+		<span class="keyword">return</span> <span class="keyword">true</span>
+	<span class="keyword">end</span>
+
+	<span class="keyword">return</span> <span class="global">math</span>.abs(a - b) &lt; tolerance
+<span class="keyword">end</span>
+
+<span class="comment">---Performs an approximate comparison of two numbers.
+</span><span class="comment">---
+</span><span class="comment">---Tolerance may be left nil to use the default value of <code>sqrt(math.epsilon)</code>,
+</span><span class="comment">---which means half of the digits are equal.
+</span><span class="comment">---
+</span><span class="comment">---Note that for comparisons of small numbers around zero this function won't
+</span><span class="comment">---give meaningful results, use <code>approxeqabs</code> instead.
+</span><span class="comment">---@param a number
+</span><span class="comment">---@param b number
+</span><a id="141"></a><span class="comment">---@param[opt] tolerance number
+</span><span class="keyword">function</span> ext_math.approxeqrel(a, b, tolerance)
+	tolerance = tolerance <span class="keyword">or</span> ext_math.epsilon
+
+	<span class="comment">-- quick path to handle infinities, signed zeroes and nans
+</span>	<span class="keyword">if</span> a == b <span class="keyword">then</span>
+		<span class="keyword">return</span> <span class="keyword">true</span>
+	<span class="keyword">end</span>
+
+	<span class="keyword">return</span> <span class="global">math</span>.abs(a - b) &lt; <span class="global">math</span>.max(a, b) * tolerance
 <span class="keyword">end</span>
 
 <span class="keyword">return</span> ext_math</pre>

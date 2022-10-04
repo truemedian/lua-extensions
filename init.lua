@@ -13,6 +13,7 @@ extensions.math = require('math.lua')
 extensions.string = require('string.lua')
 extensions.table = require('table.lua')
 extensions.coroutine = require('coroutine.lua')
+extensions.base = require('base.lua')
 
 local autoload = {
 	math = extensions.math,
@@ -21,7 +22,8 @@ local autoload = {
 	coroutine = extensions.coroutine,
 }
 
----Loads the standard library extensions into the global environment. This will **not** overwrite any user-defined functions.
+---Loads the standard library extensions into the global environment. This will
+---**not** overwrite any user-defined functions.
 ---@usage local extensions = require 'extensions' ()
 function extensions.load()
 	for name, ext in pairs(autoload) do
@@ -29,6 +31,13 @@ function extensions.load()
 			if _G[name][k] == nil then
 				_G[name][k] = v
 			end
+		end
+	end
+
+	-- Load the base extensions into the global environment
+	for k, v in pairs(extensions.base) do
+		if _G[k] == nil then
+			_G[k] = v
 		end
 	end
 end
