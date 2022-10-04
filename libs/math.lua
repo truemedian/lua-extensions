@@ -47,16 +47,18 @@ function ext_math.cbrt(n)
 	return n ^ (1 / 3)
 end
 
----Returns the `base`th root of `n`.
+---Returns the `n`th root of `x`.
 ---@param n number
 ---@param base number
 ---@return number
-function ext_math.root(n, base)
-	if base < 1 or n % 2 == 0 and n < 0 then
+function ext_math.root(x, n)
+    if n == 0 then
+        return 1
+    elseif x < 0 then
 		return ext_math.nan
 	end
 
-	return n ^ (1 / base)
+	return x ^ (1 / n)
 end
 
 ---Returns true if `n` is nan.
