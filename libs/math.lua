@@ -123,7 +123,8 @@ end
 ---Performs an approximate comparison of two numbers.
 ---
 ---Tolerance may be left nil to use the default value of `math.epsilon`, a very
----small value.
+---small value. The tolerance should never be larger than small multiple of
+---`math.epsilon`
 ---
 ---This function is recommended for comparing small values near zero; using
 ---`approxeqrel` is suggested otherwise.
@@ -138,7 +139,7 @@ function ext_math.approxeqabs(a, b, tolerance)
 		return true
 	end
 
-	return math.abs(a - b) < tolerance
+	return math.abs(a - b) <= tolerance
 end
 
 ---Performs an approximate comparison of two numbers.
@@ -159,7 +160,7 @@ function ext_math.approxeqrel(a, b, tolerance)
 		return true
 	end
 
-	return math.abs(a - b) <= math.abs(math.max(a, b)) * tolerance
+	return math.abs(a - b) <= math.max(math.abs(a), math.abs(b)) * tolerance
 end
 
 return ext_math
