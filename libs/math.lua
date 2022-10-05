@@ -139,14 +139,14 @@ end
 ---@param b number
 ---@param[opt] tolerance number
 function ext_math.approxeqrel(a, b, tolerance)
-	tolerance = tolerance or ext_math.epsilon
+	tolerance = tolerance or math.sqrt(ext_math.epsilon)
 
 	-- quick path to handle infinities, signed zeroes and nans
 	if a == b then
 		return true
 	end
 
-	return math.abs(a - b) < math.max(a, b) * tolerance
+	return math.abs(a - b) <= math.abs(math.max(a, b)) * tolerance
 end
 
 return ext_math
