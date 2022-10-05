@@ -56,11 +56,11 @@
 	<td class="summary">Format a message and then print it.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#errorf">errorf (message, ...)</a></td>
+	<td class="name" nowrap><a href="#errorf">errorf (message, level, ...)</a></td>
 	<td class="summary">Format a message and then throw an error.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#assertf">assertf (cond, message, ...)</a></td>
+	<td class="name" nowrap><a href="#assertf">assertf (cond, message, level, ...)</a></td>
 	<td class="summary">Assert a condition, throws an error with a formatted message if it is false.</td>
 	</tr>
 </table>
@@ -72,7 +72,7 @@
     <dt>
     <a name = "printf"></a>
     <strong>printf (message, ...)</strong>
-    <a style="float:right;" href="../source/base.lua.html#10">line 10</a>
+    <a style="float:right;" href="../source/base.lua.html#18">line 18</a>
     </dt>
     <dd>
     Format a message and then print it.
@@ -88,8 +88,8 @@
 </dd>
     <dt>
     <a name = "errorf"></a>
-    <strong>errorf (message, ...)</strong>
-    <a style="float:right;" href="../source/base.lua.html#17">line 17</a>
+    <strong>errorf (message, level, ...)</strong>
+    <a style="float:right;" href="../source/base.lua.html#26">line 26</a>
     </dt>
     <dd>
     Format a message and then throw an error.
@@ -98,6 +98,9 @@
         <li><span class="parameter">message</span>
          any
         </li>
+        <li><span class="parameter">level</span>
+         integer?
+        </li>
         <li><span class="parameter">...</span>
          any
         </li>
@@ -105,8 +108,8 @@
 </dd>
     <dt>
     <a name = "assertf"></a>
-    <strong>assertf (cond, message, ...)</strong>
-    <a style="float:right;" href="../source/base.lua.html#25">line 25</a>
+    <strong>assertf (cond, message, level, ...)</strong>
+    <a style="float:right;" href="../source/base.lua.html#35">line 35</a>
     </dt>
     <dd>
     Assert a condition, throws an error with a formatted message if it is false.
@@ -117,6 +120,9 @@
         </li>
         <li><span class="parameter">message</span>
          any
+        </li>
+        <li><span class="parameter">level</span>
+         integer?
         </li>
         <li><span class="parameter">...</span>
          any

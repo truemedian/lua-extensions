@@ -12,14 +12,27 @@ end
 ---@see isnan
 ext_math.nan = 0 / 0
 
-if 2 ^ 53 + 1 == 2 ^ 53 then
-	-- 64 bit float
-	ext_math.epsilon = 2 ^ -52
-elseif 2 ^ 24 + 1 == 2 ^ 24 then
+---The machine epsilon, an upper bound on the relative error due to rounding.
+ext_math.epsilon = 2 ^ -52
+
+---The largest representable number
+ext_math.max_normal = (2 - 2 ^ -52) * 2 ^ 1023
+
+---The smallest normal representable number
+ext_math.min_normal = 2 ^ -1022
+
+---The smallest subnormal representable number
+ext_math.min_subnormal = 2 ^ -1074
+
+if 2 ^ 24 + 1 == 2 ^ 24 then
 	-- 32 bit float
 	ext_math.epsilon = 2 ^ -23
-else
-	error("we don't support the float size of this system, please report this")
+
+	ext_math.max_normal = (2 - 2 ^ -23) * 2 ^ 127
+
+	ext_math.min_normal = 2 ^ -126
+
+	ext_math.min_subnormal = 2 ^ -149
 end
 
 ---Euler's number. This is the base of the natural logarithm.
