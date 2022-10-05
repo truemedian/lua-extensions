@@ -40,4 +40,41 @@ function ext_base.assertf(cond, message, level, ...)
     end
 end
 
+---Returns an array of the first return of an iterator.
+---@usage enumerate(pairs({5, 7})) -- {1, 2}
+---@param iterator function
+---@param[opt] ... any
+---@return table
+function ext_base.enumerate(iterator, ...)
+    local tbl = {}
+
+    for k in iterator, ... do
+        tbl[#tbl + 1] = k
+    end
+
+    return tbl
+end
+
+---Returns an array of arrays of the returns of an iterator
+---@usage enumerateall(pairs({5, 7})) -- {{1, 5}, {2, 7}}
+---@param iterator function
+---@param[opt] ... any
+---@return table
+function ext_base.enumerateall(iterator, ...)
+    local tbl = {}
+
+    local last = { ... }
+    while true do
+        local ret = { iterator(unpack(last)) }
+        if ret[1] == nil then
+            break
+        end
+
+        last = ret
+        tbl[#tbl + 1] = ret
+    end
+
+    return tbl
+end
+
 return ext_base
