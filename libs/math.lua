@@ -138,7 +138,7 @@ function ext_math.approxeqabs(a, b, tolerance)
 		return true
 	end
 
-	return math.abs(a - b) < tolerance
+	return math.abs(a - b) <= tolerance
 end
 
 ---Performs an approximate comparison of two numbers.
