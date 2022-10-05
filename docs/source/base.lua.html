@@ -48,29 +48,39 @@
 </span>
 <span class="keyword">local</span> ext_base = {}
 
+<span class="keyword">local</span> <span class="keyword">function</span> increaseLevel(level)
+    <span class="keyword">if</span> level == <span class="number">0</span> <span class="keyword">then</span>
+        <span class="keyword">return</span> <span class="number">0</span>
+    <span class="keyword">else</span>
+        <span class="keyword">return</span> (level <span class="keyword">or</span> <span class="number">1</span>) + <span class="number">1</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
 <span class="comment">---Format a message and then print it.
 </span><span class="comment">---@param message any
-</span><a id="10"></a><span class="comment">---@param ... any
+</span><a id="18"></a><span class="comment">---@param ... any
 </span><span class="keyword">function</span> ext_base.printf(message, ...)
     <span class="global">print</span>(<span class="global">string</span>.format(message, ...))
 <span class="keyword">end</span>
 
 <span class="comment">---Format a message and then throw an error.
 </span><span class="comment">---@param message any
-</span><a id="17"></a><span class="comment">---@param ... any
-</span><span class="keyword">function</span> ext_base.errorf(message, ...)
-    <span class="keyword">return</span> <span class="global">error</span>(<span class="global">string</span>.format(message, ...))
+</span><span class="comment">---@param level integer?
+</span><a id="26"></a><span class="comment">---@param ... any
+</span><span class="keyword">function</span> ext_base.errorf(message, level, ...)
+    <span class="keyword">return</span> <span class="global">error</span>(<span class="global">string</span>.format(message, ...), increaseLevel(level))
 <span class="keyword">end</span>
 
 <span class="comment">---Assert a condition, throws an error with a formatted message if it is false.
 </span><span class="comment">---@param cond any
 </span><span class="comment">---@param message any
-</span><a id="25"></a><span class="comment">---@param ... any
-</span><span class="keyword">function</span> ext_base.assertf(cond, message, ...)
+</span><span class="comment">---@param level integer?
+</span><a id="35"></a><span class="comment">---@param ... any
+</span><span class="keyword">function</span> ext_base.assertf(cond, message, level, ...)
     <span class="keyword">if</span> <span class="keyword">not</span> cond <span class="keyword">then</span>
-        <span class="keyword">return</span> <span class="global">error</span>(<span class="global">string</span>.format(message, ...))
+        <span class="keyword">return</span> <span class="global">error</span>(<span class="global">string</span>.format(message, ...), increaseLevel(level))
     <span class="keyword">else</span>
-        <span class="keyword">return</span> cond, message, ...
+        <span class="keyword">return</span> cond, message, level, ...
     <span class="keyword">end</span>
 <span class="keyword">end</span>
 

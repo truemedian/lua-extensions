@@ -56,24 +56,37 @@
 </span><a id="13"></a><span class="comment">---@see isnan
 </span>ext_math.nan = <span class="number">0</span> / <span class="number">0</span>
 
-<span class="keyword">if</span> <span class="number">2</span> ^ <span class="number">53</span> + <span class="number">1</span> == <span class="number">2</span> ^ <span class="number">53</span> <span class="keyword">then</span>
-	<span class="comment">-- 64 bit float
-</span>	ext_math.epsilon = <span class="number">2</span> ^ -<span class="number">52</span>
-<span class="keyword">elseif</span> <span class="number">2</span> ^ <span class="number">24</span> + <span class="number">1</span> == <span class="number">2</span> ^ <span class="number">24</span> <span class="keyword">then</span>
+<a id="16"></a><span class="comment">---The machine epsilon, an upper bound on the relative error due to rounding.
+</span>ext_math.epsilon = <span class="number">2</span> ^ -<span class="number">52</span>
+
+<a id="19"></a><span class="comment">---The largest representable number
+</span>ext_math.max_normal = (<span class="number">2</span> - <span class="number">2</span> ^ -<span class="number">52</span>) * <span class="number">2</span> ^ <span class="number">1023</span>
+
+<a id="22"></a><span class="comment">---The smallest normal representable number
+</span>ext_math.min_normal = <span class="number">2</span> ^ -<span class="number">1022</span>
+
+<a id="25"></a><span class="comment">---The smallest subnormal representable number
+</span>ext_math.min_subnormal = <span class="number">2</span> ^ -<span class="number">1074</span>
+
+<span class="keyword">if</span> <span class="number">2</span> ^ <span class="number">24</span> + <span class="number">1</span> == <span class="number">2</span> ^ <span class="number">24</span> <span class="keyword">then</span>
 	<span class="comment">-- 32 bit float
 </span>	ext_math.epsilon = <span class="number">2</span> ^ -<span class="number">23</span>
-<span class="keyword">else</span>
-	<span class="global">error</span>(<span class="string">"we don't support the float size of this system, please report this"</span>)
+
+	ext_math.max_normal = (<span class="number">2</span> - <span class="number">2</span> ^ -<span class="number">23</span>) * <span class="number">2</span> ^ <span class="number">127</span>
+
+	ext_math.min_normal = <span class="number">2</span> ^ -<span class="number">126</span>
+
+	ext_math.min_subnormal = <span class="number">2</span> ^ -<span class="number">149</span>
 <span class="keyword">end</span>
 
-<a id="26"></a><span class="comment">---Euler's number. This is the base of the natural logarithm.
+<a id="39"></a><span class="comment">---Euler's number. This is the base of the natural logarithm.
 </span>ext_math.e = <span class="global">math</span>.exp(<span class="number">1</span>)
 
 <span class="comment">---Returns <code>num</code> clamped to [minValue, maxValue].
 </span><span class="comment">---@param num number
 </span><span class="comment">---@param minValue number
 </span><span class="comment">---@param maxValue number
-</span><a id="33"></a><span class="comment">---@return number
+</span><a id="46"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.clamp(num, minValue, maxValue)
 	<span class="keyword">return</span> <span class="global">math</span>.min(<span class="global">math</span>.max(num, minValue), maxValue)
 <span class="keyword">end</span>
@@ -81,7 +94,7 @@
 <span class="comment">---Returns <code>num</code> rounded normally to <code>precision</code> decimals of precision.
 </span><span class="comment">---@param num number
 </span><span class="comment">---@param[opt] precision number
-</span><a id="41"></a><span class="comment">---@return number
+</span><a id="54"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.round(num, precision)
 	<span class="keyword">local</span> m = <span class="number">10</span> ^ (precision <span class="keyword">or</span> <span class="number">0</span>)
 	<span class="keyword">return</span> <span class="global">math</span>.floor(num * m + <span class="number">0.5</span>) / m
@@ -89,7 +102,7 @@
 
 <span class="comment">---Returns -1 for a negative number, 1 for a positive number and 0 for 0.
 </span><span class="comment">---@param n number
-</span><a id="49"></a><span class="comment">---@return number
+</span><a id="62"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.sign(n)
 	<span class="keyword">if</span> n &gt; <span class="number">0</span> <span class="keyword">then</span>
 		<span class="keyword">return</span> <span class="number">1</span>
@@ -102,7 +115,7 @@
 
 <span class="comment">---Returns the cube root of <code>n</code>.
 </span><span class="comment">---@param n number
-</span><a id="62"></a><span class="comment">---@return number
+</span><a id="75"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.cbrt(n)
 	<span class="keyword">return</span> n ^ (<span class="number">1</span> / <span class="number">3</span>)
 <span class="keyword">end</span>
@@ -113,7 +126,7 @@
 </span><span class="comment">---@usage math.root(-4, 2) -- nan
 </span><span class="comment">---@param n number
 </span><span class="comment">---@param base number
-</span><a id="73"></a><span class="comment">---@return number
+</span><a id="86"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.root(n, base)
 	<span class="keyword">if</span> base == <span class="number">0</span> <span class="keyword">then</span>
 		<span class="keyword">return</span> ext_math.nan
@@ -135,7 +148,7 @@
 </span><span class="comment">---@usage math.root(8, 3) -- 2
 </span><span class="comment">---@param n number
 </span><span class="comment">---@param base number
-</span><a id="95"></a><span class="comment">---@return number
+</span><a id="108"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.proot(n, base)
 	<span class="keyword">if</span> base == <span class="number">0</span> <span class="keyword">or</span> n &lt; <span class="number">0</span> <span class="keyword">then</span>
 		<span class="keyword">return</span> ext_math.nan
@@ -146,7 +159,7 @@
 
 <span class="comment">---Returns true if <code>n</code> is nan.
 </span><span class="comment">---@param n number
-</span><a id="106"></a><span class="comment">---@return boolean
+</span><a id="119"></a><span class="comment">---@return boolean
 </span><span class="keyword">function</span> ext_math.isnan(n)
 	<span class="keyword">return</span> n ~= n
 <span class="keyword">end</span>
@@ -160,7 +173,7 @@
 </span><span class="comment">---<code>approxeqrel</code> is suggested otherwise.
 </span><span class="comment">---@param a number
 </span><span class="comment">---@param b number
-</span><a id="120"></a><span class="comment">---@param[opt] tolerance number
+</span><a id="133"></a><span class="comment">---@param[opt] tolerance number
 </span><span class="keyword">function</span> ext_math.approxeqabs(a, b, tolerance)
 	tolerance = tolerance <span class="keyword">or</span> ext_math.epsilon
 
@@ -181,16 +194,16 @@
 </span><span class="comment">---give meaningful results, use <code>approxeqabs</code> instead.
 </span><span class="comment">---@param a number
 </span><span class="comment">---@param b number
-</span><a id="141"></a><span class="comment">---@param[opt] tolerance number
+</span><a id="154"></a><span class="comment">---@param[opt] tolerance number
 </span><span class="keyword">function</span> ext_math.approxeqrel(a, b, tolerance)
-	tolerance = tolerance <span class="keyword">or</span> ext_math.epsilon
+	tolerance = tolerance <span class="keyword">or</span> <span class="global">math</span>.sqrt(ext_math.epsilon)
 
 	<span class="comment">-- quick path to handle infinities, signed zeroes and nans
 </span>	<span class="keyword">if</span> a == b <span class="keyword">then</span>
 		<span class="keyword">return</span> <span class="keyword">true</span>
 	<span class="keyword">end</span>
 
-	<span class="keyword">return</span> <span class="global">math</span>.abs(a - b) &lt; <span class="global">math</span>.max(a, b) * tolerance
+	<span class="keyword">return</span> <span class="global">math</span>.abs(a - b) &lt;= <span class="global">math</span>.abs(<span class="global">math</span>.max(a, b)) * tolerance
 <span class="keyword">end</span>
 
 <span class="keyword">return</span> ext_math</pre>
