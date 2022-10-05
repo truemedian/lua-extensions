@@ -12,7 +12,7 @@ lit install truemedian/extensions
 
 ## Documentation
 
-https://www.truemedian.me/lua-extensions/
+https://pages.truemedian.me/lua-extensions/
 
 ## Usage
 
