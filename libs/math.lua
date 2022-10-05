@@ -73,7 +73,7 @@ end
 ---@param n number
 ---@return number
 function ext_math.cbrt(n)
-	return n ^ (1 / 3)
+	return ext_math.root(n, 3)
 end
 
 ---Returns the real `base`th root of `n`. This extends the root function to
