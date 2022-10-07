@@ -64,8 +64,9 @@ function ext_base.enumerateall(iterator, ...)
     local tbl = {}
 
     local last = { ... }
+    local state = table.remove(last, 1)
     while true do
-        local ret = { iterator(unpack(last)) }
+        local ret = { iterator(state, unpack(last)) }
         if ret[1] == nil then
             break
         end
