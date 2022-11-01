@@ -28,7 +28,7 @@ function ext_string.endswith(str, pattern, plain)
 	if plain then
 		return string.sub(str, - #pattern) == pattern
 	else
-		if string.sub(pattern, -1) == '$' then
+		if string.sub(pattern, -1) ~= '$' then
 			pattern = pattern .. '$'
 		end
 
