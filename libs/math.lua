@@ -39,24 +39,24 @@ end
 ext_math.e = math.exp(1)
 
 ---Returns `num` clamped to [minValue, maxValue].
----@param num number
+---@param n number
 ---@param minValue number
 ---@param maxValue number
 ---@return number
-function ext_math.clamp(num, minValue, maxValue)
-	return math.min(math.max(num, minValue), maxValue)
+function ext_math.clamp(n, minValue, maxValue)
+	return math.min(math.max(n, minValue), maxValue)
 end
 
 ---Returns `num` rounded normally to `precision` decimals of precision.
----@param num number
+---@param n number
 ---@param[opt] precision number
 ---@return number
-function ext_math.round(num, precision)
+function ext_math.round(n, precision)
 	local m = 10 ^ (precision or 0)
-	return math.floor(num * m + 0.5) / m
+	return math.floor(n * m + 0.5) / m
 end
 
----Returns -1 for a negative number, 1 for a positive number and 0 for 0.
+---Returns -1 for a negative number, 1 for a positive number and 0 for 0 or nan.
 ---@param n number
 ---@return number
 function ext_math.sign(n)

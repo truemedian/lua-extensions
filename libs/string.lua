@@ -26,7 +26,7 @@ end
 ---@return boolean
 function ext_string.endswith(str, pattern, plain)
 	if plain then
-		return string.sub(str, - #pattern) == pattern
+		return select(2, string.sub(str, - #pattern)) == #str
 	else
 		if string.sub(pattern, -1) ~= '$' then
 			pattern = pattern .. '$'
@@ -60,22 +60,26 @@ end
 
 ---Returns a new string with the left padded with `pattern` or spaces until the
 ---string is `final_len` characters long.
+---
+---Multi-byte padding will not overshoot `final_len`.
 ---@param str string
 ---@param final_len number
 ---@param[opt] pattern string
 ---@return string
-function ext_string.padright(str, final_len, pattern)
+function ext_string.rjust(str, final_len, pattern)
 	pattern = pattern or ' '
 	return string.rep(pattern, (final_len - #str) / #pattern) .. str
 end
 
 ---Returns a new string with both sides padded with `pattern` or spaces until
 ---the string is `final_len` characters long.
+---
+---Multi-byte padding will not overshoot `final_len`.
 ---@param str string
 ---@param final_len number
 ---@param[opt] pattern string
 ---@return string
-function ext_string.padcenter(str, final_len, pattern)
+function ext_string.cjust(str, final_len, pattern)
 	pattern = pattern or ' '
 	local pad = 0.5 * (final_len - #str) / #pattern
 	return string.rep(pattern, math.floor(pad)) .. str .. string.rep(pattern, math.ceil(pad))
@@ -83,11 +87,13 @@ end
 
 ---Returns a new string with the right padded with `pattern` or spaces until
 ---the string is `final_len` characters long.
+---
+---Multi-byte padding will not overshoot `final_len`.
 ---@param str string
 ---@param final_len number
 ---@param[opt] pattern string
 ---@return string
-function ext_string.padleft(str, final_len, pattern)
+function ext_string.ljust(str, final_len, pattern)
 	pattern = pattern or ' '
 	return str .. string.rep(pattern, (final_len - #str) / #pattern)
 end
