@@ -63,6 +63,14 @@
 	<td class="name" nowrap><a href="#assertf">assertf (cond, message, level, ...)</a></td>
 	<td class="summary">Assert a condition, throws an error with a formatted message if it is false.</td>
 	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#enumerate">enumerate (iterator[, ...])</a></td>
+	<td class="summary">Returns an array of the first return of an iterator.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#enumerateall">enumerateall (iterator[, ...])</a></td>
+	<td class="summary">Returns an array of arrays of the returns of an iterator</td>
+	</tr>
 </table>
 <br/>
 <br/>
@@ -127,6 +135,60 @@
         <li><span class="parameter">...</span>
          any
         </li>
+    </ul>
+</dd>
+    <dt>
+    <a name = "enumerate"></a>
+    <strong>enumerate (iterator[, ...])</strong>
+    <a style="float:right;" href="../source/base.lua.html#48">line 48</a>
+    </dt>
+    <dd>
+    Returns an array of the first return of an iterator.
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">iterator</span>
+         function
+        </li>
+        <li><span class="parameter">...</span>
+         any
+         (<em>optional</em>)
+        </li>
+    </ul>
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">enumerate(<span class="global">pairs</span>({<span class="number">5</span>, <span class="number">7</span>})) <span class="comment">-- {1, 2}</span></pre>
+    </ul>
+</dd>
+    <dt>
+    <a name = "enumerateall"></a>
+    <strong>enumerateall (iterator[, ...])</strong>
+    <a style="float:right;" href="../source/base.lua.html#63">line 63</a>
+    </dt>
+    <dd>
+    Returns an array of arrays of the returns of an iterator
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">iterator</span>
+         function
+        </li>
+        <li><span class="parameter">...</span>
+         any
+         (<em>optional</em>)
+        </li>
+    </ul>
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">enumerateall(<span class="global">pairs</span>({<span class="number">5</span>, <span class="number">7</span>})) <span class="comment">-- {{1, 5}, {2, 7}}</span></pre>
     </ul>
 </dd>
 </dl>

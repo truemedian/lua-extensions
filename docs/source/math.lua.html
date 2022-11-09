@@ -83,24 +83,24 @@
 </span>ext_math.e = <span class="global">math</span>.exp(<span class="number">1</span>)
 
 <span class="comment">---Returns <code>num</code> clamped to [minValue, maxValue].
-</span><span class="comment">---@param num number
+</span><span class="comment">---@param n number
 </span><span class="comment">---@param minValue number
 </span><span class="comment">---@param maxValue number
 </span><a id="46"></a><span class="comment">---@return number
-</span><span class="keyword">function</span> ext_math.clamp(num, minValue, maxValue)
-	<span class="keyword">return</span> <span class="global">math</span>.min(<span class="global">math</span>.max(num, minValue), maxValue)
+</span><span class="keyword">function</span> ext_math.clamp(n, minValue, maxValue)
+	<span class="keyword">return</span> <span class="global">math</span>.min(<span class="global">math</span>.max(n, minValue), maxValue)
 <span class="keyword">end</span>
 
 <span class="comment">---Returns <code>num</code> rounded normally to <code>precision</code> decimals of precision.
-</span><span class="comment">---@param num number
+</span><span class="comment">---@param n number
 </span><span class="comment">---@param[opt] precision number
 </span><a id="54"></a><span class="comment">---@return number
-</span><span class="keyword">function</span> ext_math.round(num, precision)
+</span><span class="keyword">function</span> ext_math.round(n, precision)
 	<span class="keyword">local</span> m = <span class="number">10</span> ^ (precision <span class="keyword">or</span> <span class="number">0</span>)
-	<span class="keyword">return</span> <span class="global">math</span>.floor(num * m + <span class="number">0.5</span>) / m
+	<span class="keyword">return</span> <span class="global">math</span>.floor(n * m + <span class="number">0.5</span>) / m
 <span class="keyword">end</span>
 
-<span class="comment">---Returns -1 for a negative number, 1 for a positive number and 0 for 0.
+<span class="comment">---Returns -1 for a negative number, 1 for a positive number and 0 for 0 or nan.
 </span><span class="comment">---@param n number
 </span><a id="62"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.sign(n)
@@ -117,7 +117,7 @@
 </span><span class="comment">---@param n number
 </span><a id="75"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_math.cbrt(n)
-	<span class="keyword">return</span> n ^ (<span class="number">1</span> / <span class="number">3</span>)
+	<span class="keyword">return</span> ext_math.root(n, <span class="number">3</span>)
 <span class="keyword">end</span>
 
 <span class="comment">---Returns the real <code>base</code>th root of <code>n</code>. This extends the root function to
@@ -167,13 +167,14 @@
 <span class="comment">---Performs an approximate comparison of two numbers.
 </span><span class="comment">---
 </span><span class="comment">---Tolerance may be left nil to use the default value of <code>math.epsilon</code>, a very
-</span><span class="comment">---small value.
+</span><span class="comment">---small value. The tolerance should never be larger than small multiple of
+</span><span class="comment">---<code>math.epsilon</code>
 </span><span class="comment">---
 </span><span class="comment">---This function is recommended for comparing small values near zero; using
 </span><span class="comment">---<code>approxeqrel</code> is suggested otherwise.
 </span><span class="comment">---@param a number
 </span><span class="comment">---@param b number
-</span><a id="133"></a><span class="comment">---@param[opt] tolerance number
+</span><a id="134"></a><span class="comment">---@param[opt] tolerance number
 </span><span class="keyword">function</span> ext_math.approxeqabs(a, b, tolerance)
 	tolerance = tolerance <span class="keyword">or</span> ext_math.epsilon
 
@@ -182,7 +183,7 @@
 		<span class="keyword">return</span> <span class="keyword">true</span>
 	<span class="keyword">end</span>
 
-	<span class="keyword">return</span> <span class="global">math</span>.abs(a - b) &lt; tolerance
+	<span class="keyword">return</span> <span class="global">math</span>.abs(a - b) &lt;= tolerance
 <span class="keyword">end</span>
 
 <span class="comment">---Performs an approximate comparison of two numbers.
@@ -194,7 +195,7 @@
 </span><span class="comment">---give meaningful results, use <code>approxeqabs</code> instead.
 </span><span class="comment">---@param a number
 </span><span class="comment">---@param b number
-</span><a id="154"></a><span class="comment">---@param[opt] tolerance number
+</span><a id="155"></a><span class="comment">---@param[opt] tolerance number
 </span><span class="keyword">function</span> ext_math.approxeqrel(a, b, tolerance)
 	tolerance = tolerance <span class="keyword">or</span> <span class="global">math</span>.sqrt(ext_math.epsilon)
 
@@ -203,7 +204,7 @@
 		<span class="keyword">return</span> <span class="keyword">true</span>
 	<span class="keyword">end</span>
 
-	<span class="keyword">return</span> <span class="global">math</span>.abs(a - b) &lt;= <span class="global">math</span>.abs(<span class="global">math</span>.max(a, b)) * tolerance
+	<span class="keyword">return</span> <span class="global">math</span>.abs(a - b) &lt;= <span class="global">math</span>.max(<span class="global">math</span>.abs(a), <span class="global">math</span>.abs(b)) * tolerance
 <span class="keyword">end</span>
 
 <span class="keyword">return</span> ext_math</pre>

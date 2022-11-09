@@ -70,9 +70,9 @@
 </span><a id="27"></a><span class="comment">---@return boolean
 </span><span class="keyword">function</span> ext_string.endswith(str, pattern, plain)
 	<span class="keyword">if</span> plain <span class="keyword">then</span>
-		<span class="keyword">return</span> <span class="global">string</span>.sub(str, - #pattern) == pattern
+		<span class="keyword">return</span> <span class="global">select</span>(<span class="number">2</span>, <span class="global">string</span>.sub(str, - #pattern)) == #str
 	<span class="keyword">else</span>
-		<span class="keyword">if</span> <span class="global">string</span>.sub(pattern, -<span class="number">1</span>) == <span class="string">'$'</span> <span class="keyword">then</span>
+		<span class="keyword">if</span> <span class="global">string</span>.sub(pattern, -<span class="number">1</span>) ~= <span class="string">'$'</span> <span class="keyword">then</span>
 			pattern = pattern .. <span class="string">'$'</span>
 		<span class="keyword">end</span>
 
@@ -104,22 +104,26 @@
 
 <span class="comment">---Returns a new string with the left padded with <code>pattern</code> or spaces until the
 </span><span class="comment">---string is <code>final_len</code> characters long.
+</span><span class="comment">---
+</span><span class="comment">---Multi-byte padding will not overshoot <code>final_len</code>.
 </span><span class="comment">---@param str string
 </span><span class="comment">---@param final_len number
 </span><span class="comment">---@param[opt] pattern string
-</span><a id="67"></a><span class="comment">---@return string
-</span><span class="keyword">function</span> ext_string.padright(str, final_len, pattern)
+</span><a id="69"></a><span class="comment">---@return string
+</span><span class="keyword">function</span> ext_string.rjust(str, final_len, pattern)
 	pattern = pattern <span class="keyword">or</span> <span class="string">' '</span>
 	<span class="keyword">return</span> <span class="global">string</span>.rep(pattern, (final_len - #str) / #pattern) .. str
 <span class="keyword">end</span>
 
 <span class="comment">---Returns a new string with both sides padded with <code>pattern</code> or spaces until
 </span><span class="comment">---the string is <code>final_len</code> characters long.
+</span><span class="comment">---
+</span><span class="comment">---Multi-byte padding will not overshoot <code>final_len</code>.
 </span><span class="comment">---@param str string
 </span><span class="comment">---@param final_len number
 </span><span class="comment">---@param[opt] pattern string
-</span><a id="78"></a><span class="comment">---@return string
-</span><span class="keyword">function</span> ext_string.padcenter(str, final_len, pattern)
+</span><a id="82"></a><span class="comment">---@return string
+</span><span class="keyword">function</span> ext_string.cjust(str, final_len, pattern)
 	pattern = pattern <span class="keyword">or</span> <span class="string">' '</span>
 	<span class="keyword">local</span> pad = <span class="number">0.5</span> * (final_len - #str) / #pattern
 	<span class="keyword">return</span> <span class="global">string</span>.rep(pattern, <span class="global">math</span>.floor(pad)) .. str .. <span class="global">string</span>.rep(pattern, <span class="global">math</span>.ceil(pad))
@@ -127,11 +131,13 @@
 
 <span class="comment">---Returns a new string with the right padded with <code>pattern</code> or spaces until
 </span><span class="comment">---the string is <code>final_len</code> characters long.
+</span><span class="comment">---
+</span><span class="comment">---Multi-byte padding will not overshoot <code>final_len</code>.
 </span><span class="comment">---@param str string
 </span><span class="comment">---@param final_len number
 </span><span class="comment">---@param[opt] pattern string
-</span><a id="90"></a><span class="comment">---@return string
-</span><span class="keyword">function</span> ext_string.padleft(str, final_len, pattern)
+</span><a id="96"></a><span class="comment">---@return string
+</span><span class="keyword">function</span> ext_string.ljust(str, final_len, pattern)
 	pattern = pattern <span class="keyword">or</span> <span class="string">' '</span>
 	<span class="keyword">return</span> str .. <span class="global">string</span>.rep(pattern, (final_len - #str) / #pattern)
 <span class="keyword">end</span>
@@ -141,7 +147,7 @@
 </span><span class="comment">---@param str string
 </span><span class="comment">---@param[opt] delim string
 </span><span class="comment">---@param[opt] plain boolean
-</span><a id="101"></a><span class="comment">---@return table
+</span><a id="107"></a><span class="comment">---@return table
 </span><span class="keyword">function</span> ext_string.split(str, delim, plain)
 	<span class="keyword">local</span> ret = {}
 
@@ -177,7 +183,7 @@
 </span><span class="comment">---@param final_len number
 </span><span class="comment">---@param[opt] mn number
 </span><span class="comment">---@param[opt] mx number
-</span><a id="137"></a><span class="comment">---@return string
+</span><a id="143"></a><span class="comment">---@return string
 </span><span class="keyword">function</span> ext_string.random(final_len, mn, mx)
 	<span class="keyword">local</span> ret = {}
 	mn = mn <span class="keyword">or</span> <span class="number">0</span>
@@ -195,7 +201,7 @@
 </span><span class="comment">---[Wikipedia "Levenshtein Distance"](https://en.wikipedia.org/wiki/Levenshtein_distance)
 </span><span class="comment">---@param str1 string
 </span><span class="comment">---@param str2 string
-</span><a id="155"></a><span class="comment">---@return number
+</span><a id="161"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_string.levenshtein(str1, str2)
 	<span class="keyword">if</span> str1 == str2 <span class="keyword">then</span>
 		<span class="keyword">return</span> <span class="number">0</span>
@@ -234,7 +240,7 @@
 </span><span class="comment">---[Wikipedia "Damerau-Levenshtein Distance"](https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance)
 </span><span class="comment">---@param str1 string
 </span><span class="comment">---@param str2 string
-</span><a id="194"></a><span class="comment">---@return number
+</span><a id="200"></a><span class="comment">---@return number
 </span><span class="keyword">function</span> ext_string.dameraulevenshtein(str1, str2)
 	<span class="keyword">if</span> str1 == str2 <span class="keyword">then</span>
 		<span class="keyword">return</span> <span class="number">0</span>
@@ -277,7 +283,7 @@
 </span><span class="comment">---which letters form the subsequence).
 </span><span class="comment">---@param subseq string
 </span><span class="comment">---@param str string
-</span><a id="237"></a><span class="comment">---@return boolean
+</span><a id="243"></a><span class="comment">---@return boolean
 </span><span class="keyword">function</span> ext_string.subsequencematch(subseq, str)
 	<span class="keyword">local</span> matches = <span class="number">0</span>
 

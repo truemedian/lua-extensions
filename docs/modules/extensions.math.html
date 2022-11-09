@@ -53,16 +53,16 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#clamp">clamp (num, minValue, maxValue)</a></td>
+	<td class="name" nowrap><a href="#clamp">clamp (n, minValue, maxValue)</a></td>
 	<td class="summary">Returns <code>num</code> clamped to [minValue, maxValue].</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#round">round (num[, precision])</a></td>
+	<td class="name" nowrap><a href="#round">round (n[, precision])</a></td>
 	<td class="summary">Returns <code>num</code> rounded normally to <code>precision</code> decimals of precision.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#sign">sign (n)</a></td>
-	<td class="summary">Returns -1 for a negative number, 1 for a positive number and 0 for 0.</td>
+	<td class="summary">Returns -1 for a negative number, 1 for a positive number and 0 for 0 or nan.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#cbrt">cbrt (n)</a></td>
@@ -123,14 +123,14 @@
     <dl class="function">
     <dt>
     <a name = "clamp"></a>
-    <strong>clamp (num, minValue, maxValue)</strong>
+    <strong>clamp (n, minValue, maxValue)</strong>
     <a style="float:right;" href="../source/math.lua.html#46">line 46</a>
     </dt>
     <dd>
     Returns <code>num</code> clamped to [minValue, maxValue].
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">num</span>
+        <li><span class="parameter">n</span>
          number
         </li>
         <li><span class="parameter">minValue</span>
@@ -148,14 +148,14 @@
 </dd>
     <dt>
     <a name = "round"></a>
-    <strong>round (num[, precision])</strong>
+    <strong>round (n[, precision])</strong>
     <a style="float:right;" href="../source/math.lua.html#54">line 54</a>
     </dt>
     <dd>
     Returns <code>num</code> rounded normally to <code>precision</code> decimals of precision.
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">num</span>
+        <li><span class="parameter">n</span>
          number
         </li>
         <li><span class="parameter">precision</span>
@@ -175,7 +175,7 @@
     <a style="float:right;" href="../source/math.lua.html#62">line 62</a>
     </dt>
     <dd>
-    Returns -1 for a negative number, 1 for a positive number and 0 for 0.
+    Returns -1 for a negative number, 1 for a positive number and 0 for 0 or nan.
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">n</span>
@@ -284,13 +284,14 @@
     <dt>
     <a name = "approxeqabs"></a>
     <strong>approxeqabs (a, b[, tolerance])</strong>
-    <a style="float:right;" href="../source/math.lua.html#133">line 133</a>
+    <a style="float:right;" href="../source/math.lua.html#134">line 134</a>
     </dt>
     <dd>
     Performs an approximate comparison of two numbers. </p>
 
 <p>Tolerance may be left nil to use the default value of <a href="../modules/extensions.math.html#epsilon">math.epsilon</a>, a very
-small value.</p>
+small value. The tolerance should never be larger than small multiple of
+<a href="../modules/extensions.math.html#epsilon">math.epsilon</a></p>
 
 <p>This function is recommended for comparing small values near zero; using
 <a href="../modules/extensions.math.html#approxeqrel">approxeqrel</a> is suggested otherwise.
@@ -311,7 +312,7 @@ small value.</p>
     <dt>
     <a name = "approxeqrel"></a>
     <strong>approxeqrel (a, b[, tolerance])</strong>
-    <a style="float:right;" href="../source/math.lua.html#154">line 154</a>
+    <a style="float:right;" href="../source/math.lua.html#155">line 155</a>
     </dt>
     <dd>
     Performs an approximate comparison of two numbers. </p>

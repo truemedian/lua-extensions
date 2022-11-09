@@ -68,17 +68,17 @@
 	<td class="summary">Returns a new string with all leading and trailing whitespace removed.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#padright">padright (str, final_len[, pattern])</a></td>
+	<td class="name" nowrap><a href="#rjust">rjust (str, final_len[, pattern])</a></td>
 	<td class="summary">Returns a new string with the left padded with <code>pattern</code> or spaces until the
 string is <code>final_len</code> characters long.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#padcenter">padcenter (str, final_len[, pattern])</a></td>
+	<td class="name" nowrap><a href="#cjust">cjust (str, final_len[, pattern])</a></td>
 	<td class="summary">Returns a new string with both sides padded with <code>pattern</code> or spaces until
 the string is <code>final_len</code> characters long.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#padleft">padleft (str, final_len[, pattern])</a></td>
+	<td class="name" nowrap><a href="#ljust">ljust (str, final_len[, pattern])</a></td>
 	<td class="summary">Returns a new string with the right padded with <code>pattern</code> or spaces until
 the string is <code>final_len</code> characters long.</td>
 	</tr>
@@ -206,13 +206,15 @@ A pattern may be provided to instead strip using that pattern.
     </ol>
 </dd>
     <dt>
-    <a name = "padright"></a>
-    <strong>padright (str, final_len[, pattern])</strong>
-    <a style="float:right;" href="../source/string.lua.html#67">line 67</a>
+    <a name = "rjust"></a>
+    <strong>rjust (str, final_len[, pattern])</strong>
+    <a style="float:right;" href="../source/string.lua.html#69">line 69</a>
     </dt>
     <dd>
     Returns a new string with the left padded with <code>pattern</code> or spaces until the
-string is <code>final_len</code> characters long.
+string is <code>final_len</code> characters long. </p>
+
+<p>Multi-byte padding will not overshoot <code>final_len</code>.
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str</span>
@@ -233,13 +235,15 @@ string is <code>final_len</code> characters long.
     </ol>
 </dd>
     <dt>
-    <a name = "padcenter"></a>
-    <strong>padcenter (str, final_len[, pattern])</strong>
-    <a style="float:right;" href="../source/string.lua.html#78">line 78</a>
+    <a name = "cjust"></a>
+    <strong>cjust (str, final_len[, pattern])</strong>
+    <a style="float:right;" href="../source/string.lua.html#82">line 82</a>
     </dt>
     <dd>
     Returns a new string with both sides padded with <code>pattern</code> or spaces until
-the string is <code>final_len</code> characters long.
+the string is <code>final_len</code> characters long. </p>
+
+<p>Multi-byte padding will not overshoot <code>final_len</code>.
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str</span>
@@ -260,13 +264,15 @@ the string is <code>final_len</code> characters long.
     </ol>
 </dd>
     <dt>
-    <a name = "padleft"></a>
-    <strong>padleft (str, final_len[, pattern])</strong>
-    <a style="float:right;" href="../source/string.lua.html#90">line 90</a>
+    <a name = "ljust"></a>
+    <strong>ljust (str, final_len[, pattern])</strong>
+    <a style="float:right;" href="../source/string.lua.html#96">line 96</a>
     </dt>
     <dd>
     Returns a new string with the right padded with <code>pattern</code> or spaces until
-the string is <code>final_len</code> characters long.
+the string is <code>final_len</code> characters long. </p>
+
+<p>Multi-byte padding will not overshoot <code>final_len</code>.
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">str</span>
@@ -289,7 +295,7 @@ the string is <code>final_len</code> characters long.
     <dt>
     <a name = "split"></a>
     <strong>split (str[, delim[, plain]])</strong>
-    <a style="float:right;" href="../source/string.lua.html#101">line 101</a>
+    <a style="float:right;" href="../source/string.lua.html#107">line 107</a>
     </dt>
     <dd>
     Returns a table of all elements of the string split on <code>delim</code>.  Use <code>plain</code>
@@ -317,7 +323,7 @@ if the delimiter provided is not a pattern.
     <dt>
     <a name = "random"></a>
     <strong>random (final_len[, mn[, mx]])</strong>
-    <a style="float:right;" href="../source/string.lua.html#137">line 137</a>
+    <a style="float:right;" href="../source/string.lua.html#143">line 143</a>
     </dt>
     <dd>
     Returns a string of <code>final_len</code> random characters in the byte-range of
@@ -345,7 +351,7 @@ if the delimiter provided is not a pattern.
     <dt>
     <a name = "levenshtein"></a>
     <strong>levenshtein (str1, str2)</strong>
-    <a style="float:right;" href="../source/string.lua.html#155">line 155</a>
+    <a style="float:right;" href="../source/string.lua.html#161">line 161</a>
     </dt>
     <dd>
     Returns the Levenshtein distance between the two strings.  This is often
@@ -369,7 +375,7 @@ referred as "edit distance".
     <dt>
     <a name = "dameraulevenshtein"></a>
     <strong>dameraulevenshtein (str1, str2)</strong>
-    <a style="float:right;" href="../source/string.lua.html#194">line 194</a>
+    <a style="float:right;" href="../source/string.lua.html#200">line 200</a>
     </dt>
     <dd>
     Returns the Damerau-Levenshtein distance between the two strings.  This is
@@ -393,7 +399,7 @@ often referred as "edit distance".
     <dt>
     <a name = "subsequencematch"></a>
     <strong>subsequencematch (subseq, str)</strong>
-    <a style="float:right;" href="../source/string.lua.html#237">line 237</a>
+    <a style="float:right;" href="../source/string.lua.html#243">line 243</a>
     </dt>
     <dd>
     Returns true if the subsequence can be found inside <code>str</code>.
