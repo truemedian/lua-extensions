@@ -266,6 +266,20 @@ function ext_table.values(tbl)
 	return new
 end
 
+---Takes all the values in a table and creates a new table where keys are the
+---taken values and values are all `true`.
+---@param tbl table
+---@return table
+function ext_table.makeset(tbl)
+	local set = {}
+
+	for _, v in pairs(tbl) do
+		set[v] = true
+	end
+
+	return set
+end
+
 ---Returns whether or not the table is empty.
 ---@param tbl table
 ---@return boolean
