@@ -121,6 +121,11 @@ at.</td>
 	<td class="summary">Returns an array of values available in the table.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#makeset">makeset (tbl)</a></td>
+	<td class="summary">Takes all the values in a table and creates a new table where keys are the
+taken values and values are all <code>true</code>.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#isempty">isempty (tbl)</a></td>
 	<td class="summary">Returns whether or not the table is empty.</td>
 	</tr>
@@ -515,9 +520,29 @@ at.
     </ol>
 </dd>
     <dt>
+    <a name = "makeset"></a>
+    <strong>makeset (tbl)</strong>
+    <a style="float:right;" href="../source/table.lua.html#273">line 273</a>
+    </dt>
+    <dd>
+    Takes all the values in a table and creates a new table where keys are the
+taken values and values are all <code>true</code>.
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+         table
+        </li>
+    </ul>
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+</dd>
+    <dt>
     <a name = "isempty"></a>
     <strong>isempty (tbl)</strong>
-    <a style="float:right;" href="../source/table.lua.html#272">line 272</a>
+    <a style="float:right;" href="../source/table.lua.html#286">line 286</a>
     </dt>
     <dd>
     Returns whether or not the table is empty.
@@ -536,7 +561,7 @@ at.
     <dt>
     <a name = "shuffle"></a>
     <strong>shuffle (tbl)</strong>
-    <a style="float:right;" href="../source/table.lua.html#279">line 279</a>
+    <a style="float:right;" href="../source/table.lua.html#293">line 293</a>
     </dt>
     <dd>
     Shuffles a table in place.
@@ -555,7 +580,7 @@ at.
     <dt>
     <a name = "randomipair"></a>
     <strong>randomipair (tbl)</strong>
-    <a style="float:right;" href="../source/table.lua.html#291">line 291</a>
+    <a style="float:right;" href="../source/table.lua.html#305">line 305</a>
     </dt>
     <dd>
     Returns a random key, value index from an array.
@@ -574,7 +599,7 @@ at.
     <dt>
     <a name = "randomvalue"></a>
     <strong>randomvalue (tbl)</strong>
-    <a style="float:right;" href="../source/table.lua.html#299">line 299</a>
+    <a style="float:right;" href="../source/table.lua.html#313">line 313</a>
     </dt>
     <dd>
     Returns a random key, value index from an array.
@@ -593,7 +618,7 @@ at.
     <dt>
     <a name = "randompair"></a>
     <strong>randompair (tbl)</strong>
-    <a style="float:right;" href="../source/table.lua.html#307">line 307</a>
+    <a style="float:right;" href="../source/table.lua.html#321">line 321</a>
     </dt>
     <dd>
     Returns a random key, value index from a table.
@@ -612,7 +637,7 @@ at.
     <dt>
     <a name = "fill"></a>
     <strong>fill (tbl, value, len, start)</strong>
-    <a style="float:right;" href="../source/table.lua.html#324">line 324</a>
+    <a style="float:right;" href="../source/table.lua.html#338">line 338</a>
     </dt>
     <dd>
     Fills a table from <code>start</code> to <code>start + len</code> with <code>value</code>.

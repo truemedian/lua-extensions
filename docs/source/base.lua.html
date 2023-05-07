@@ -48,7 +48,7 @@
 </span>
 <span class="keyword">local</span> ext_base = {}
 
-<span class="keyword">local</span> <span class="keyword">function</span> increaseLevel(level)
+<span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">increaseLevel</span>(level)
     <span class="keyword">if</span> level == <span class="number">0</span> <span class="keyword">then</span>
         <span class="keyword">return</span> <span class="number">0</span>
     <span class="keyword">else</span>
@@ -59,16 +59,16 @@
 <span class="comment">---Format a message and then print it.
 </span><span class="comment">---@param message any
 </span><a id="18"></a><span class="comment">---@param ... any
-</span><span class="keyword">function</span> ext_base.printf(message, ...)
-    <span class="global">print</span>(<span class="global">string</span>.format(message, ...))
+</span><span class="keyword">function</span> ext_base.<span class="function-name">printf</span>(message, ...)
+    <span class="global">print</span>(<span class="global">string</span>.<span class="function-name">format</span>(message, ...))
 <span class="keyword">end</span>
 
 <span class="comment">---Format a message and then throw an error.
 </span><span class="comment">---@param message any
 </span><span class="comment">---@param level integer?
 </span><a id="26"></a><span class="comment">---@param ... any
-</span><span class="keyword">function</span> ext_base.errorf(message, level, ...)
-    <span class="keyword">return</span> <span class="global">error</span>(<span class="global">string</span>.format(message, ...), increaseLevel(level))
+</span><span class="keyword">function</span> ext_base.<span class="function-name">errorf</span>(message, level, ...)
+    <span class="keyword">return</span> <span class="global">error</span>(<span class="global">string</span>.<span class="function-name">format</span>(message, ...), <span class="function-name">increaseLevel</span>(level))
 <span class="keyword">end</span>
 
 <span class="comment">---Assert a condition, throws an error with a formatted message if it is false.
@@ -76,9 +76,9 @@
 </span><span class="comment">---@param message any
 </span><span class="comment">---@param level integer?
 </span><a id="35"></a><span class="comment">---@param ... any
-</span><span class="keyword">function</span> ext_base.assertf(cond, message, level, ...)
+</span><span class="keyword">function</span> ext_base.<span class="function-name">assertf</span>(cond, message, level, ...)
     <span class="keyword">if</span> <span class="keyword">not</span> cond <span class="keyword">then</span>
-        <span class="keyword">return</span> <span class="global">error</span>(<span class="global">string</span>.format(message, ...), increaseLevel(level))
+        <span class="keyword">return</span> <span class="global">error</span>(<span class="global">string</span>.<span class="function-name">format</span>(message, ...), <span class="function-name">increaseLevel</span>(level))
     <span class="keyword">else</span>
         <span class="keyword">return</span> cond, message, level, ...
     <span class="keyword">end</span>
@@ -89,7 +89,7 @@
 </span><span class="comment">---@param iterator function
 </span><span class="comment">---@param[opt] ... any
 </span><a id="48"></a><span class="comment">---@return table
-</span><span class="keyword">function</span> ext_base.enumerate(iterator, ...)
+</span><span class="keyword">function</span> ext_base.<span class="function-name">enumerate</span>(iterator, ...)
     <span class="keyword">local</span> tbl = {}
 
     <span class="keyword">for</span> k <span class="keyword">in</span> iterator, ... <span class="keyword">do</span>
@@ -104,13 +104,13 @@
 </span><span class="comment">---@param iterator function
 </span><span class="comment">---@param[opt] ... any
 </span><a id="63"></a><span class="comment">---@return table
-</span><span class="keyword">function</span> ext_base.enumerateall(iterator, ...)
+</span><span class="keyword">function</span> ext_base.<span class="function-name">enumerateall</span>(iterator, ...)
     <span class="keyword">local</span> tbl = {}
 
     <span class="keyword">local</span> last = { ... }
-    <span class="keyword">local</span> state = <span class="global">table</span>.remove(last, <span class="number">1</span>)
+    <span class="keyword">local</span> state = <span class="global">table</span>.<span class="function-name">remove</span>(last, <span class="number">1</span>)
     <span class="keyword">while</span> <span class="keyword">true</span> <span class="keyword">do</span>
-        <span class="keyword">local</span> ret = { iterator(state, <span class="global">unpack</span>(last)) }
+        <span class="keyword">local</span> ret = { <span class="function-name">iterator</span>(state, <span class="function-name">unpack</span>(last)) }
         <span class="keyword">if</span> ret[<span class="number">1</span>] == <span class="keyword">nil</span> <span class="keyword">then</span>
             <span class="keyword">break</span>
         <span class="keyword">end</span>

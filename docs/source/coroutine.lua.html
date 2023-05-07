@@ -48,7 +48,7 @@
 </span>
 <span class="keyword">local</span> ext_coro = {}
 
-<span class="keyword">local</span> <span class="keyword">function</span> pack_vararg(success, ...)
+<span class="keyword">local</span> <span class="keyword">function</span> <span class="function-name">pack_vararg</span>(success, ...)
 	<span class="keyword">return</span> success, { ... }, <span class="global">select</span>(<span class="string">'#'</span>, ...)
 <span class="keyword">end</span>
 
@@ -62,20 +62,20 @@
 </span><span class="comment">---@param thread thread
 </span><span class="comment">---@param[opt] ... any
 </span><a id="21"></a><span class="comment">---@return ...
-</span><span class="keyword">function</span> ext_coro.assertresume(thread, ...)
-	<span class="keyword">local</span> success, args, n = pack_vararg(<span class="global">coroutine</span>.resume(thread, ...))
+</span><span class="keyword">function</span> ext_coro.<span class="function-name">assertresume</span>(thread, ...)
+	<span class="keyword">local</span> success, args, n = <span class="function-name">pack_vararg</span>(<span class="global">coroutine</span>.<span class="function-name">resume</span>(thread, ...))
 	<span class="keyword">if</span> <span class="keyword">not</span> success <span class="keyword">then</span>
-		<span class="global">error</span>(<span class="global">debug</span>.traceback(thread, args[<span class="number">1</span>]), <span class="number">0</span>)
+		<span class="global">error</span>(<span class="global">debug</span>.<span class="function-name">traceback</span>(thread, args[<span class="number">1</span>]), <span class="number">0</span>)
 	<span class="keyword">end</span>
 
-	<span class="keyword">return</span> <span class="global">unpack</span>(args, <span class="number">1</span>, n)
+	<span class="keyword">return</span> <span class="function-name">unpack</span>(args, <span class="number">1</span>, n)
 <span class="keyword">end</span>
 
 <span class="comment">---Returns whether or not the function was run inside of a coroutine. Returns
 </span><span class="comment">---false if it is on the main thread.
 </span><a id="33"></a><span class="comment">---@return boolean
-</span><span class="keyword">function</span> ext_coro.isthread()
-	<span class="keyword">return</span> <span class="keyword">not</span> <span class="global">select</span>(<span class="number">2</span>, <span class="global">coroutine</span>.running())
+</span><span class="keyword">function</span> ext_coro.<span class="function-name">isthread</span>()
+	<span class="keyword">return</span> <span class="keyword">not</span> <span class="global">select</span>(<span class="number">2</span>, <span class="global">coroutine</span>.<span class="function-name">running</span>())
 <span class="keyword">end</span>
 
 <span class="keyword">return</span> ext_coro</pre>
