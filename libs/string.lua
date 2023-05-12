@@ -26,7 +26,7 @@ end
 ---@return boolean
 function ext_string.endswith(str, pattern, plain)
 	if plain then
-		return select(2, string.sub(str, - #pattern)) == #str
+		return select(2, string.find(str, pattern, 1, true)) == #str
 	else
 		if string.sub(pattern, -1) ~= '$' then
 			pattern = pattern .. '$'
