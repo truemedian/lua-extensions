@@ -68,7 +68,7 @@ end
 ---@return string
 function ext_string.rjust(str, final_len, pattern)
 	pattern = pattern or ' '
-	return string.rep(pattern, (final_len - #str) / #pattern) .. str
+	return string.rep(pattern, math.floor((final_len - #str) / #pattern)) .. str
 end
 
 ---Returns a new string with both sides padded with `pattern` or spaces until
@@ -95,7 +95,7 @@ end
 ---@return string
 function ext_string.ljust(str, final_len, pattern)
 	pattern = pattern or ' '
-	return str .. string.rep(pattern, (final_len - #str) / #pattern)
+	return str .. string.rep(pattern, math.floor((final_len - #str) / #pattern))
 end
 
 ---Returns a table of all elements of the string split on `delim`. Use `plain`
