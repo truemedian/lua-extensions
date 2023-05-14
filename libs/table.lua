@@ -91,9 +91,9 @@ end
 ---value, passing in the return value from the previous element.
 ---If `initial` is not provided, the first element of the array is used, and
 ---the iteration starts at the second element.
----The reduce function has a signature of: `fn(previous, value, index?) boolean`
+---The reduce function has a signature of: `fn(previous, value, index?) any`
 ---@param tbl table
----@param fn fun(previous: any, value: any, index?: integer): boolean
+---@param fn function
 ---@param initial any
 ---@return any
 function ext_table.reduce(tbl, fn, initial)
