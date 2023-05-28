@@ -110,13 +110,12 @@ function ext_table.reduce(tbl, fn, initial)
 	return reduced
 end
 
----Reverses the contents of the array.
----If `dest` is provided, the source array will not be modified
+---Reverses the contents of the array. When no destination is provided, the reverse will be applied in place.
 ---@param tbl table
 ---@param dest? table
 ---@return table
 function ext_table.reverse(tbl, dest)
-	if dest then
+	if dest and dest ~= tbl then
 		for i = 1, #tbl do
 			dest[i] = tbl[#tbl - i + 1]
 		end
