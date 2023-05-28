@@ -61,7 +61,7 @@ end
 ---Returns a new string with the left padded with `pattern` or spaces until the
 ---string is `final_len` characters long.
 ---
----Multi-byte padding will not overshoot `final_len`.
+---Multi-byte padding will overshoot `final_len`.
 ---@param str string
 ---@param final_len number
 ---@param[opt] pattern string
@@ -74,7 +74,7 @@ end
 ---Returns a new string with both sides padded with `pattern` or spaces until
 ---the string is `final_len` characters long.
 ---
----Multi-byte padding will not overshoot `final_len`.
+---Multi-byte padding will overshoot `final_len`.
 ---@param str string
 ---@param final_len number
 ---@param[opt] pattern string
@@ -88,7 +88,7 @@ end
 ---Returns a new string with the right padded with `pattern` or spaces until
 ---the string is `final_len` characters long.
 ---
----Multi-byte padding will not overshoot `final_len`.
+---Multi-byte padding will overshoot `final_len`.
 ---@param str string
 ---@param final_len number
 ---@param[opt] pattern string
