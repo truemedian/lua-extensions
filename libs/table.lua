@@ -134,7 +134,7 @@ function ext_table.reverse(tbl, dest)
 	end
 end
 
----Shifts every index after `index` in the table to the right by `count`.
+---Shifts every index after and including `index` in the table to the right by `count`.
 ---@param tbl table
 ---@param index number
 ---@param count number
