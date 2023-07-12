@@ -113,7 +113,7 @@ function ext_string.split(str, delim, plain)
 
 	if not delim or delim == '' then
 		for i = 1, #str do
-			ret[i] = string.char(string.byte(str, i))
+			ret[i] = string.sub(str, i, i)
 		end
 
 		return ret
