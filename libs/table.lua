@@ -313,29 +313,39 @@ function ext_table.shuffle(tbl)
 	return tbl
 end
 
----Returns a random key, value index from an array.
+---Returns a random key and the value associated with it from an array, or `nil` on an empty array.
 ---
 ---This function only works on the sequence portion of the table. Its behavior is undefined if the table has holes.
 ---@param tbl table
----@return any, any
+---@return any|nil, any|nil
 function ext_table.randomipair(tbl)
+	if #tbl == 0 then
+		return
+	end
 	local i = math.random(#tbl)
 	return i, tbl[i]
 end
 
----Returns a random key, value index from an array.
+---Returns a random key and the value associated with it from an array, or `nil` on an empty array.
 ---@param tbl table
----@return any, any
+---@return any|nil, any|nil
 function ext_table.randomvalue(tbl)
 	local values = ext_table.values(tbl)
+	if #values == 0 then
+		return
+	end
 	return values[math.random(#values)]
 end
 
----Returns a random key, value index from a table.
+---Returns a random key and the value associated with it from a table, or `nil` on an empty table.
 ---@param tbl table
----@return any, any
+---@return any|nil, any|nil
 function ext_table.randompair(tbl)
-	local rand = math.random(ext_table.count(tbl))
+	local count = ext_table.count(tbl)
+	if count == 0 then
+		return
+	end
+	local rand = math.random(count)
 	local n = 0
 	for k, v in pairs(tbl) do
 		n = n + 1
