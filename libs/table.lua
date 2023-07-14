@@ -313,7 +313,7 @@ function ext_table.shuffle(tbl)
 	return tbl
 end
 
----Returns a random key and the value associated with it from an array, or `nil` on an empty array.
+---Returns a random (key, value) pair selected from the sequence portion of a table, or `nil` on an empty array.
 ---
 ---This function only works on the sequence portion of the table. Its behavior is undefined if the table has holes.
 ---@param tbl table
@@ -326,7 +326,7 @@ function ext_table.randomipair(tbl)
 	return i, tbl[i]
 end
 
----Returns a random key and the value associated with it from an array, or `nil` on an empty array.
+---Returns a random value selected from a table, or `nil` on an empty table.
 ---@param tbl table
 ---@return any|nil, any|nil
 function ext_table.randomvalue(tbl)
@@ -337,7 +337,7 @@ function ext_table.randomvalue(tbl)
 	return values[math.random(#values)]
 end
 
----Returns a random key and the value associated with it from a table, or `nil` on an empty table.
+---Returns a random (key, value) pair selected from a table, or `nil` on an empty table.
 ---@param tbl table
 ---@return any|nil, any|nil
 function ext_table.randompair(tbl)
