@@ -1,7 +1,6 @@
 ---Extensions to the Lua standard table library.
 ---@module extensions.table
 ---@alias ext_table
-
 local ext_table = {}
 
 for k, v in pairs(table) do
@@ -91,9 +90,11 @@ end
 ---value, passing in the return value from the previous element.
 ---If `initial` is not provided, the first element of the array is used, and
 ---the iteration starts at the second element.
----The reduce function has a signature of: `fn(previous, value, index?) boolean`
+---The reduce function has a signature of: `fn(previous, value, index?) any`
+---
+---This function only works on the sequence portion of the table. Any values after a hole will be ignored.
 ---@param tbl table
----@param fn fun(previous: any, value: any, index?: integer): boolean
+---@param fn function
 ---@param initial any
 ---@return any
 function ext_table.reduce(tbl, fn, initial)
@@ -110,20 +111,25 @@ function ext_table.reduce(tbl, fn, initial)
 	return reduced
 end
 
----Reverses the contents of the array.
----If `dest` is provided, the source array will not be modified
+---Reverses the contents of the array. When no destination is provided, the reverse will be applied in place.
+---
+---This function only works on the sequence portion of the table. Its behavior is undefined if the table has holes.
+---This may be avoided by passing in the third argument, which is the length of the source table.
 ---@param tbl table
 ---@param dest? table
+---@param len? number
 ---@return table
-function ext_table.reverse(tbl, dest)
-	if dest then
-		for i = 1, #tbl do
-			dest[i] = tbl[#tbl - i + 1]
+function ext_table.reverse(tbl, dest, len)
+	len = len or #tbl
+
+	if dest and dest ~= tbl then
+		for i = 1, len do
+			dest[i] = tbl[len - i + 1]
 		end
 
 		return dest
 	else
-		local i, n = 1, #tbl
+		local i, n = 1, len
 
 		while i < n do
 			tbl[i], tbl[n] = tbl[n], tbl[i]
@@ -134,12 +140,17 @@ function ext_table.reverse(tbl, dest)
 	end
 end
 
----Shifts every index after `index` in the table to the right by `count`.
+---Shifts every index after and including `index` in the table to the right by `count`.
+---
+---This function only works on the sequence portion of the table. Its behavior is undefined if the table has holes.
+---This may be avoided by passing in the third argument, which is the length of the source table.
 ---@param tbl table
 ---@param index number
 ---@param count number
-function ext_table.shift(tbl, index, count)
-	local i = #tbl
+---@param len? number
+---@return table
+function ext_table.shift(tbl, index, count, len)
+	local i = len or #tbl
 
 	while i >= index do
 		tbl[i + count] = tbl[i]
@@ -154,8 +165,7 @@ function ext_table.shift(tbl, index, count)
 	return tbl
 end
 
----Returns a slice of the table, works similarly to `string.sub` except on a
----table.
+---Returns a slice of the table, works similarly to `string.sub` except on a table.
 ---@param tbl table
 ---@param[opt] start number
 ---@param[opt] stop number
@@ -214,6 +224,8 @@ end
 
 ---Removes the value at the index from an array and replaces it with the item
 ---at the end of the array.
+---
+---This function only works on the sequence portion of the table. Its behavior is undefined if the table has holes.
 ---@param tbl table
 ---@param i number
 ---@return any
@@ -288,6 +300,8 @@ function ext_table.isempty(tbl)
 end
 
 ---Shuffles a table in place.
+---
+---This function only works on the sequence portion of the table. Its behavior is undefined if the table has holes.
 ---@param tbl table
 ---@return table
 function ext_table.shuffle(tbl)
@@ -300,6 +314,8 @@ function ext_table.shuffle(tbl)
 end
 
 ---Returns a random key, value index from an array.
+---
+---This function only works on the sequence portion of the table. Its behavior is undefined if the table has holes.
 ---@param tbl table
 ---@return any, any
 function ext_table.randomipair(tbl)

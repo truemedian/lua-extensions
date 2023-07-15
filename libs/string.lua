@@ -26,7 +26,7 @@ end
 ---@return boolean
 function ext_string.endswith(str, pattern, plain)
 	if plain then
-		return select(2, string.sub(str, - #pattern)) == #str
+		return string.sub(str, -#pattern) == pattern
 	else
 		if string.sub(pattern, -1) ~= '$' then
 			pattern = pattern .. '$'
@@ -61,20 +61,20 @@ end
 ---Returns a new string with the left padded with `pattern` or spaces until the
 ---string is `final_len` characters long.
 ---
----Multi-byte padding will not overshoot `final_len`.
+---Multi-byte padding will overshoot `final_len`.
 ---@param str string
 ---@param final_len number
 ---@param[opt] pattern string
 ---@return string
 function ext_string.rjust(str, final_len, pattern)
 	pattern = pattern or ' '
-	return string.rep(pattern, (final_len - #str) / #pattern) .. str
+	return string.rep(pattern, math.floor((final_len - #str) / #pattern)) .. str
 end
 
 ---Returns a new string with both sides padded with `pattern` or spaces until
 ---the string is `final_len` characters long.
 ---
----Multi-byte padding will not overshoot `final_len`.
+---Multi-byte padding will overshoot `final_len`.
 ---@param str string
 ---@param final_len number
 ---@param[opt] pattern string
@@ -88,14 +88,14 @@ end
 ---Returns a new string with the right padded with `pattern` or spaces until
 ---the string is `final_len` characters long.
 ---
----Multi-byte padding will not overshoot `final_len`.
+---Multi-byte padding will overshoot `final_len`.
 ---@param str string
 ---@param final_len number
 ---@param[opt] pattern string
 ---@return string
 function ext_string.ljust(str, final_len, pattern)
 	pattern = pattern or ' '
-	return str .. string.rep(pattern, (final_len - #str) / #pattern)
+	return str .. string.rep(pattern, math.floor((final_len - #str) / #pattern))
 end
 
 ---Returns a table of all elements of the string split on `delim`. Use `plain`
@@ -113,7 +113,7 @@ function ext_string.split(str, delim, plain)
 
 	if not delim or delim == '' then
 		for i = 1, #str do
-			ret[i] = string.byte(str, i)
+			ret[i] = string.sub(str, i, i)
 		end
 
 		return ret
