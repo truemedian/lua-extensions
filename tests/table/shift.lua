@@ -47,7 +47,7 @@ describe('ext_table.shift', function ()
 		assert.same(exp_tbl, shift(tbl, -3, -2))
 	end)
 
-	-- in case of an index that is outside the array's size
+	-- in case of an index that is outside the array's range
 	-- nothing should happen
 	test('with out of range index', function ()
 		local tbl = init(16)
@@ -77,7 +77,27 @@ describe('ext_table.shift', function ()
 		assert.same(cp(tbl), shift(cp(tbl), 2, 10))
 	end)
 
-	-- TODO: may want to make tests for negative count
-	-- TODO: define the behavior of index = 0
-	-- TODO: define what happens with integer inputs
+	test('with {1, 2, ..., 8} shifted left by 4', function ()
+		local tbl = init(8)
+		local exp_tbl = {5, 6, 7, 8, 5, 6, 7, 8}
+		-- a negative count is a left shift instead of right
+		assert.same(exp_tbl, shift(tbl, 5, -4))
+	end)
+
+	test('with {[0] = 0, 1, 2, ..., 4} with a 0 index', function ()
+		local tbl = init(4)
+		tbl[0] = 0
+		local exp_tbl = expect(tbl, 0, 4)
+		exp_tbl[4] = 0
+		assert.same(exp_tbl, shift(tbl, 0, 4))
+	end)
+
+	test('with {[-16] = 1, ... [-1] = 16}', function ()
+		local tbl = {}
+		for i = -16, -1 do
+			tbl[i] = 16 - math.abs(i) + 1
+		end
+		local exp_tbl = init(16)
+		assert.same(exp_tbl, shift(tbl, -16, 17))
+	end)
 end)

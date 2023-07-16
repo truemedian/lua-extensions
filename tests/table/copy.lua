@@ -15,10 +15,11 @@ describe('ext_table.copy', function ()
 		[tbl] = tbl,
 	}
 
-	test('', function ()
+	test('copying tables', function ()
 		assert.same(exp_tbl, copy(exp_tbl))
 		assert.same({}, copy({}))
-		-- make sure it is not a deep copy
+	end)
+	test('if the copy is not a deep-copy', function ()
 		assert.equal(tbl, copy(exp_tbl)[tbl])
 		assert.equal(tbl.layer, copy(exp_tbl)[tbl].layer)
 	end)

@@ -11,23 +11,22 @@ describe('ext_table.reverse', function ()
 		end
 	end)
 
-	test('with no dest', function ()
+	it('reverses the table in-place when dest is not provided', function ()
 		local rtn = reverse(tbl)
 		assert.same(exp_tbl, rtn)
 		assert.equal(rtn, tbl)
 	end)
-
-	test('with dest', function ()
+	it('reverses the table into dest when provided', function ()
 		local dest = {}
 		local rtn = reverse(tbl, dest)
 		assert.same(exp_tbl, rtn)
 		assert.equal(rtn, dest)
 		assert.are_not_equal(tbl, rtn)
 	end)
-
-	-- TODO: what should the behavior of passing tbl to dest be?
-	-- test('with dest as the table', function ()
-	-- 	local rtn = reverse(tbl, tbl)
-	-- 	assert.same(exp_tbl, rtn)
-	-- end)
+	it('ignores dest if it is equal to the table', function ()
+		-- in this case, it should be treated
+		-- as if no dest was passed
+		local rtn = reverse(tbl, tbl)
+		assert.same(exp_tbl, rtn)
+	end)
 end)

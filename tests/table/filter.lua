@@ -14,24 +14,24 @@ describe('ext_table.filter', function ()
 		[{}] = {layer = {}},
 	}
 
-	test('with true returned for all keys', function ()
+	test('accepting all keys', function ()
 		assert.same(tbl, filter(tbl, function ()
 			return true
 		end))
 	end)
-	test('with false returned for all keys', function ()
+	test('rejecting all keys', function ()
 		assert.same({}, filter(tbl, function ()
 			return false
 		end))
 	end)
-	test('does iterate all keys', function ()
+	it('does iterate all keys', function ()
 		local seen = {}
 		filter(tbl, function (v, k)
 			seen[k] = v
 		end)
 		assert.same(seen, tbl)
 	end)
-	test('with true to numeric keys', function ()
+	test('accepting string values only', function ()
 		local exp_tbl = {
 			[-6] = 'nine',
 			[math.pi] = 'pi',
@@ -41,7 +41,7 @@ describe('ext_table.filter', function ()
 			return type(v) == 'string'
 		end))
 	end)
-	test('with true to string values', function ()
+	test('accepting numerical keys only', function ()
 		local exp_tbl = {
 			[-6] = 'nine',
 			[-1] = false,

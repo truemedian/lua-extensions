@@ -1,19 +1,23 @@
 local map = require('libs.table').map
 
+local function maketbl()
+	return {
+		[-6] = 'nine',
+		[-1] = coroutine.create(map),
+		[0] = 0,
+		1,
+		2,
+		[math.pi] = 'pi',
+		foo = 'bar',
+		[false] = true,
+		[coroutine.create(map)] = map,
+		[{}] = {layer = {}},
+	}
+end
+
 describe('ext_table.map', function ()
-	test('iterates all entries', function ()
-		local tbl = {
-			[-6] = 'nine',
-			[-1] = coroutine.create(map),
-			[0] = 0,
-			1,
-			2,
-			[math.pi] = 'pi',
-			foo = 'bar',
-			[false] = true,
-			[coroutine.create(map)] = map,
-			[{}] = {layer = {}},
-		}
+	it('iterates all entries', function ()
+		local tbl = maketbl()
 		tbl.tbl = tbl
 		assert.same(tbl, map(tbl, function (v, k)
 			return v, k
@@ -23,10 +27,10 @@ describe('ext_table.map', function ()
 	test('new keys, keep values', function ()
 		local tbl = {
 			[-1]	= 'a',
-			[3]		= 'b',
-			[4]		= 'c',
-			[5.3] 	= 'd',
-			[0] 	= 'e',
+			[0]		= 'b',
+			[3]		= 'c',
+			[4]		= 'd',
+			[5.3]	= 'e',
 		}
 		local exp_tbl = {}
 		for i, v in pairs(tbl) do
@@ -54,18 +58,7 @@ describe('ext_table.map', function ()
 	end)
 
 	test('swap keys with values', function ()
-		local tbl = {
-			[-6] = 'nine',
-			[-1] = coroutine.create(map),
-			[0] = 0,
-			1,
-			2,
-			[math.pi] = 'pi',
-			foo = 'bar',
-			[false] = true,
-			[coroutine.create(map)] = map,
-			[{}] = {layer = {}},
-		}
+		local tbl = maketbl()
 		local exp_tbl = {}
 		for k, v in pairs(tbl) do
 			exp_tbl[v] = k

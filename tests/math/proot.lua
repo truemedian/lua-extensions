@@ -1,10 +1,11 @@
 local math = require('libs.math')
-local proot, isnan, approxeqrel = math.proot, math.isnan, math.approxeqrel
+local proot, isnan = math.proot, math.isnan
+local tolerance = math.sqrt(math.epsilon)
 
 describe('ext_math.proot', function()
 	test('of (16, 2), (64, 3), (0, 2)', function()
 		assert.equal(4, proot(16, 2))
-		assert.truthy(approxeqrel(4, proot(64, 3)))
+		assert.near(4, proot(64, 3), tolerance)
 		assert.equal(0, proot(0, 2))
 	end)
 
