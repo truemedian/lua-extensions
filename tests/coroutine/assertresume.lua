@@ -3,7 +3,7 @@ local assertresume = require('libs.coroutine').assertresume
 describe('ext_coro.assertresume', function()
 	_G.unpack = table.unpack
 
-	test('resumes and returns correctly', function()
+	it('resumes and returns correctly', function()
 		local co = coroutine.create(function(...)
 			return ...
 		end)
@@ -16,7 +16,7 @@ describe('ext_coro.assertresume', function()
 		assert.same(args, rtn_args)
 	end)
 
-	test('throws an error', function()
+	it('throws an error', function()
 		-- note: we are not checking for the error message
 		-- since assertresume's error message will
 		-- depend on the actual stack traceback

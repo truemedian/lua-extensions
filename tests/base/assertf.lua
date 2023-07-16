@@ -2,20 +2,20 @@ local assertf = require('libs.base').assertf
 
 describe('ext_base.assertf', function()
 	local _ = require('luassert.match')._
-	test('raises an error', function()
+	it('raises an error', function()
 		assert.has_error(function()
 			assertf(false, 'test')
 		end, 'test')
 	end)
 
-	test('returns all arguments', function()
+	it('returns all arguments', function()
 		local tbl = {1, {}, 'test', false}
 		local rtn = {assertf(table.unpack(tbl))}
 
 		assert.same(rtn, tbl)
 	end)
 
-	test('increases error level', function()
+	it('increases error level', function()
 		stub(_G, 'error')
 
 		local index = 2
@@ -25,7 +25,7 @@ describe('ext_base.assertf', function()
 		error:revert()
 	end)
 
-	test('formats error message properly', function()
+	it('formats error message properly', function()
 		local msg, arg = 'test %s', 'errorf'
 		local formatted_msg = msg:format(arg)
 

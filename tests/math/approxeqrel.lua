@@ -4,31 +4,25 @@ local min_value = math.min_normal
 local approxeqrel = math.approxeqrel
 
 describe('ext_math.approxeqrel', function()
-	test('((64 ^ (1 / 3), 4)', function()
+	spec('((64 ^ (1 / 3), 4)', function()
 		assert.truthy(approxeqrel((64 ^ (1 / 3)), 4))
 	end)
-
-	test('(1, 1)', function()
+	spec('(1, 1)', function()
 		assert.truthy(approxeqrel(1, 1))
 	end)
-
-	test('(1, 0)', function()
+	spec('(1, 0)', function()
 		assert.falsy(approxeqrel(1, 0))
 	end)
-
-	test('(1, nan)', function()
+	spec('(1, nan)', function()
 		assert.falsy(approxeqrel(1, nan))
 	end)
-
-	test('(nan, nan)', function()
+	spec('(nan, nan)', function()
 		assert.falsy(approxeqrel(nan, nan))
 	end)
-
-	test('(inf, inf)', function()
+	spec('(inf, inf)', function()
 		assert.truthy(approxeqrel(inf, inf))
 	end)
-
-	test('(+/-math.min_normal, +/-math.min_normal)', function()
+	spec('(+/-math.min_normal, +/-math.min_normal)', function()
 		assert.truthy(approxeqrel(min_value, min_value))
 		assert.truthy(approxeqrel(-min_value, -min_value))
 	end)

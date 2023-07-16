@@ -4,17 +4,16 @@ local inf, epsilon = math.huge, math.epsilon
 
 describe('ext_math.root', function()
 	local tolerance = math.sqrt(epsilon)
+
 	test('with whole squared and cubic roots', function()
 		assert.equal(4, root(16, 2))
 		assert.near(4, root(64, 3), tolerance)
 		assert.equal(0, root(0, 2))
 	end)
-
 	test('with negative inputs/outputs', function()
 		assert.near(-4, root(-64, 3), tolerance)
 		assert.equal(.5, root(16, -4))
 	end)
-
 	test('with NaN outputs', function()
 		assert.truthy(isnan(root(9, 0)))
 		assert.truthy(isnan(root(0, 0)))
@@ -23,7 +22,6 @@ describe('ext_math.root', function()
 		assert.truthy(isnan(root(-math.max_normal, -4)))
 		assert.truthy(isnan(root(-math.min_subnormal, -4)))
 	end)
-
 	test('with +/- inf', function()
 		assert.equal(inf, root(inf, 2))
 		assert.equal(0, root(inf, -2))
@@ -35,7 +33,6 @@ describe('ext_math.root', function()
 		assert.equal(inf, root(inf, math.min_subnormal))
 		assert.equal(0, root(inf, -math.min_subnormal))
 	end)
-
 	test('cubic with floating points', function()
 		tolerance = 0.000001
 		assert.near(0.584804, root(0.2, 3), tolerance)

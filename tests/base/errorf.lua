@@ -2,13 +2,13 @@ local errorf = require('libs.base').errorf
 
 describe('ext_base.errorf', function()
 	local _ = require('luassert.match')._
-	test('raises an error', function()
+	it('raises an error', function()
 		assert.has_error(function()
 			errorf('test')
 		end, 'test')
 	end)
 
-	test('passes expected values to string.format', function()
+	it('passes expected values to string.format', function()
 		local msg, arg = 'test %s', 'errorf'
 		local formatted_msg = msg:format(arg)
 
@@ -17,7 +17,7 @@ describe('ext_base.errorf', function()
 		end, formatted_msg)
 	end)
 
-	test('increases error level', function()
+	it('increases error level', function()
 		spy.on(_G, 'error')
 
 		local index = 1

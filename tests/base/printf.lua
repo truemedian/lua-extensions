@@ -1,7 +1,7 @@
 local printf = require('libs.base').printf
 
 describe('ext_base.printf', function()
-	test('passes the right arguments to string.format', function()
+	it('passes the right arguments to string.format', function()
 		local msg, arg = 'printf %s', 'test'
 		local rtn = msg:format(arg)
 
