@@ -1,9 +1,9 @@
 local split = require('libs.string').split
 
-describe('ext_string.split', function ()
-    local str = 'Foo.bar7@example.com'
+describe('ext_string.split', function()
+	local str = 'Foo.bar7@example.com'
 
-    test('with pattern delimiter', function ()
+	test('with pattern delimiter', function()
 		assert.same({'Foo', 'bar7', 'example', 'com'}, split(str, '%p'))
 		assert.same({'Foo.bar', '@example.com'}, split(str, '%d'))
 		assert.same({'Foo.bar', 'example.com'}, split(str, '%d%p'))
@@ -12,9 +12,9 @@ describe('ext_string.split', function ()
 			empty_str[i] = ''
 		end
 		assert.same(empty_str, split(str, '.'))
-    end)
+	end)
 
-	test('with plain delimiter', function ()
+	test('with plain delimiter', function()
 		assert.same({'Foo.bar7', 'example.com'}, split(str, '@', true))
 		assert.same({'Foo', 'bar7@example', 'com'}, split(str, '.', true))
 
@@ -22,7 +22,7 @@ describe('ext_string.split', function ()
 		assert.same({'Foo.bar7@example', ''}, split(str, '.com', true))
 	end)
 
-	test('with empty string delimiter', function ()
+	test('with empty string delimiter', function()
 		local chars = {}
 		for i = 1, #str do
 			chars[i] = str:sub(i, i)

@@ -7,7 +7,7 @@ describe('ext_math.sign', function()
 		assert.equal(0, sign(0))
 		assert.equal(1, sign(1))
 	end)
-	test('with NaN as input', function ()
+	test('with NaN as input', function()
 		assert.equal(0, sign(0 / 0))
 	end)
 

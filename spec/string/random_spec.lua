@@ -10,14 +10,14 @@ local function verify(str, mn, mx)
 	return true
 end
 
-describe('ext_string.random', function ()
-    it('returns the correct string size', function ()
+describe('ext_string.random', function()
+	it('returns the correct string size', function()
 		assert.equal(10, #random(10))
 		assert.equal(10, #random(10, 1))
 		assert.equal(10, #random(10, nil, 100))
 		assert.equal(10, #random(10, 1, 100))
 	end)
-	it('returns characters in the correct range', function ()
+	it('returns characters in the correct range', function()
 		assert.is_true(verify((random(1000)), 0, 255))
 		assert.is_true(verify((random(1000, 0, 1)), 0, 1))
 		assert.is_true(verify((random(1000, 1, 1)), 1, 1))

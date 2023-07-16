@@ -1,9 +1,9 @@
 local subsequencematch = require('libs.string').subsequencematch
 
-describe('ext_string.subsequencematch', function ()
+describe('ext_string.subsequencematch', function()
 	local str = 'foo bar'
 
-	it('returns expected value', function ()
+	it('returns expected value', function()
 		assert.truthy(subsequencematch('foo', str))
 		assert.truthy(subsequencematch('bar', str))
 		assert.truthy(subsequencematch(str, str))

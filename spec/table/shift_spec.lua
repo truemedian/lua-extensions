@@ -28,8 +28,8 @@ local function expect(tbl, i, count)
 	return exp_tbl
 end
 
-describe('ext_table.shift', function ()
-	test('with count 0', function ()
+describe('ext_table.shift', function()
+	test('with count 0', function()
 		local tbl = init(3)
 		local exp_tbl = cp(tbl)
 		assert.same(exp_tbl, shift(tbl, 1, 0))
@@ -37,7 +37,7 @@ describe('ext_table.shift', function ()
 		assert.same(exp_tbl, shift(tbl, -3, 0))
 	end)
 
-	test('with empty table', function ()
+	test('with empty table', function()
 		local tbl = {}
 		local exp_tbl = {}
 		assert.same(exp_tbl, shift(tbl, 1, 3))
@@ -49,20 +49,20 @@ describe('ext_table.shift', function ()
 
 	-- in case of an index that is outside the array's range
 	-- nothing should happen
-	test('with out of range index', function ()
+	test('with out of range index', function()
 		local tbl = init(16)
 		assert.same(tbl, shift(cp(tbl), 17, 3))
-		assert.same(tbl, shift(cp(tbl), 2^52, 3))
-		assert.same(tbl, shift(cp(tbl), 2^52, 2^52))
+		assert.same(tbl, shift(cp(tbl), 2 ^ 52, 3))
+		assert.same(tbl, shift(cp(tbl), 2 ^ 52, 2 ^ 52))
 	end)
 
-	test('with {1, 2, ..., 16} for last element', function ()
+	test('with {1, 2, ..., 16} for last element', function()
 		local tbl = init(16)
 		assert.same(expect(tbl, 16, 3), shift(cp(tbl), 16, 3))
 		assert.same(expect(tbl, 16, 1), shift(cp(tbl), 16, 1))
 	end)
 
-	test('with {1, 2, ..., 32}', function ()
+	test('with {1, 2, ..., 32}', function()
 		local tbl = init(32)
 		assert.same(expect(tbl, 1, 16), shift(cp(tbl), 1, 16))
 		assert.same(expect(tbl, 12, 1), shift(cp(tbl), 12, 1))
@@ -70,21 +70,21 @@ describe('ext_table.shift', function ()
 		assert.same(expect(tbl, 32, 32), shift(cp(tbl), 32, 32))
 	end)
 
-	test('with {1}', function ()
+	test('with {1}', function()
 		local tbl = init(1)
 		assert.same(expect(tbl, 1, 16), shift(cp(tbl), 1, 16))
 		assert.same(expect(tbl, 0, 3), shift(cp(tbl), 0, 3))
 		assert.same(cp(tbl), shift(cp(tbl), 2, 10))
 	end)
 
-	test('with {1, 2, ..., 8} shifted left by 4', function ()
+	test('with {1, 2, ..., 8} shifted left by 4', function()
 		local tbl = init(8)
 		local exp_tbl = {5, 6, 7, 8, 5, 6, 7, 8}
 		-- a negative count is a left shift instead of right
 		assert.same(exp_tbl, shift(tbl, 5, -4))
 	end)
 
-	test('with {[0] = 0, 1, 2, ..., 4} with a 0 index', function ()
+	test('with {[0] = 0, 1, 2, ..., 4} with a 0 index', function()
 		local tbl = init(4)
 		tbl[0] = 0
 		local exp_tbl = expect(tbl, 0, 4)
@@ -92,7 +92,7 @@ describe('ext_table.shift', function ()
 		assert.same(exp_tbl, shift(tbl, 0, 4))
 	end)
 
-	test('with {[-16] = 1, ... [-1] = 16}', function ()
+	test('with {[-16] = 1, ... [-1] = 16}', function()
 		local tbl = {}
 		for i = -16, -1 do
 			tbl[i] = 16 - math.abs(i) + 1

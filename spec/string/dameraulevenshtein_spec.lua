@@ -1,9 +1,9 @@
 local dameraulevenshtein = require('libs.string').dameraulevenshtein
 
-describe('ext_string.levenshtein', function ()
+describe('ext_string.levenshtein', function()
 	local str = 'foo bar'
 
-	test('for insertion, deletion and substitution', function ()
+	test('for insertion, deletion and substitution', function()
 		assert.equal(3, dameraulevenshtein(str, 'faf bor'))
 		assert.equal(5, dameraulevenshtein(str, 'foo over bar'))
 		assert.equal(3, dameraulevenshtein(str, 'o ar'))
@@ -13,7 +13,7 @@ describe('ext_string.levenshtein', function ()
 		assert.equal(#str, dameraulevenshtein(str, ''))
 	end)
 
-	test('for transposition', function ()
+	test('for transposition', function()
 		assert.equal(1, dameraulevenshtein(str, 'foo bra'))
 		assert.equal(2, dameraulevenshtein(str, 'ofo abr'))
 		assert.equal(4, dameraulevenshtein(str, 'ofoc ab'))
