@@ -111,7 +111,7 @@ function ext_table.reduce(tbl, fn, initial)
 	return reduced
 end
 
----Reverses the contents of the array. When no destination is provided, the reverse will be applied in place.
+---Reverses the contents of the array `tbl` and returns it. When no destination is provided, the reverse will be applied in place.
 ---
 ---This function only works on the sequence portion of the table. Its behavior is undefined if the table has holes.
 ---This may be avoided by passing in the third argument, which is the length of the source table.
@@ -181,7 +181,7 @@ function ext_table.slice(tbl, start, stop, step)
 	return new
 end
 
----Appends all elements of `b` into `a`. Does not consider non-array elements.
+---Appends all elements of `b` into `a` and returns `a` back. Does not consider non-array elements.
 ---@param a table
 ---@param b table
 ---@return table
@@ -193,7 +193,7 @@ function ext_table.join(a, b)
 	return a
 end
 
----Merges all key-value pairs of `b` into `a`. Will overwrite any existing keys.
+---Merges all key-value pairs of `b` into `a` and returns `a` back. Will overwrite any existing keys.
 ---@param a table
 ---@param b table
 ---@return table
@@ -227,7 +227,7 @@ function ext_table.move(src, first, stop, src_offset, dest)
 end
 
 ---Removes the value at the index from an array and replaces it with the item
----at the end of the array.
+---at the end of the array. Returns the old value before the replace.
 ---
 ---This function only works on the sequence portion of the table. Its behavior is undefined if the table has holes.
 ---@param tbl table
