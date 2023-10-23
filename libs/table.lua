@@ -215,6 +215,10 @@ end
 function ext_table.move(src, first, stop, src_offset, dest)
 	dest = dest or src
 
+	if stop - first <= 0 then
+		return dest
+	end
+
 	for i = 0, stop - first do
 		dest[src_offset + i] = src[first + i]
 	end
