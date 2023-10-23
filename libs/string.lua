@@ -36,6 +36,14 @@ function ext_string.endswith(str, pattern, plain)
 	end
 end
 
+---Returns false if `str` is falsy or an empty string; otherwise, returns `str`
+---unchanged.
+---@param str string
+---@return boolean|string
+function ext_string.truthy(str)
+	return (str and str ~= "") and str or false
+end
+
 local pattern_special = [[^$()%.[]*+-?]]
 local pattern_match = '[' .. pattern_special:gsub('.', '%%%1') .. ']'
 
