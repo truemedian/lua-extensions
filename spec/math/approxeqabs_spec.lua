@@ -1,0 +1,22 @@
+local math = require('libs.math')
+local approxeqabs = math.approxeqabs
+local min_value, eps = math.min_normal, math.epsilon
+
+describe('ext_math.approxeqabs', function()
+	spec('(0, 0)', function()
+		assert.truthy(approxeqabs(0, 0))
+	end)
+	spec('(-1, -1)', function()
+		assert.truthy(approxeqabs(-1, -1))
+	end)
+	spec('(3 * math.epsilon, 1)', function()
+		assert.falsy(approxeqabs(3 * eps, 1))
+	end)
+	spec('(1 + math.epsilon, 1)', function()
+		assert.truthy(approxeqabs(1 + eps, 1))
+	end)
+	spec('(+/-min_value, 0, math.epsilon * 2)', function()
+		assert.truthy(approxeqabs(min_value, 0, eps * 2))
+		assert.truthy(approxeqabs(-min_value, 0, eps * 2))
+	end)
+end)

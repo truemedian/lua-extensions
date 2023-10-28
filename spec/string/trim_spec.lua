@@ -1,0 +1,25 @@
+local trim = require('libs.string').trim
+
+describe('ext_string.trim', function()
+	test('with whitespaces', function()
+		assert.equal('test', trim(' test'))
+		assert.equal('test', trim('test\t  '))
+		assert.equal('test', trim('  \ttest\t  '))
+		assert.equal('test test', trim('\t  \ttest test \t\t'))
+	end)
+
+	test('with patterns', function()
+		assert.equal('test', trim('123test123', '%d'))
+		assert.equal('test', trim('[test', '[%[%]]'))
+		assert.equal('test', trim('[test]', '[%[%]]'))
+		assert.equal('test', trim('test]', '[%[%]]'))
+		assert.equal('test', trim('[[[test]]', '[%[%]]'))
+		assert.equal('test])', trim('[[[test])]', '[%[%]]'))
+	end)
+
+	test('errors on empty pattern', function()
+		assert.has_error(function()
+			trim('test', '')
+		end)
+	end)
+end)
