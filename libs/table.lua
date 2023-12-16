@@ -241,7 +241,7 @@ end
 ---at.
 ---@param tbl table
 ---@param value any
----@return any|nil
+---@return any
 function ext_table.search(tbl, value)
 	for k, v in pairs(tbl) do
 		if v == value then
@@ -328,7 +328,7 @@ end
 
 ---Returns a random value selected from a table, or `nil` on an empty table.
 ---@param tbl table
----@return any|nil, any|nil
+---@return any, any
 function ext_table.randomvalue(tbl)
 	local values = ext_table.values(tbl)
 	if #values == 0 then
@@ -339,7 +339,7 @@ end
 
 ---Returns a random (key, value) pair selected from a table, or `nil` on an empty table.
 ---@param tbl table
----@return any|nil, any|nil
+---@return any, any
 function ext_table.randompair(tbl)
 	local count = ext_table.count(tbl)
 	if count == 0 then
