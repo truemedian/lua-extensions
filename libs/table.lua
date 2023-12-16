@@ -317,7 +317,7 @@ end
 ---
 ---This function only works on the sequence portion of the table. Its behavior is undefined if the table has holes.
 ---@param tbl table
----@return any|nil, any|nil
+---@return any, any
 function ext_table.randomipair(tbl)
 	if #tbl == 0 then
 		return
